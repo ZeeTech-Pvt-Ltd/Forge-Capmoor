@@ -1,0 +1,76 @@
+/* ==========================================================================
+   Why Forge Capmoor
+   ========================================================================== */
+
+.why__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(2.5rem, 6vw, 5.5rem);
+  align-items: start;
+}
+
+/* The heading holds position while the reasons scroll beside it. */
+.why__head {
+  position: sticky;
+  top: calc(var(--header-h) + 2.5rem);
+}
+
+.why__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.why__item {
+  padding-block: clamp(1.75rem, 3vw, 2.5rem);
+  border-top: 1px solid var(--border-soft);
+}
+
+.why__item:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.why__item:last-child {
+  padding-bottom: 0;
+}
+
+.why__index {
+  display: block;
+  margin-bottom: 0.7rem;
+  font-family: var(--font-body);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--accent-ink);
+}
+
+.why__item-title {
+  font-size: var(--fs-h3);
+  font-weight: 700;
+}
+
+.why__item-text {
+  margin-top: 0.7rem;
+  font-size: var(--fs-body);
+  line-height: 1.68;
+  color: var(--text-2);
+  max-width: 52ch;
+}
+
+@media (max-width: 899px) {
+  .why__inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(2.25rem, 6vw, 3rem);
+  }
+
+  /* Sticky positioning in a single column would pin the heading over the
+     list beneath it, so it reverts to normal flow. */
+  .why__head {
+    position: static;
+  }
+
+  .why__item:first-child {
+    border-top: 1px solid var(--border-soft);
+    padding-top: clamp(1.75rem, 3vw, 2.5rem);
+  }
+}

@@ -1,0 +1,116 @@
+/* ==========================================================================
+   How it works — horizontal three-step track
+   ========================================================================== */
+
+.how__track {
+  position: relative;
+  margin-top: clamp(2.75rem, 5vw, 4.25rem);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+}
+
+/* Dashed rule linking the node centres. With three equal columns the first
+   node sits at 16.667% and the last at 83.333%. */
+.how__track::before {
+  content: '';
+  position: absolute;
+  top: 25px;
+  left: 16.667%;
+  right: 16.667%;
+  height: 1px;
+  background-image: linear-gradient(90deg, var(--line-strong) 0 6px, transparent 6px 14px);
+  background-size: 14px 1px;
+  background-repeat: repeat-x;
+}
+
+.how__step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.how__node {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.how__num {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--accent-ink);
+}
+
+.how__body {
+  margin-top: 1.35rem;
+}
+
+.how__step-title {
+  font-size: var(--fs-h4);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.how__step-text {
+  margin-top: 0.6rem;
+  font-size: var(--fs-small);
+  line-height: 1.62;
+  color: var(--text-2);
+}
+
+/* Three steps do not halve: two columns would strand the third on a row of
+   its own, so the track drops straight to the stacked arrangement below the
+   breakpoint where the row stops working. */
+@media (max-width: 899px) {
+  .how__track {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.75rem;
+  }
+
+  /* Stacked, the dashed rule no longer lands on the nodes; the track becomes a
+     left-aligned list with a vertical rule instead — a different arrangement,
+     not a squeezed version of the row. */
+  .how__track::before {
+    display: none;
+  }
+
+  .how__step {
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
+    gap: 1rem;
+  }
+
+  .how__step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 50px;
+    left: 24px;
+    width: 1px;
+    height: calc(100% - 34px);
+    background: linear-gradient(to bottom, var(--line-strong), rgba(255, 75, 43, 0.06));
+  }
+
+  .how__node {
+    flex: none;
+    width: 48px;
+    height: 48px;
+  }
+
+  .how__body {
+    margin-top: 0;
+    padding-top: 4px;
+  }
+}

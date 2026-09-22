@@ -1,0 +1,4 @@
+# Netlify / Cloudflare Pages SPA fallback.
+# Lets /privacy and /terms resolve on a direct hit or a refresh. Real static
+# files are always served first, so this never shadows an asset.
+/*    /index.html   200

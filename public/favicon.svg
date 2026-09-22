@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="Forge Capmoor">
+  <defs>
+    <linearGradient id="fc" x1="8" y1="6" x2="40" y2="42" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF7A4D"/>
+      <stop offset="0.55" stop-color="#FF4B2B"/>
+      <stop offset="1" stop-color="#E23A1B"/>
+    </linearGradient>
+  </defs>
+  <path d="M24 3.4 41.8 13.7v20.6L24 44.6 6.2 34.3V13.7z" fill="url(#fc)"/>
+  <path d="M17.5 14H30.5L28.7 17.6H21.1V21.8H29L27.3 25.3H21.1V34H17.5Z" fill="#0E0E11" fill-opacity="0.9"/>
+</svg>

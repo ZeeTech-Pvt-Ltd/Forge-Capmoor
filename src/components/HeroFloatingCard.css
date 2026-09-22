@@ -1,0 +1,170 @@
+/* ==========================================================================
+   Hero network chips
+   ==========================================================================
+   Position and width arrive as inline percentages of the hero box (see
+   HeroFloatingCard.jsx), so each chip tracks its connector endpoint however
+   the hero is sized. Type is measured in `cqw` against the backdrop, which is
+   the query container.
+   -------------------------------------------------------------------------- */
+
+.hero-node {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  gap: clamp(5px, 0.8cqw, 11px);
+  padding: 9px 11px;
+  padding: clamp(5px, 0.72cqw, 12px) clamp(7px, 1.05cqw, 15px);
+  border-radius: 13px;
+  border-radius: clamp(9px, 1.35cqw, 18px);
+  border: 1px solid transparent;
+  opacity: 0;
+  /* Entrance uses the standalone `translate` property, hover uses
+     `transform` — so the two can never fight over the same value. */
+  translate: 0 14px;
+  animation: hero-node-in 720ms var(--ease-out) var(--node-delay, 0ms) forwards;
+  transition:
+    transform var(--dur) var(--ease-out),
+    box-shadow var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out);
+}
+
+.hero-node:hover {
+  transform: translateY(-4px);
+}
+
+@keyframes hero-node-in {
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+.hero-node__icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  width: clamp(20px, 2.7cqw, 34px);
+  height: clamp(20px, 2.7cqw, 34px);
+  border-radius: 9px;
+  border-radius: clamp(6px, 0.9cqw, 11px);
+}
+
+.hero-node__icon svg {
+  width: 58%;
+  height: 58%;
+}
+
+.hero-node__body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  gap: clamp(2px, 0.3cqw, 5px);
+  min-width: 0;
+}
+
+.hero-node__label {
+  font-size: 12.5px;
+  font-size: clamp(9.5px, 1.05cqw, 13px);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.012em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hero-node__viz {
+  width: 100%;
+  max-width: 34px;
+  max-width: clamp(26px, 3.4cqw, 46px);
+  height: 7px;
+  height: clamp(5px, 0.62cqw, 9px);
+  opacity: 0.55;
+}
+
+.hero-node__viz-accent {
+  fill: var(--accent);
+}
+
+/* --- Variants ------------------------------------------------------------ */
+
+.hero-node--light {
+  background: var(--bg);
+  border-color: var(--border-soft);
+  box-shadow: var(--shadow-md);
+  color: var(--ink);
+}
+
+.hero-node--light .hero-node__icon {
+  background: var(--accent-tint);
+  color: var(--accent-ink);
+}
+
+.hero-node--light .hero-node__label {
+  color: var(--ink);
+}
+
+.hero-node--plain {
+  background: var(--surface);
+  border-color: var(--border-soft);
+  box-shadow: var(--shadow-xs);
+  color: var(--ink-2);
+}
+
+.hero-node--plain .hero-node__icon {
+  background: var(--bg);
+  color: var(--ink-2);
+  box-shadow: var(--shadow-xs);
+}
+
+.hero-node--plain .hero-node__label {
+  color: var(--ink-2);
+}
+
+.hero-node--dark {
+  background: linear-gradient(152deg, #22222b 0%, #131319 100%);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 42px -20px rgba(14, 14, 17, 0.55);
+  color: var(--on-dark);
+}
+
+.hero-node--dark .hero-node__icon {
+  background: rgba(255, 75, 43, 0.17);
+  color: var(--accent);
+}
+
+.hero-node--dark .hero-node__label {
+  color: var(--on-dark);
+}
+
+.hero-node--accent {
+  background: var(--accent);
+  border-color: transparent;
+  box-shadow: 0 20px 44px -18px rgba(255, 75, 43, 0.55);
+  color: var(--ink);
+}
+
+.hero-node--accent .hero-node__icon {
+  background: rgba(14, 14, 17, 0.15);
+  color: var(--ink);
+}
+
+.hero-node--accent .hero-node__label {
+  color: var(--ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-node {
+    opacity: 1;
+    translate: 0 0;
+    animation: none;
+  }
+
+  .hero-node:hover {
+    transform: none;
+  }
+}

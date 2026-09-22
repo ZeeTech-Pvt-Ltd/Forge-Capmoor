@@ -1,0 +1,31 @@
+/* ==========================================================================
+   Placeholder token
+   ==========================================================================
+   A value the site owner still has to supply. Conspicuous on purpose — it
+   should be impossible to ship one by accident. See lib/legal.js.
+
+   This lives with the component rather than in styles/pages.css because the
+   Footer renders a placeholder on every page, including the homepage — and
+   pages.css is only pulled in by the lazily-loaded sub-pages, so a rule there
+   would leave the homepage token unstyled. The colour tokens are in
+   tokens.css; only the marking is here.
+   -------------------------------------------------------------------------- */
+
+.placeholder {
+  display: inline-block;
+  padding: 0.05em 0.42em;
+  border-radius: 4px;
+  background: var(--placeholder-bg);
+  color: var(--placeholder-ink); /* 4.7:1 */
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.88em;
+  font-weight: 600;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.section--dark .placeholder,
+.footer .placeholder {
+  background: var(--placeholder-bg-dark);
+  color: var(--placeholder-ink-dark); /* 8.1:1 */
+}

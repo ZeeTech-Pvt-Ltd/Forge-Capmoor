@@ -1,0 +1,201 @@
+/* ==========================================================================
+   Forge Capmoor — design tokens
+   ==========================================================================
+   Every colour, size, radius and timing in the site resolves to a value in
+   this file. Components never hardcode a hex value.
+
+   Contrast notes (WCAG 2.1, verified by hand against the sRGB relative
+   luminance formula — these are the pairings the site actually uses):
+
+     ink        on white         19.0 : 1   AAA
+     text-2     on white          6.8 : 1   AA
+     text-2     on surface        6.3 : 1   AA
+     text-3     on white          5.0 : 1   AA
+     text-3     on surface        4.6 : 1   AA
+     accent-ink on white          5.1 : 1   AA
+     ink        on accent         6.3 : 1   AA   <- primary button
+     white      on dark          19.0 : 1   AAA
+     on-dark-2  on dark           7.3 : 1   AAA
+     on-dark-3  on dark           5.3 : 1   AA
+     on-dark-3  on dark-deep      5.5 : 1   AA
+     accent     on dark           5.7 : 1   AA
+
+   The one pairing that does NOT pass is white text on the bright accent
+   (3.3 : 1). That is why the primary button carries ink-coloured text on an
+   accent fill rather than white text — it clears AA comfortably and, as a
+   bonus, reads as a deliberate brand choice rather than a default.
+
+   Note on the tertiary tones: AA is a hard ceiling on how faint they can go.
+   The original text-3 (#8a8a93) measured 3.5 : 1 and on-dark-3 (#6f6f7a)
+   4.0 : 1 — both visibly pleasant and both unusable as body text. They were
+   darkened/lightened to the values below, which is why the gap between
+   text-2 and text-3 is narrower than a purely aesthetic scale would set it.
+   -------------------------------------------------------------------------- */
+
+:root {
+  /* --- Surfaces ---------------------------------------------------------- */
+  --bg: #ffffff;
+  --surface: #f7f6f4; /* warm off-white; never a cold grey */
+  --surface-2: #f1efec;
+  --surface-3: #e9e6e2;
+
+  /* --- Dark surfaces ----------------------------------------------------- */
+  --dark: #101014;
+  --dark-2: #17171d;
+  --dark-3: #202028;
+  /* A shade deeper than --dark, so the footer reads as a separate plane when
+     it sits directly beneath the dark call-to-action band. */
+  --dark-deep: #0a0a0e;
+  --dark-line: rgba(255, 255, 255, 0.1);
+
+  /* --- Text -------------------------------------------------------------- */
+  --ink: #0e0e11;
+  --ink-2: #26262c;
+  --text-2: #5a5a62;
+  --text-3: #6f6f78; /* the faintest tone that still clears AA on --surface */
+  --on-dark: #ffffff;
+  --on-dark-2: #a3a3ae;
+  --on-dark-3: #86868f;
+
+  /* --- Brand accent ------------------------------------------------------ */
+  --accent: #ff4b2b; /* fills, graphics, large type */
+  --accent-dark: #de3a1c; /* pressed state */
+  --accent-ink: #c93a18; /* accent as *text* on light — passes AA at 5.1:1 */
+  --accent-2: #ff9e45; /* gradient partner only; never a standalone hue */
+  --accent-tint: #fff2ee; /* faintest warm wash for icon tiles */
+  --accent-tint-2: #ffe3da;
+
+  /* --- Lines ------------------------------------------------------------- */
+  --line: rgba(255, 75, 43, 0.25);
+  --line-strong: rgba(255, 75, 43, 0.42);
+  --border: rgba(14, 14, 17, 0.1);
+  --border-soft: rgba(14, 14, 17, 0.06);
+
+  /* --- Form fields -------------------------------------------------------
+     Input borders are deliberately heavier than the site's hairlines. WCAG
+     1.4.11 wants 3:1 for the boundary that identifies a control, and a
+     hairline --border (1.2:1 on white) does not come close. The dark variant
+     of every one of these lives in components/SignUpForm.css under
+     `.form--dark`, so the field markup stays identical in both tones.
+
+     Ratios: field-line on --bg 3.6:1 · field-line-invalid 4.4:1 ·
+     field-error on --bg 5.1:1 · field-label on --bg 6.8:1. */
+  --field-line: rgba(14, 14, 17, 0.5);
+  --field-line-hover: rgba(14, 14, 17, 0.66);
+  --field-line-invalid: var(--accent-dark);
+  --field-bg: var(--bg);
+  --field-bg-focus: var(--bg);
+  --field-text: var(--ink);
+  --field-label: var(--text-2);
+  --field-placeholder: var(--text-3);
+  --field-error: var(--accent-ink);
+  --field-status: var(--ink);
+  --field-note: var(--text-3);
+  --field-note-link: var(--text-2);
+  --field-note-link-hover: var(--ink);
+
+  /* Deliberately conspicuous marker for a value the owner must supply.
+     See lib/legal.js — these are never invented, only flagged. */
+  --placeholder-bg: var(--accent-tint);
+  --placeholder-ink: var(--accent-ink);
+  --placeholder-bg-dark: rgba(255, 255, 255, 0.08);
+  --placeholder-ink-dark: var(--accent-2);
+
+  /* --- Focus ------------------------------------------------------------- */
+  /* Outline-only, so it is visible against light AND dark sections. */
+  --focus: var(--accent);
+  --focus-width: 3px;
+  --focus-offset: 2px;
+
+  /* --- Typography -------------------------------------------------------- */
+  --font-display: 'Bricolage Grotesque', 'Segoe UI', system-ui, -apple-system,
+    Roboto, Arial, sans-serif;
+  --font-body: 'Plus Jakarta Sans', 'Segoe UI', system-ui, -apple-system,
+    Roboto, Arial, sans-serif;
+
+  /* Fluid scale. The lower bound is tuned so nothing overflows at 320px and
+     the upper bound keeps measure comfortable on a 1920px display. */
+  --fs-display: clamp(2.45rem, 1.05rem + 5.2vw, 5.15rem);
+  --fs-h2: clamp(1.85rem, 1.1rem + 2.5vw, 2.95rem);
+  --fs-h3: clamp(1.2rem, 1.05rem + 0.6vw, 1.5rem);
+  --fs-h4: clamp(1.02rem, 0.97rem + 0.22vw, 1.14rem);
+  --fs-lead: clamp(1.02rem, 0.97rem + 0.34vw, 1.2rem);
+  --fs-body: clamp(0.96rem, 0.94rem + 0.12vw, 1.03rem);
+  --fs-small: 0.875rem;
+  --fs-micro: 0.775rem;
+
+  --lh-display: 0.98;
+  --lh-heading: 1.12;
+  --lh-snug: 1.32;
+  --lh-body: 1.68;
+
+  --ls-display: -0.032em; /* tight, but never touching */
+  --ls-heading: -0.02em;
+  --ls-body: -0.005em;
+  --ls-eyebrow: 0.13em;
+
+  /* --- Spacing ----------------------------------------------------------- */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 2.75rem;
+  --sp-8: 3.5rem;
+  --sp-9: 5rem;
+
+  /* Vertical rhythm for full-width sections. */
+  --section-y: clamp(4.25rem, 7.5vw, 7.75rem);
+  --section-y-tight: clamp(3rem, 5vw, 5rem);
+
+  /* --- Layout ------------------------------------------------------------ */
+  --container: 1200px;
+  --container-wide: 1340px;
+  --container-narrow: 780px;
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --header-h: 74px;
+
+  /* --- Radii ------------------------------------------------------------- */
+  --r-xs: 8px;
+  --r-sm: 12px;
+  --r-md: 16px;
+  --r-lg: 22px;
+  --r-xl: 30px;
+  --r-2xl: 38px;
+  --r-pill: 999px;
+
+  /* --- Elevation --------------------------------------------------------- */
+  --shadow-xs: 0 1px 2px rgba(14, 14, 17, 0.05);
+  --shadow-sm: 0 2px 8px -2px rgba(14, 14, 17, 0.08),
+    0 1px 2px rgba(14, 14, 17, 0.04);
+  --shadow-md: 0 14px 30px -14px rgba(14, 14, 17, 0.18),
+    0 2px 6px -2px rgba(14, 14, 17, 0.05);
+  --shadow-lg: 0 30px 64px -26px rgba(14, 14, 17, 0.24),
+    0 4px 12px -4px rgba(14, 14, 17, 0.06);
+  --shadow-accent: 0 18px 44px -18px rgba(255, 75, 43, 0.42);
+
+  /* --- Motion ------------------------------------------------------------ */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast: 160ms;
+  --dur: 280ms;
+  --dur-slow: 640ms;
+
+  /* --- Z-index ladder ---------------------------------------------------- */
+  --z-base: 1;
+  --z-raised: 10;
+  --z-header: 100;
+  --z-drawer: 200;
+  --z-skip: 300;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    /* Collapse every timing to effectively zero in one place, so individual
+       components do not each need to remember to opt out. */
+    --dur-fast: 0.01ms;
+    --dur: 0.01ms;
+    --dur-slow: 0.01ms;
+  }
+}

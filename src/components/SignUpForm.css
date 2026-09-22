@@ -1,0 +1,167 @@
+/* ==========================================================================
+   Account form — shared by the homepage band, /signup and /contact
+   ==========================================================================
+   The markup is identical in both tones. Only the token block changes, so a
+   field can never be styled correctly on one surface and wrongly on another.
+   Light values are the defaults in tokens.css; the dark overrides are below.
+   -------------------------------------------------------------------------- */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+  width: 100%;
+  max-width: 40rem;
+  margin-inline: auto;
+}
+
+/* --- Dark tone ----------------------------------------------------------- */
+
+.form--dark {
+  /* 0.36 rather than a hairline: the input's own fill is only ~1.1:1 against
+     --dark, so the border is what identifies the control. See tokens.css. */
+  --field-line: rgba(255, 255, 255, 0.36);
+  --field-line-hover: rgba(255, 255, 255, 0.52);
+  --field-line-invalid: #ff8f78;
+  --field-bg: rgba(255, 255, 255, 0.05);
+  --field-bg-focus: rgba(255, 255, 255, 0.08);
+  --field-text: var(--on-dark);
+  --field-label: var(--on-dark-2);
+  --field-placeholder: rgba(255, 255, 255, 0.42);
+  --field-error: #ffb3a3;
+  --field-status: var(--on-dark);
+  --field-note: var(--on-dark-3);
+  --field-note-link: var(--on-dark-2);
+  --field-note-link-hover: var(--on-dark);
+
+}
+
+/* Phone field, dark tone. Scoped as `.form--dark .phone` rather than set in the
+   block above: `.phone` declares the same tokens at equal specificity, and
+   which one won would come down to the order the bundler emits two stylesheets
+   in. Two classes settle it regardless.
+   The popup is an opaque surface, not a translucent fill like the inputs — it
+   floats over the band, and a 5% white wash would let the band show through the
+   country list. */
+.form--dark .phone {
+  --phone-bg: var(--dark-2);
+  --phone-line: rgba(255, 255, 255, 0.16);
+  --phone-trigger-hover: rgba(255, 255, 255, 0.06);
+  --phone-option-active: rgba(255, 255, 255, 0.1);
+  --phone-flag-ring: rgba(255, 255, 255, 0.28);
+}
+
+/* --- Fields -------------------------------------------------------------- */
+
+.form__fields {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  text-align: left;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.field__label {
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--field-label);
+}
+
+.field__input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border-radius: var(--r-sm);
+  background: var(--field-bg);
+  border: 1px solid var(--field-line);
+  color: var(--field-text);
+  font-size: 1rem;
+  transition:
+    border-color var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out);
+}
+
+.field__input::placeholder {
+  color: var(--field-placeholder);
+}
+
+.field__input:hover {
+  border-color: var(--field-line-hover);
+}
+
+.field__input:focus {
+  background: var(--field-bg-focus);
+  border-color: var(--accent);
+}
+
+.field__input[aria-invalid='true'] {
+  border-color: var(--field-line-invalid);
+}
+
+.field__error {
+  font-size: var(--fs-small);
+  color: var(--field-error);
+}
+
+/* Off-screen rather than display:none — some bots skip hidden fields. */
+.form__honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* --- Actions and messages ------------------------------------------------ */
+
+.form__submit {
+  margin-top: 0.35rem;
+}
+
+.form__submit:disabled {
+  opacity: 0.72;
+  cursor: progress;
+}
+
+.form__status {
+  min-height: 1.4em;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--field-status);
+  text-align: center;
+}
+
+.form__consent {
+  font-size: var(--fs-small);
+  line-height: 1.6;
+  color: var(--field-note);
+  max-width: 48ch;
+  text-align: center;
+}
+
+.form__consent-link {
+  color: var(--field-note-link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.form__consent-link:hover {
+  color: var(--field-note-link-hover);
+}
+
+@media (max-width: 599px) {
+  .form__fields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .form__submit {
+    width: 100%;
+  }
+}

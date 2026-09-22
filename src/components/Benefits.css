@@ -1,0 +1,100 @@
+/* ==========================================================================
+   Benefits — alternating full-width rows
+   ========================================================================== */
+
+.benefits__rows {
+  margin-top: clamp(2.75rem, 5vw, 4.25rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.5rem, 5vw, 4rem);
+}
+
+.benefit {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+  gap: clamp(1.75rem, 5vw, 4.5rem);
+  align-items: center;
+}
+
+/* Odd rows put the artwork on the right. */
+.benefit--flip .benefit__art {
+  order: 2;
+}
+
+.benefit__art {
+  display: grid;
+  place-items: center;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  border-radius: var(--r-xl);
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-xs);
+}
+
+.benefit__art svg {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+}
+
+.benefit__index {
+  display: block;
+  margin-bottom: 0.65rem;
+  font-family: var(--font-body);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--accent-ink);
+}
+
+.benefit__title {
+  font-size: var(--fs-h3);
+  font-weight: 700;
+}
+
+.benefit__body {
+  margin-top: 0.7rem;
+  font-size: var(--fs-lead);
+  line-height: 1.62;
+  color: var(--text-2);
+  max-width: 46ch;
+}
+
+/* The three supporting points under each benefit. A plain list rather than a
+   grid: they read in sequence, and three short lines in a column keep the
+   row's rhythm instead of adding a second block to scan. */
+.benefit__points {
+  margin-top: 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.benefit__point {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: var(--fs-small);
+  line-height: 1.55;
+  color: var(--text-2);
+}
+
+/* Nudged down to sit on the first line's centre rather than its top. */
+.benefit__point-icon {
+  flex: none;
+  margin-top: 0.14rem;
+  color: var(--accent-ink);
+}
+
+@media (max-width: 799px) {
+  .benefit {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+
+  /* Artwork always leads on narrow screens, so the reading order matches
+     the visual order. */
+  .benefit--flip .benefit__art {
+    order: 0;
+  }
+}

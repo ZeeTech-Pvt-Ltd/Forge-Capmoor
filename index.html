@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+    <title>Forge Capmoor | AI Trading Platform That Explains Itself</title>
+    <meta
+      name="description"
+      content="Forge Capmoor is an AI trading platform that analyses market data, executes the strategy you choose, and shows the reasoning behind every action it takes."
+    />
+    <link rel="canonical" href="https://forge-capmoor.net/" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+
+    <meta name="theme-color" content="#FFFFFF" />
+    <meta name="color-scheme" content="light" />
+
+    <!-- Icons. The SVG favicon is the primary; the PNG fallback covers
+         browsers and platforms that still will not read an SVG icon. -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Fonts are self-hosted (no third-party request, no render-blocking
+         Google Fonts stylesheet). Preloading both variable files means the
+         H1 usually paints in Bricolage on first frame rather than swapping,
+         which keeps layout shift from the font swap close to zero. -->
+    <link
+      rel="preload"
+      href="/fonts/bricolage-grotesque-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/plus-jakarta-sans-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Forge Capmoor" />
+    <meta property="og:title" content="Forge Capmoor | AI Trading Platform That Explains Itself" />
+    <meta
+      property="og:description"
+      content="An AI trading platform that analyses market data, executes the strategy you choose, and shows the reasoning behind every action it takes."
+    />
+    <meta property="og:url" content="https://forge-capmoor.net/" />
+    <meta property="og:image" content="https://forge-capmoor.net/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="The Forge Capmoor intelligence hub, with connected analysis modules radiating outward." />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Forge Capmoor | AI Trading Platform That Explains Itself" />
+    <meta
+      name="twitter:description"
+      content="An AI trading platform that analyses market data, executes the strategy you choose, and shows the reasoning behind every action it takes."
+    />
+    <meta name="twitter:image" content="https://forge-capmoor.net/og-image.png" />
+    <meta name="twitter:image:alt" content="The Forge Capmoor intelligence hub, with connected analysis modules radiating outward." />
+
+    <!--
+      Minimal critical CSS. Establishes the page background and the text
+      fallback stack before the main stylesheet arrives, so the first paint
+      is never an unstyled white flash or an invisible-text frame.
+    -->
+    <style>
+      html {
+        background: #ffffff;
+        -webkit-text-size-adjust: 100%;
+      }
+      body {
+        margin: 0;
+        background: #ffffff;
+        color: #0e0e11;
+        font-family: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      #root {
+        min-height: 100vh;
+      }
+    </style>
+
+    <!--
+      Organization + WebSite structured data. The FAQPage graph is emitted by
+      the FAQ page itself — and only there — so the schema and the visible copy
+      can never drift apart, and no second URL carries a duplicate FAQPage.
+    -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://forge-capmoor.net/#organization",
+            "name": "Forge Capmoor",
+            "url": "https://forge-capmoor.net/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://forge-capmoor.net/og-image.png",
+              "width": 1200,
+              "height": 630
+            },
+            "description": "Forge Capmoor builds an AI trading platform that analyses market data, executes the strategy a client chooses, and shows the reasoning behind every action it takes."
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://forge-capmoor.net/#website",
+            "url": "https://forge-capmoor.net/",
+            "name": "Forge Capmoor",
+            "publisher": { "@id": "https://forge-capmoor.net/#organization" },
+            "inLanguage": "en"
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

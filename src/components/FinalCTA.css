@@ -1,0 +1,60 @@
+/* ==========================================================================
+   Closing call to action
+   ==========================================================================
+   Only the framing lives here. Every field, button and message inside the
+   band belongs to SignUpForm, which owns its own stylesheet so the same form
+   renders correctly on the light pages too.
+   -------------------------------------------------------------------------- */
+
+.cta {
+  position: relative;
+  overflow: clip;
+}
+
+.cta__glow {
+  position: absolute;
+  inset: -40% 50% auto auto;
+  width: 70%;
+  aspect-ratio: 1;
+  transform: translateX(50%);
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(255, 75, 43, 0.2) 0%, transparent 62%);
+}
+
+.cta__inner {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cta__mark {
+  display: grid;
+  place-items: center;
+  width: 88px;
+  height: 88px;
+  border-radius: var(--r-lg);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--dark-line);
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.cta__title {
+  font-size: var(--fs-h2);
+  color: var(--on-dark);
+}
+
+.cta__lead {
+  margin-top: var(--sp-4);
+  max-width: 52ch;
+  font-size: var(--fs-lead);
+  line-height: 1.62;
+  color: var(--on-dark-2);
+}
+
+.cta__form-wrap {
+  width: 100%;
+  margin-top: clamp(2rem, 4vw, 3rem);
+}

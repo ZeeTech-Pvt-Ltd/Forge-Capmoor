@@ -1,0 +1,74 @@
+/* ==========================================================================
+   Data domains
+   ========================================================================== */
+
+.domains__grid {
+  margin-top: clamp(2.75rem, 5vw, 4.25rem);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 1.6vw, 1.5rem);
+}
+
+/* Flat bordered tiles rather than the shadowed cards used for capabilities,
+   so this section reads as reference material beside that one. */
+.domain {
+  padding: clamp(1.3rem, 2.2vw, 1.75rem);
+  border-radius: var(--r-md);
+  background: var(--bg);
+  border: 1px solid var(--border-soft);
+  transition: border-color var(--dur) var(--ease-out);
+}
+
+.domain:hover {
+  border-color: var(--border);
+}
+
+.domain__chart {
+  display: block;
+  height: 56px;
+  margin-bottom: 1.15rem;
+}
+
+.domain__chart svg {
+  width: 100%;
+  max-width: 140px;
+  height: 100%;
+}
+
+.domain__title {
+  font-size: var(--fs-h4);
+  font-weight: 700;
+}
+
+.domain__text {
+  margin-top: 0.5rem;
+  font-size: var(--fs-small);
+  line-height: 1.62;
+  color: var(--text-2);
+}
+
+/* --- Honest footnote ----------------------------------------------------- */
+
+.domains__note {
+  margin-top: clamp(2rem, 3.5vw, 2.75rem);
+  max-width: 68ch;
+  margin-inline: auto;
+  text-align: center;
+  padding-top: clamp(1.5rem, 3vw, 2rem);
+  border-top: 1px solid var(--border-soft);
+  font-size: var(--fs-small);
+  line-height: 1.7;
+  color: var(--text-3);
+}
+
+@media (max-width: 899px) {
+  .domains__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 559px) {
+  .domains__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

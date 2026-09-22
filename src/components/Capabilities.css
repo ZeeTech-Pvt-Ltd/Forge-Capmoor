@@ -1,0 +1,132 @@
+/* ==========================================================================
+   Capabilities — bento grid
+   ========================================================================== */
+
+.cap__grid {
+  margin-top: clamp(2.75rem, 5vw, 4.25rem);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 1.6vw, 1.5rem);
+}
+
+.cap-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  padding: clamp(1.4rem, 2.3vw, 1.95rem);
+  border-radius: var(--r-lg);
+  background: var(--bg);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition:
+    transform var(--dur) var(--ease-out),
+    box-shadow var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out);
+}
+
+.cap-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border);
+}
+
+/* Accent rule that draws across the top edge on hover. */
+.cap-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transition: width 460ms var(--ease-out);
+}
+
+.cap-card:hover::after {
+  width: 100%;
+}
+
+.cap-card--wide {
+  grid-column: span 2;
+}
+
+.cap-card__icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 46px;
+  height: 46px;
+  border-radius: var(--r-sm);
+  background: var(--accent-tint);
+  color: var(--accent-ink);
+}
+
+.cap-card__title {
+  font-size: var(--fs-h3);
+  font-weight: 700;
+}
+
+.cap-card__text {
+  margin-top: 0.55rem;
+  font-size: var(--fs-body);
+  line-height: 1.62;
+  color: var(--text-2);
+  max-width: 46ch;
+}
+
+/* --- Decorative micro-visuals -------------------------------------------- */
+
+.cap-viz {
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+.cap-viz--rows {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.cap-viz__row {
+  height: 7px;
+  width: var(--w);
+  border-radius: var(--r-pill);
+  background: var(--accent-tint-2);
+}
+
+.cap-viz__row:nth-child(odd) {
+  background: var(--accent-tint);
+}
+
+/* --- Responsive ---------------------------------------------------------- */
+
+@media (max-width: 1023px) {
+  .cap__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Two columns, and the eight cards only tile if the wide one gives up its
+     second column: eight singles fill four rows exactly. Leaving it at span 2
+     would push a hole into the bottom of the grid. */
+  .cap-card--wide {
+    grid-column: span 1;
+  }
+}
+
+@media (max-width: 639px) {
+  .cap__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .cap-card--wide {
+    grid-column: span 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cap-card:hover {
+    transform: none;
+  }
+}

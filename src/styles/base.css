@@ -1,0 +1,450 @@
+/* ==========================================================================
+   Forge Capmoor — reset, element defaults and shared primitives
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Anchor jumps clear the sticky header instead of hiding under it. */
+  scroll-padding-top: calc(var(--header-h) + 16px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: var(--ls-body);
+  font-weight: 450;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Belt-and-braces against a stray wide child creating a scrollbar. */
+  overflow-x: clip;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+}
+
+/* --- Typography ---------------------------------------------------------- */
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-heading);
+  color: var(--ink);
+  /* Keeps multi-line headings from leaving an orphan word on the last line. */
+  text-wrap: balance;
+  /* Title case across every heading, set once here rather than typed into each
+     one. Component rules that need a different treatment (the risk band and the
+     footer column titles are uppercase) override this on specificity, so they
+     are unaffected.
+     This is presentation only: the DOM text keeps its sentence case, so screen
+     readers and search engines still see what the markup says. */
+  text-transform: capitalize;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--ink);
+}
+
+/* --- Focus --------------------------------------------------------------- */
+
+:focus-visible {
+  outline: var(--focus-width) solid var(--focus);
+  outline-offset: var(--focus-offset);
+  border-radius: 4px;
+}
+
+/* --- Accessibility helpers ---------------------------------------------- */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -120%);
+  z-index: var(--z-skip);
+  background: var(--ink);
+  color: var(--on-dark);
+  padding: 0.75rem 1.25rem;
+  border-radius: 0 0 var(--r-sm) var(--r-sm);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.skip-link:focus-visible {
+  transform: translate(-50%, 0);
+}
+
+/* --- Layout -------------------------------------------------------------- */
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.container--wide {
+  max-width: var(--container-wide);
+}
+
+.container--narrow {
+  max-width: var(--container-narrow);
+}
+
+.section {
+  padding-block: var(--section-y);
+  position: relative;
+}
+
+.section--tight {
+  padding-block: var(--section-y-tight);
+}
+
+.section--surface {
+  background: var(--surface);
+}
+
+.section--dark {
+  background: var(--dark);
+  color: var(--on-dark);
+}
+
+/* --- Section headings ---------------------------------------------------- */
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  margin-bottom: var(--sp-4);
+}
+
+.eyebrow::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex: none;
+}
+
+.section--dark .eyebrow {
+  color: var(--accent);
+}
+
+/* Headings take an explicit colour in the base layer, so a dark section has to
+   re-state it — inheritance alone never reaches them. Without this a heading
+   renders near-black on the near-black band. */
+.section--dark .section-title,
+.section--dark h1,
+.section--dark h2,
+.section--dark h3,
+.section--dark h4 {
+  color: var(--on-dark);
+}
+
+.section-head {
+  max-width: 46rem;
+}
+
+/* Centred variant, used where a section reads better as one balanced block. */
+.section-head--center {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.section-head--center .eyebrow {
+  justify-content: center;
+}
+
+.section-title {
+  font-size: var(--fs-h2);
+}
+
+.section-lead {
+  margin-top: var(--sp-4);
+  font-size: var(--fs-lead);
+  line-height: 1.6;
+  color: var(--text-2);
+  max-width: 40rem;
+}
+
+.section-head--center .section-lead {
+  margin-inline: auto;
+}
+
+.section--dark .section-lead {
+  color: var(--on-dark-2);
+}
+
+/* --- Buttons ------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.92rem 1.6rem;
+  border-radius: var(--r-pill);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition:
+    background-color var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out),
+    color var(--dur) var(--ease-out),
+    transform var(--dur) var(--ease-out),
+    box-shadow var(--dur) var(--ease-out);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn__icon {
+  flex: none;
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.btn:hover .btn__icon {
+  transform: translateX(3px);
+}
+
+/* Ink text on an accent fill: 6.3:1 — see the note in tokens.css. */
+.btn--primary {
+  background: var(--accent);
+  color: var(--ink);
+  box-shadow: var(--shadow-accent);
+}
+
+.btn--primary:hover {
+  background: var(--accent-2);
+  box-shadow: 0 22px 50px -18px rgba(255, 75, 43, 0.55);
+}
+
+.btn--primary:active {
+  background: var(--accent-dark);
+}
+
+.btn--secondary {
+  background: var(--bg);
+  color: var(--ink);
+  border-color: var(--border);
+  box-shadow: var(--shadow-xs);
+}
+
+.btn--secondary:hover {
+  border-color: rgba(14, 14, 17, 0.22);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn--on-dark {
+  background: var(--accent);
+  color: var(--ink);
+}
+
+.btn--on-dark:hover {
+  background: var(--accent-2);
+}
+
+.btn--ghost-on-dark {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--on-dark);
+  border-color: var(--dark-line);
+}
+
+.btn--ghost-on-dark:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
+.btn--sm {
+  padding: 0.68rem 1.2rem;
+  font-size: 0.9rem;
+}
+
+.btn--lg {
+  padding: 1.08rem 2rem;
+  font-size: 1.06rem;
+}
+
+/* --- Links --------------------------------------------------------------- */
+
+.link-inline {
+  color: var(--accent-ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--line-strong);
+  transition: text-decoration-color var(--dur) var(--ease-out);
+}
+
+.link-inline:hover {
+  text-decoration-color: var(--accent-ink);
+}
+
+/* --- Cards --------------------------------------------------------------- */
+
+.card {
+  background: var(--bg);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* --- Icon tiles ---------------------------------------------------------- */
+
+.icon-tile {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: var(--r-sm);
+  background: var(--accent-tint);
+  color: var(--accent-ink);
+  flex: none;
+}
+
+.icon-tile--dark {
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--accent);
+}
+
+.icon-tile--accent {
+  background: var(--accent);
+  color: var(--ink);
+}
+
+/* --- Hairline divider ---------------------------------------------------- */
+
+.rule {
+  height: 1px;
+  border: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--border) 12%,
+    var(--border) 88%,
+    transparent
+  );
+}
+
+/* --- Scroll reveal -------------------------------------------------------
+   The hidden state is applied by the Reveal component only once it has
+   mounted and confirmed IntersectionObserver exists, so a browser without
+   it — or a JS failure — never leaves content invisible.
+   -------------------------------------------------------------------------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+  /* Deliberately no will-change here. There are ~54 reveals on the homepage,
+     and asking for a compositor layer on every one of them costs more (layer
+     memory, extra style/layout work on load) than it saves — opacity and
+     transform are already composited while the transition runs. */
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .btn:hover,
+  .btn:active {
+    transform: none;
+  }
+}

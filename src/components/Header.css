@@ -1,0 +1,267 @@
+/* ==========================================================================
+   Header — floating pill navigation
+   ==========================================================================
+   At the top of the page the bar is invisible: just the wordmark, the links
+   and the CTA sitting on the hero. Once the page scrolls, the bar contracts
+   into a floating pill with a hairline border and a soft shadow. The
+   transition is on background/border/shadow only — nothing about the bar's
+   geometry changes, so the header never shifts the page beneath it.
+   -------------------------------------------------------------------------- */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-header);
+  padding: 10px var(--gutter) 0;
+  pointer-events: none;
+}
+
+.header__inner {
+  max-width: var(--container-wide);
+  margin-inline: auto;
+}
+
+.header__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  height: 62px;
+  padding-inline: 1.15rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: var(--r-pill);
+  pointer-events: auto;
+  /* Present at rest, not only once scrolled. An invisible bar left the wordmark
+     floating loose over the hero and made the nav read as page content; the
+     pill now sits above it from the first frame and simply firms up on scroll.
+     Both states keep a translucent fill, so the network stays faintly visible
+     through the bar rather than being cut off by an opaque strip. */
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 2px 10px rgba(23, 20, 18, 0.04);
+  /* Progressive enhancement: without backdrop-filter the near-opaque white
+     above already reads correctly, it is simply less translucent. */
+  backdrop-filter: saturate(170%) blur(12px);
+  -webkit-backdrop-filter: saturate(170%) blur(12px);
+  transition:
+    background-color var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out),
+    box-shadow var(--dur) var(--ease-out);
+}
+
+.header[data-scrolled] .header__bar {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: var(--border);
+  box-shadow: var(--shadow-md);
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+}
+
+/* --- Brand --------------------------------------------------------------- */
+
+.header__brand {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--r-sm);
+  flex: none;
+}
+
+/* Scoped to the header rather than changed in Logo.css: the same wordmark is
+   used in the footer, and it should stay the size it is there. */
+.header__brand .logo__word {
+  font-size: 1.3rem;
+}
+
+/* --- Desktop nav --------------------------------------------------------- */
+
+.header__nav-list {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.header__nav-link {
+  display: block;
+  padding: 0.55rem 0.9rem;
+  border-radius: var(--r-pill);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
+}
+
+.header__nav-link:hover {
+  background: var(--surface-2);
+  color: var(--ink);
+}
+
+/* --- Actions ------------------------------------------------------------- */
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: none;
+}
+
+.header__menu-btn {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r-pill);
+  color: var(--ink);
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+
+.header__menu-btn:hover {
+  background: var(--surface-2);
+}
+
+/* --- Mobile drawer ------------------------------------------------------- */
+
+.header__backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(14, 14, 17, 0.38);
+  opacity: 0;
+  visibility: hidden;
+  /* Same pattern as the panel: instant on open, deferred to the end of the
+     fade on close so the backdrop does not disappear before it has faded. */
+  transition:
+    opacity var(--dur) var(--ease-out),
+    visibility 0s linear var(--dur);
+  pointer-events: auto;
+}
+
+.header__backdrop[data-open] {
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity var(--dur) var(--ease-out),
+    visibility 0s linear 0s;
+}
+
+.header__panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(86vw, 360px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+  padding: calc(var(--header-h) + 0.5rem) var(--gutter) calc(var(--sp-6) + env(safe-area-inset-bottom));
+  background: var(--bg);
+  border-left: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-lg);
+  transform: translateX(100%);
+  visibility: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  pointer-events: auto;
+  /* visibility switches instantly on open (so the panel is focusable the
+     moment it exists) and only after the slide finishes on close (so it does
+     not vanish mid-animation). Transitioning it over a duration instead would
+     leave the panel unfocusable for the opening frames. */
+  transition:
+    transform 380ms var(--ease-out),
+    visibility 0s linear 380ms;
+}
+
+.header__panel[data-open] {
+  transform: translateX(0);
+  visibility: visible;
+  transition:
+    transform 380ms var(--ease-out),
+    visibility 0s linear 0s;
+}
+
+.header__panel-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.header__panel-link {
+  display: block;
+  padding: 1.05rem 0.25rem;
+  border-bottom: 1px solid var(--border-soft);
+  font-family: var(--font-display);
+  font-size: 1.42rem;
+  font-weight: 600;
+  letter-spacing: var(--ls-heading);
+  color: var(--ink);
+  border-radius: var(--r-xs);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.header__panel-link:hover {
+  color: var(--accent-ink);
+}
+
+/* Links rise in sequence once the panel is open. */
+.header__panel[data-open] .header__panel-list li {
+  animation: panel-link-in 460ms var(--ease-out) both;
+  animation-delay: calc(90ms + var(--i) * 55ms);
+}
+
+@keyframes panel-link-in {
+  from {
+    opacity: 0;
+    transform: translateX(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.header__panel-cta {
+  width: 100%;
+}
+
+/* --- Responsive ---------------------------------------------------------- */
+
+@media (max-width: 1023px) {
+  .header__nav {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .header__menu-btn {
+    display: none;
+  }
+
+  .header__panel,
+  .header__backdrop {
+    display: none;
+  }
+}
+
+/* Below this width the wordmark, CTA and button together crowd the bar, so
+   the CTA moves into the drawer and the bar keeps just brand + menu. */
+@media (max-width: 479px) {
+  .header__cta {
+    display: none;
+  }
+
+  .header__bar {
+    padding-inline: 0.85rem 0.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header__panel[data-open] .header__panel-list li {
+    animation: none;
+  }
+
+  .header__panel,
+  .header__backdrop {
+    transition: none;
+  }
+}

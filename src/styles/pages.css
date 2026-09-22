@@ -1,0 +1,540 @@
+/* ==========================================================================
+   Sub-pages — legal copy, contact, sign-up and the 404
+   ==========================================================================
+   Everything here is a page-level primitive shared by two or more sub-pages.
+   Anything used by exactly one page lives in that page's own stylesheet.
+   -------------------------------------------------------------------------- */
+
+.page {
+  /* Clears the fixed header on a short page. */
+  padding-top: calc(var(--header-h) + clamp(2.5rem, 6vw, 5rem));
+  padding-bottom: clamp(4rem, 8vw, 7rem);
+}
+
+.page__head {
+  padding-bottom: clamp(1.75rem, 3vw, 2.5rem);
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.page__title {
+  font-size: clamp(2.1rem, 1.4rem + 3vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: var(--ls-display);
+  line-height: 1.06;
+}
+
+.page__updated {
+  margin-top: 0.9rem;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--text-3);
+}
+
+.page__lead {
+  margin-top: 1.35rem;
+  font-size: var(--fs-lead);
+  line-height: 1.65;
+  color: var(--text-2);
+  max-width: 52ch;
+}
+
+.page__inner {
+  text-align: center;
+}
+
+.page__inner .page__lead {
+  margin-inline: auto;
+}
+
+.page__actions {
+  margin-top: clamp(1.75rem, 3vw, 2.5rem);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  justify-content: center;
+}
+
+/* Under a left-aligned heading, centred buttons read as a mistake. */
+.page__actions--start {
+  justify-content: flex-start;
+}
+
+/* Centred pages are a single self-contained block, so the rule that separates
+   a head from a body of clauses would only be a stray line. */
+.page__head--center {
+  text-align: center;
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.page__head--center .eyebrow {
+  justify-content: center;
+}
+
+.page__head--center .page__lead {
+  margin-inline: auto;
+}
+
+/* --- Prominent head ------------------------------------------------------
+   For a page that opens as a statement. The homepage hero carries a warm
+   wash and a display-sized headline; an inner page that is the destination
+   for a nav link should not open smaller than the section it was clicked
+   from. Opt-in, so the legal pages keep the flatter register they read
+   better in. */
+
+.page__head--prominent {
+  padding-block: 0;
+  /* The hairline belongs to the document register. This variant uses space
+     instead, the same way the homepage hero does. */
+  border-bottom: 0;
+}
+
+.page__head--prominent .page__title {
+  font-size: clamp(2.4rem, 1.2rem + 3.6vw, 3.7rem);
+}
+
+.page__head--prominent .page__lead {
+  margin-top: 1.4rem;
+  max-width: 46ch;
+}
+
+/* --- Split hero ----------------------------------------------------------
+   Text left, artwork right, with the warm wash behind the pair. The wash
+   lives here rather than on the head because the head is now only half the
+   hero: a full-bleed gradient positioned against a column would centre on the
+   column instead of the page. */
+
+.about__hero {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+  padding-block: clamp(1rem, 3vw, 2.5rem) clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.about__hero::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: -28%;
+  left: 50%;
+  width: 100vw;
+  height: 165%;
+  translate: -50% 0;
+  pointer-events: none;
+  background: radial-gradient(
+    54% 60% at 42% 34%,
+    rgba(255, 75, 43, 0.11) 0%,
+    rgba(255, 158, 69, 0.05) 44%,
+    transparent 74%
+  );
+}
+
+.about__hero-art {
+  border-radius: var(--r-xl);
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-xs);
+  /* Tight to the drawing. The chart carries its own margin in its viewBox, so
+     panel padding on top of that only made the artwork smaller than the space
+     it was sitting in. */
+  padding: clamp(0.75rem, 1.6vw, 1.15rem);
+  overflow: hidden;
+}
+
+.about__hero-art svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 899px) {
+  .about__hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* Artwork after the text on narrow screens, so the heading is what a
+     visitor reads first rather than a chart they have no context for. */
+  .about__hero-art {
+    order: 1;
+  }
+}
+
+/* The closing statement that signs the page off. */
+.about__closing {
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  padding-top: clamp(2rem, 4vw, 2.75rem);
+  border-top: 1px solid var(--border-soft);
+}
+
+.about__closing-lead {
+  font-size: var(--fs-lead);
+  line-height: 1.6;
+  color: var(--text-2);
+  max-width: 58ch;
+}
+
+/* The page's opening artwork. A tinted panel rather than a bare drawing, so
+   the chart reads as a placed image instead of floating linework — and so it
+   holds its own against the wash directly above it. */
+.about__figure {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding: clamp(1.25rem, 3vw, 2.25rem) clamp(1rem, 3vw, 2rem) 0;
+  border-radius: var(--r-xl);
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-xs);
+  overflow: hidden;
+}
+
+.about__figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* --- Tile artwork -------------------------------------------------------- */
+
+/* Artwork leads the tile, so the icon moves down beside the title rather than
+   sitting above the drawing — two stacked marks in the same corner would read
+   as a mistake. */
+.tile--art .tile__icon {
+  margin-bottom: 0.85rem;
+}
+
+.tile__art {
+  margin: 0 0 1.1rem;
+  border-radius: var(--r-md);
+  background: var(--bg);
+  border: 1px solid var(--border-soft);
+  overflow: hidden;
+}
+
+.tile__art svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* --- Vertical rhythm between page blocks --------------------------------- */
+
+.page__body {
+  padding-top: clamp(2rem, 4vw, 3rem);
+}
+
+.page__section {
+  padding-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+/* Sits between --fs-h3 and --fs-h2: a section heading on a sub-page should
+   rank below the page title, which --fs-h2 alone did not make obvious. */
+.page__section-title {
+  font-size: clamp(1.45rem, 1.1rem + 1.4vw, 2.05rem);
+  font-weight: 700;
+}
+
+.page__section-lead {
+  margin-top: 0.85rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+  font-size: var(--fs-lead);
+  line-height: 1.62;
+  color: var(--text-2);
+  max-width: 48ch;
+}
+
+.page__section-body {
+  margin-top: clamp(1.5rem, 3vw, 2rem);
+}
+
+/* Running body copy on a sub-page, where the legal pages' clause styling
+   would be the wrong shape. */
+.prose {
+  margin-top: clamp(1.25rem, 2.5vw, 1.75rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  max-width: 68ch;
+}
+
+.prose p {
+  font-size: var(--fs-body);
+  line-height: 1.78;
+  color: var(--text-2); /* 6.8:1 */
+}
+
+.page__form-wrap {
+  margin-top: clamp(1.75rem, 3.5vw, 2.5rem);
+}
+
+/* Heading block above a form. Matches the form's own 40rem measure so the two
+   line up instead of the heading running wide over a centred form. */
+.page__form-head {
+  max-width: 40rem;
+  margin-inline: auto;
+  margin-bottom: clamp(1.5rem, 3vw, 2rem);
+  text-align: center;
+}
+
+.page__form-head .page__section-lead {
+  margin-inline: auto;
+  margin-bottom: 0;
+}
+
+/* --- Review note ---------------------------------------------------------
+   Sits on any document making a regulated claim, and says out loud that the
+   bracketed values below are still missing. See lib/legal.js.
+   -------------------------------------------------------------------------- */
+
+.page__note {
+  margin-top: clamp(1.5rem, 3vw, 2rem);
+  padding: clamp(1rem, 2.2vw, 1.35rem) clamp(1.1rem, 2.4vw, 1.5rem);
+  border: 1px solid rgba(201, 58, 24, 0.28);
+  border-left-width: 3px;
+  border-radius: var(--r-sm);
+  background: var(--accent-tint);
+}
+
+.page__note-title {
+  font-size: var(--fs-small);
+  font-weight: 700;
+  color: var(--accent-ink); /* 4.7:1 on the tint */
+  margin-bottom: 0.45rem;
+}
+
+.page__note p {
+  font-size: var(--fs-small);
+  line-height: 1.65;
+  color: var(--ink-2); /* 13.7:1 on the tint */
+  max-width: 72ch;
+}
+
+.page__note p + p {
+  margin-top: 0.5rem;
+}
+
+/* --- Tiles ---------------------------------------------------------------
+   auto-fit rather than fixed columns: one rule covers 320px through 1920px
+   with no breakpoints, and a three-tile row becomes a two-tile row and then a
+   single column on its own.
+   -------------------------------------------------------------------------- */
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.tile {
+  padding: clamp(1.25rem, 2.5vw, 1.6rem);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-lg);
+  background: var(--bg);
+  box-shadow: var(--shadow-sm);
+}
+
+.tile__icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 1rem;
+  border-radius: var(--r-sm);
+  background: var(--accent-tint);
+  color: var(--accent-ink);
+}
+
+.tile__title {
+  font-size: var(--fs-h4);
+  font-weight: 700;
+  margin-bottom: 0.45rem;
+}
+
+.tile__text {
+  font-size: var(--fs-small);
+  line-height: 1.7;
+  color: var(--text-2); /* 6.8:1 */
+}
+
+/* A tile that carries a definable value rather than prose — the contact
+   details. Slightly heavier so the value reads before the label. */
+.tile__value {
+  font-size: var(--fs-h4);
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  overflow-wrap: anywhere;
+}
+
+.tile__label {
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--text-3); /* 5.0:1 */
+  margin-bottom: 0.7rem;
+}
+
+/* --- Numbered steps ------------------------------------------------------ */
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 2.5vw, 1.75rem);
+}
+
+.steps__item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.steps__num {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--accent-tint);
+  color: var(--accent-ink); /* 4.7:1 on the tint */
+  font-size: var(--fs-small);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.steps__title {
+  font-size: var(--fs-h4);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+
+.steps__text {
+  font-size: var(--fs-body);
+  line-height: 1.68;
+  color: var(--text-2);
+  max-width: 58ch;
+}
+
+/* Centred variant, for the thank-you page. */
+.steps--center {
+  max-width: 38rem;
+  margin-inline: auto;
+  text-align: left;
+}
+
+/* --- Two-column split ---------------------------------------------------- */
+
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: start;
+}
+
+.split__panel {
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-xl);
+  background: var(--surface);
+}
+
+.split__panel-title {
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  margin-bottom: 1.35rem;
+}
+
+/* The "read this before you fund anything" line. */
+.split__note {
+  margin-top: clamp(1.5rem, 3vw, 2rem);
+  font-size: var(--fs-small);
+  line-height: 1.7;
+  color: var(--text-2); /* 6.8:1 */
+  max-width: 48ch;
+}
+
+@media (max-width: 899px) {
+  .split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* --- Confirmation mark --------------------------------------------------- */
+
+.thanks__mark {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 1.35rem;
+  border-radius: 50%;
+  background: var(--accent-tint);
+  color: var(--accent-ink);
+}
+
+/* --- Legal article body -------------------------------------------------- */
+
+.legal__body {
+  padding-top: clamp(1.75rem, 3.5vw, 2.75rem);
+}
+
+.legal__section + .legal__section {
+  margin-top: clamp(1.85rem, 3.2vw, 2.5rem);
+}
+
+.legal__heading {
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+}
+
+/* The 01–10 marker on the risk disclosure. Decorative, so it is aria-hidden
+   at the source and the heading text carries the meaning. */
+.legal__num {
+  display: inline-block;
+  margin-right: 0.7rem;
+  font-size: 0.78em;
+  font-variant-numeric: tabular-nums;
+  vertical-align: 0.08em;
+  color: var(--accent-ink); /* 5.1:1 */
+}
+
+.legal__body p {
+  font-size: var(--fs-body);
+  line-height: 1.75;
+  color: var(--text-2);
+  max-width: 68ch;
+}
+
+.legal__body p + p {
+  margin-top: 0.85rem;
+}
+
+.legal__list {
+  margin-top: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding-left: 0;
+}
+
+.legal__list li {
+  position: relative;
+  padding-left: 1.35rem;
+  font-size: var(--fs-body);
+  line-height: 1.7;
+  color: var(--text-2);
+  max-width: 66ch;
+}
+
+.legal__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}

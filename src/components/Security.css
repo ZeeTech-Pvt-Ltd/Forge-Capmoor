@@ -1,0 +1,51 @@
+/* ==========================================================================
+   Security — three cards stating how funds and the account are protected
+   ========================================================================== */
+
+.security__grid {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.25rem, 2.4vw, 1.75rem);
+  align-items: stretch;
+}
+
+.security__card {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.5rem, 2.6vw, 2rem);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-xs);
+}
+
+.security__icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r-sm);
+  background: var(--accent-tint);
+  border: 1px solid var(--border-soft);
+  color: var(--accent-ink);
+}
+
+.security__card-title {
+  margin-top: 1.15rem;
+  font-size: var(--fs-h4);
+  font-weight: 700;
+}
+
+.security__card-text {
+  margin-top: 0.7rem;
+  font-size: var(--fs-small);
+  line-height: 1.68;
+  color: var(--text-2);
+}
+
+@media (max-width: 899px) {
+  .security__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

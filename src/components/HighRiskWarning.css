@@ -1,0 +1,35 @@
+/* ==========================================================================
+   High risk warning band
+   ==========================================================================
+   Sits in the footer, above the copyright line. Warmer and more bounded than
+   the surrounding text so it reads as a notice rather than as more footer.
+   -------------------------------------------------------------------------- */
+
+.risk-band {
+  padding: clamp(1.15rem, 2.5vw, 1.7rem);
+  border: 1px solid rgba(255, 75, 43, 0.3);
+  border-radius: var(--r-md);
+  background: rgba(255, 75, 43, 0.06);
+}
+
+.risk-band__title {
+  font-family: var(--font-body);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  /* 5.7:1 on the tinted near-black behind it. */
+  color: var(--accent);
+  margin-bottom: 0.85rem;
+}
+
+.risk-band__text {
+  font-size: var(--fs-micro);
+  line-height: 1.72;
+  color: var(--on-dark-2);
+  max-width: 96ch;
+}
+
+.risk-band__text + .risk-band__text {
+  margin-top: 0.7rem;
+}

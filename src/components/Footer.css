@@ -1,0 +1,137 @@
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.footer {
+  background: var(--dark-deep);
+  color: var(--on-dark-2);
+  padding-block: clamp(3rem, 6vw, 4.5rem) clamp(2rem, 4vw, 2.75rem);
+}
+
+.footer__top {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1.35fr);
+  gap: clamp(2.5rem, 5vw, 5rem);
+}
+
+/* --- Brand column -------------------------------------------------------- */
+
+.footer__brand-link {
+  display: inline-flex;
+  border-radius: var(--r-sm);
+}
+
+.footer__desc {
+  margin-top: 1.15rem;
+  max-width: 42ch;
+  font-size: var(--fs-small);
+  line-height: 1.7;
+  color: var(--on-dark-2);
+}
+
+.footer__cta {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 1.35rem;
+  padding: 0.6rem 1.1rem;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--dark-line);
+  background: rgba(255, 255, 255, 0.05);
+  font-size: var(--fs-small);
+  font-weight: 700;
+  color: var(--on-dark);
+  transition:
+    background-color var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out);
+}
+
+.footer__cta:hover {
+  background: rgba(255, 255, 255, 0.11);
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
+/* --- Link columns -------------------------------------------------------- */
+
+.footer__nav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.footer__col-title {
+  font-family: var(--font-body);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--on-dark-3);
+  margin-bottom: 1rem;
+}
+
+.footer__col-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.footer__link {
+  font-size: var(--fs-small);
+  color: var(--on-dark-2);
+  border-radius: 4px;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.footer__link:hover {
+  color: var(--on-dark);
+}
+
+/* --- Bottom bar ---------------------------------------------------------- */
+
+/* The horizontal rule that sat between the link columns and the warning band is
+   gone; this is the separation it was providing, as spacing instead of a line.
+   Scoped to the footer rather than added inside HighRiskWarning.css, so the band
+   keeps its own spacing wherever else it is used. */
+.footer .risk-band {
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.25rem 2rem;
+  margin-top: clamp(1.5rem, 3vw, 2rem);
+}
+
+.footer__legal {
+  flex: 1 1 34rem;
+}
+
+.footer__note {
+  max-width: 74ch;
+  font-size: var(--fs-micro);
+  line-height: 1.7;
+  color: var(--on-dark-3);
+}
+
+
+.footer__copy {
+  font-size: var(--fs-small);
+  color: var(--on-dark-3);
+  white-space: nowrap;
+}
+
+@media (max-width: 899px) {
+  .footer__top {
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(2.25rem, 6vw, 3rem);
+  }
+}
+
+@media (max-width: 479px) {
+  .footer__nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.75rem 1.25rem;
+  }
+}

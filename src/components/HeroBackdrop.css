@@ -1,0 +1,64 @@
+/* ==========================================================================
+   Hero backdrop — the network, drawn against the hero box itself
+   ==========================================================================
+   The box is the hero, so the composition's percentages and the hero's own
+   layout are the same coordinate space. `container-type` makes the box the
+   query container for the chip typography, which is what lets one set of
+   clamp() bounds serve three very different canvas widths.
+   -------------------------------------------------------------------------- */
+
+.hero-backdrop {
+  position: absolute;
+  inset: 0;
+  /* Nothing here is interactive, and it sits under the text. */
+  z-index: 0;
+  pointer-events: none;
+  container-type: inline-size;
+  /* Capped so an ultrawide window does not stretch the network into a band of
+     stray lines. The connectors stay behind the copy either way. */
+  max-width: 1680px;
+  margin-inline: auto;
+}
+
+.hero-backdrop__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* --- Chips ---------------------------------------------------------------
+   The stage sized these off a ~1180px canvas; the box here is the whole hero,
+   so the same clamp() bounds would produce a 34px icon inside a 133px chip.
+   Re-scaled to the box instead, with the lower bounds doing the work on the
+   narrow canvases where the chips are a smaller share of the width.
+   -------------------------------------------------------------------------- */
+
+.hero-backdrop .hero-node {
+  gap: clamp(4px, 0.5cqw, 8px);
+  padding: clamp(4px, 0.5cqw, 10px) clamp(6px, 0.75cqw, 14px);
+  border-radius: clamp(8px, 0.9cqw, 14px);
+}
+
+.hero-backdrop .hero-node__icon {
+  width: clamp(15px, 1.5cqw, 24px);
+  height: clamp(15px, 1.5cqw, 24px);
+  border-radius: clamp(5px, 0.5cqw, 8px);
+}
+
+.hero-backdrop .hero-node__label {
+  font-size: clamp(9px, 0.86cqw, 13px);
+  letter-spacing: -0.005em;
+}
+
+.hero-backdrop .hero-node__viz {
+  max-width: clamp(22px, 2.2cqw, 38px);
+  height: clamp(4px, 0.45cqw, 7px);
+}
+
+/* --- Guide rings ---------------------------------------------------------
+   Where the rings live: with the hub, in HeroHub.css. They are deliberately
+   not part of the connector SVG — the canvas here is stretched to the shape of
+   the hero, which would turn a circle drawn in that space into an ellipse.
+   -------------------------------------------------------------------------- */

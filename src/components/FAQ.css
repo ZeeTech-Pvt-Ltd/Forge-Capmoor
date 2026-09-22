@@ -1,0 +1,139 @@
+/* ==========================================================================
+   FAQ accordion
+   ========================================================================== */
+
+.faq__list {
+  margin-top: clamp(2.5rem, 4.5vw, 3.5rem);
+  max-width: 52rem;
+  margin-inline: auto;
+  border-top: 1px solid var(--border-soft);
+}
+
+/* On /faq the list sits directly under a page head that already draws a rule,
+   so its own top border and lead-in margin would double up. */
+.faq__list--flush {
+  margin-top: 0;
+  border-top: 0;
+}
+
+.faq__item {
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.faq__question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: clamp(1.15rem, 2.2vw, 1.5rem) 0.35rem;
+  cursor: pointer;
+  list-style: none;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+/* Remove the native disclosure triangle in every engine. */
+.faq__question::-webkit-details-marker {
+  display: none;
+}
+
+.faq__question::marker {
+  content: '';
+}
+
+.faq__question:hover {
+  color: var(--accent-ink);
+}
+
+.faq__question-text {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  text-wrap: balance;
+}
+
+.faq__indicator {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  color: var(--ink);
+  background: var(--bg);
+  transition:
+    transform var(--dur) var(--ease-out),
+    background-color var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out),
+    color var(--dur) var(--ease-out);
+}
+
+/* The plus turns into a cross as the answer opens. */
+.faq__item[open] .faq__indicator {
+  transform: rotate(45deg);
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--ink);
+}
+
+.faq__question:hover .faq__indicator {
+  border-color: var(--line-strong);
+}
+
+.faq__answer {
+  padding: 0 3.5rem 1.6rem 0.35rem;
+}
+
+.faq__answer p {
+  font-size: var(--fs-body);
+  line-height: 1.72;
+  color: var(--text-2);
+  max-width: 62ch;
+}
+
+/* <details> cannot animate its own height without script, so the opening is
+   expressed as a short fade-and-lift of the content instead. */
+.faq__item[open] .faq__answer {
+  animation: faq-reveal 300ms var(--ease-out) both;
+}
+
+@keyframes faq-reveal {
+  from {
+    opacity: 0;
+    translate: 0 -6px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+/* The homepage teaser's link out to the full set. */
+.faq__more {
+  margin-top: clamp(1.75rem, 3vw, 2.5rem);
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 559px) {
+  .faq__answer {
+    padding-right: 0.35rem;
+  }
+
+  .faq__indicator {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq__item[open] .faq__answer {
+    animation: none;
+  }
+
+  .faq__item[open] .faq__indicator {
+    transform: rotate(45deg);
+  }
+}

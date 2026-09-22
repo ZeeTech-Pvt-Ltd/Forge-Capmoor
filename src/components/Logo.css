@@ -1,0 +1,37 @@
+/* ==========================================================================
+   Brand lockup
+   ========================================================================== */
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  line-height: 1;
+}
+
+.logo__word {
+  font-family: var(--font-display);
+  font-size: 1.175rem;
+  font-weight: 700;
+  /* Tighter than body tracking so the two words read as one mark. */
+  letter-spacing: -0.035em;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.logo__word-accent {
+  color: var(--ink);
+}
+
+/* On dark panels the wordmark inverts; the emblem keeps its accent gradient
+   because it reads correctly against both light and dark. */
+.logo--dark .logo__word,
+.logo--dark .logo__word-accent {
+  color: var(--on-dark);
+}
+
+@media (max-width: 359px) {
+  .logo__word {
+    font-size: 1.05rem;
+  }
+}

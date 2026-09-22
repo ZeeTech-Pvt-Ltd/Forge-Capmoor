@@ -1,0 +1,258 @@
+/* ==========================================================================
+   Phone field — dial-code selector fused to a number input
+   ==========================================================================
+   Colours come from the `--field-*` tokens in SignUpForm.css, so this control
+   inherits whichever tone it is dropped into. The few tokens that have no
+   `--field-` equivalent (the popup's own surface) are declared here for the
+   light tone and overridden in `.form--dark` alongside the others.
+
+   The border lives on `.phone__control`, not on the trigger and the input.
+   Two abutting elements each drawing their own border would show a double line
+   where they meet, and neither could render a focus ring around the pair.
+   -------------------------------------------------------------------------- */
+
+.phone__control {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  border-radius: var(--r-sm);
+  background: var(--field-bg);
+  border: 1px solid var(--field-line);
+  transition:
+    border-color var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out);
+}
+
+.phone__control:hover {
+  border-color: var(--field-line-hover);
+}
+
+/* Covers the trigger as well as the input — tabbing to the button lights the
+   whole control, which is what makes it read as one field. */
+.phone__control:focus-within {
+  background: var(--field-bg-focus);
+  border-color: var(--accent);
+}
+
+/* `:has()` on the input's aria-invalid rather than a class on the wrapper: the
+   invalid state is already expressed on the input for assistive technology, and
+   mirroring it here keeps one source of truth. */
+.phone__control:has([aria-invalid='true']) {
+  border-color: var(--field-line-invalid);
+}
+
+/* --- The number input ---------------------------------------------------- */
+
+/* Specificity raised deliberately. `.field__input` and its `:focus` rule are
+   two classes; these are three, so they win whichever stylesheet the bundler
+   happens to emit first. */
+.phone .field__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+}
+
+.phone .field__input:hover,
+.phone .field__input:focus {
+  border-color: transparent;
+  background: transparent;
+}
+
+/* --- Trigger ------------------------------------------------------------- */
+
+.phone__country {
+  flex: none;
+  display: flex;
+}
+
+.phone__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  /* A fixed floor, not `auto`: without it the control's left half changes
+     width every time the dial code does, and `+1` beside `+880` would shuffle
+     the number the visitor is in the middle of typing. */
+  min-width: 5.3rem;
+  padding: 0 0.7rem;
+  border: 0;
+  border-right: 1px solid var(--field-line);
+  border-radius: var(--r-sm) 0 0 var(--r-sm);
+  background: transparent;
+  color: var(--field-text);
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+
+.phone__trigger:hover {
+  background: var(--phone-trigger-hover);
+}
+
+.phone__flag {
+  /* `width: auto` so the 20×15 attributes only set the intrinsic ratio; the
+     height below is what actually sizes it. */
+  width: auto;
+  height: 1rem;
+  flex: none;
+  border-radius: 2px;
+  object-fit: cover;
+  /* Most of these flags are pale at the edges and several are white — without
+     an outline the white ones dissolve into the field. */
+  box-shadow: 0 0 0 1px var(--phone-flag-ring);
+}
+
+.phone__dial {
+  line-height: 1;
+}
+
+.phone__caret {
+  flex: none;
+  color: var(--field-label);
+  transition: rotate var(--dur-fast) var(--ease-out);
+}
+
+.phone__trigger[aria-expanded='true'] .phone__caret {
+  rotate: 180deg;
+}
+
+/* --- Popup --------------------------------------------------------------- */
+
+/* Spans the whole control rather than sitting under the trigger. The trigger is
+   only ~85px wide and the field sits in the right-hand column of the form, so a
+   popup anchored to it ran off the right edge of the viewport at 1280 — and any
+   fixed width does the same at some screen size. Matching the control means it
+   fits wherever the field fits, and it lines up with the field while it is
+   open, which is what it reads as. */
+.phone__popup {
+  position: absolute;
+  z-index: 30;
+  top: calc(100% + 0.4rem);
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  max-height: 19rem;
+  border: 1px solid var(--phone-line);
+  border-radius: var(--r-sm);
+  background: var(--phone-bg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  animation: phone-pop 140ms var(--ease-out);
+}
+
+@keyframes phone-pop {
+  from {
+    opacity: 0;
+    translate: 0 -4px;
+  }
+}
+
+.phone__search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--phone-line);
+  color: var(--field-placeholder);
+  flex: none;
+}
+
+.phone__search-icon {
+  flex: none;
+}
+
+.phone__search-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: var(--field-text);
+  font: inherit;
+  font-size: 0.95rem;
+}
+
+.phone__search-input::placeholder {
+  color: var(--field-placeholder);
+}
+
+.phone__search-input:focus {
+  outline: none;
+}
+
+/* The popup is the only focus affordance inside the combobox, so the control
+   around it lights up rather than the bare input. */
+.phone__popup:focus-within .phone__search {
+  border-bottom-color: var(--accent);
+}
+
+.phone__list {
+  margin: 0;
+  padding: 0.3rem;
+  list-style: none;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.phone__option {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.55rem;
+  border-radius: calc(var(--r-sm) - 4px);
+  color: var(--field-text);
+  font-size: 0.95rem;
+  cursor: pointer;
+  /* 250 rows are in the DOM but only ~8 are ever on screen. `loading="lazy"`
+     alone still fetched 86 flags, because the browser's lazy threshold reaches
+     well past the visible rows. `content-visibility: auto` takes the off-screen
+     ones out of rendering entirely, and their flags are never requested. The
+     intrinsic size has to be declared or the scrollbar cannot be sized — it
+     mirrors this row's real height (1rem flag + 2 × 0.5rem padding). */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 2.05rem;
+}
+
+.phone__option[data-active='true'] {
+  background: var(--phone-option-active);
+}
+
+.phone__option[aria-selected='true'] .phone__name {
+  font-weight: 600;
+}
+
+.phone__name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.phone__option-dial {
+  flex: none;
+  color: var(--field-label);
+  font-size: var(--fs-small);
+  font-variant-numeric: tabular-nums;
+}
+
+.phone__empty {
+  padding: 0.75rem;
+  color: var(--field-label);
+  font-size: var(--fs-small);
+}
+
+/* --- Light defaults ------------------------------------------------------
+   Overridden by `.form--dark` in SignUpForm.css. */
+
+.phone {
+  --phone-bg: #ffffff;
+  --phone-line: var(--border);
+  --phone-trigger-hover: rgba(14, 14, 17, 0.04);
+  --phone-option-active: rgba(14, 14, 17, 0.06);
+  --phone-flag-ring: rgba(14, 14, 17, 0.16);
+}
