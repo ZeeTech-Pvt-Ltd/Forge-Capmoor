@@ -6,7 +6,9 @@
       "Bash(node shot.mjs v4)",
       "Bash(sed -i 's/hub: { cx: 720, cy: 943, pct: 6 },/hub: { cx: 720, cy: 941, pct: 7.5 },/' src/lib/heroNetwork.js)",
       "Bash(sed -i 's/min-height: max\\(100svh, 49rem\\);/min-height: max\\(100svh, 50rem\\);/' src/components/Hero.css)",
-      "WebFetch(domain:ai-proapp.com)"
+      "WebFetch(domain:ai-proapp.com)",
+      "Bash(git remote *)",
+      "Bash(git push *)"
     ]
   }
 }
