@@ -159,16 +159,14 @@ export default function About() {
           <p className="eyebrow">How we work</p>
           <h2 className="page__section-title">Four commitments that decide what ships</h2>
 
-          <ol className="steps">
+          <ol className="commitments">
             {VALUES.map((value, index) => (
-              <li key={value.title} className="steps__item">
-                <span className="steps__num" aria-hidden="true">
+              <li key={value.title} className="commitment">
+                <span className="commitment__num" aria-hidden="true">
                   {String(index + 1).padStart(2, '0')}
                 </span>
-                <div>
-                  <h3 className="steps__title">{value.title}</h3>
-                  <p className="steps__text">{value.text}</p>
-                </div>
+                <h3 className="commitment__title">{value.title}</h3>
+                <p className="commitment__text">{value.text}</p>
               </li>
             ))}
           </ol>

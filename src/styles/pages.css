@@ -416,6 +416,111 @@
   max-width: 58ch;
 }
 
+/* --- Commitments ---------------------------------------------------------
+   A 2x2 card grid, not the stacked list this used to be. Four blocks of prose
+   in one column read as a document — nothing to look at between the heading
+   and the next section, and the small numbered discs carried no weight. Two
+   across gives each commitment its own surface, and a numeral large enough to
+   be part of the composition rather than a bullet.
+
+   Deliberately not four across: that is the shape the tiles above and the
+   security tiles below already use, and four narrow columns of this much text
+   would be the worst of both. */
+
+.commitments {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  margin-top: clamp(2rem, 4vw, 3rem);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.15rem, 2.2vw, 1.75rem);
+}
+
+.commitment {
+  position: relative;
+  padding: clamp(1.5rem, 2.8vw, 2.25rem);
+  border-radius: var(--r-xl);
+  background: var(--bg);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition:
+    transform var(--dur) var(--ease-out),
+    box-shadow var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out);
+}
+
+.commitment:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border);
+}
+
+/* The numeral, set large and low-contrast in the corner. It is decoration —
+   the ordered list already carries the sequence for assistive technology — so
+   it is aria-hidden in the markup and does not intercept anything here. */
+.commitment__num {
+  position: absolute;
+  top: clamp(0.75rem, 1.8vw, 1.25rem);
+  right: clamp(1rem, 2.2vw, 1.6rem);
+  font-family: var(--font-display);
+  font-size: clamp(3.25rem, 5.5vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--accent);
+  opacity: 0.13;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* A short accent rule above the title, which draws across on hover. */
+.commitment::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transition: width 420ms var(--ease-out);
+}
+
+.commitment:hover::before {
+  width: 100%;
+}
+
+.commitment__title {
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  /* Clears the numeral, which is a positioned sibling rather than part of the
+     flow — so without this the title runs straight underneath it. The value
+     tracks the numeral's own clamps (offset + 1.15em across two digits) rather
+     than being a guess: a fixed 3.5rem cleared it at no width, and the four
+     titles on this page are short enough that it never showed until measured. */
+  padding-right: clamp(5rem, 9vw, 7rem);
+}
+
+.commitment__text {
+  margin-top: 0.7rem;
+  font-size: var(--fs-small);
+  line-height: 1.7;
+  color: var(--text-2);
+}
+
+@media (max-width: 767px) {
+  .commitments {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .commitment:hover {
+    transform: none;
+  }
+}
+
 /* Centred variant, for the thank-you page. */
 .steps--center {
   max-width: 38rem;
