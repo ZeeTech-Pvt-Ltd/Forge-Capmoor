@@ -162,22 +162,25 @@
      shorter now, so it can carry more size without running off the measure —
      and at this weight the display face is what makes the block read as a
      masthead rather than as a page title. */
-  /* The floor is 2.2rem, not 2.7. At 2.7 the clamp bottomed out on every phone
-     width, which set the headline on four lines at 390px — and four lines put
-     the colour break mid-row, so "That Shows" straddled white and accent. The
-     lower floor lets the vw term do the work down there: three lines, and the
-     accent lands on a line boundary. */
-  font-size: clamp(2.2rem, 1rem + 6vw, 5.9rem);
-  /* 500, the light end of what this headline carries well. Two treatments were
-     tried before it and both were removed: splitting the two halves by colour,
-     then by weight (500 against 800). Each made two focal points where the
-     headline needs one, and at this size the weight split read as an accident
-     rather than as emphasis. Uniform is the stronger choice — the size alone
-     is doing the work.
-     The variable font runs 400–800, so this costs no extra file. */
-  font-weight: 500;
+  /* The ceiling is 5rem — 80px — which is the desktop size. It stays a clamp
+     rather than a flat 80px because a fixed size would set the headline at 80px
+     on a 390px phone too, where it would run to six or seven lines and push the
+     CTA off the fold. The cap governs from about 1100px up; below that the vw
+     term scales it down.
+     2.2rem is the floor: at 2.7 the clamp bottomed out on every phone width and
+     set four lines at 390px. */
+  font-size: clamp(2.2rem, 1rem + 6vw, 5rem);
+  /* 600. Two treatments were tried before it and both were removed: splitting
+     the two halves by colour, then by weight (500 against 800). Each made two
+     focal points where the headline needs one, and the split read as an
+     accident rather than as emphasis. Uniform weight, one colour, and the size
+     does the work.
+     The variable font runs 400–800, so the weight costs no extra file. */
+  font-weight: 600;
   line-height: 0.94;
-  letter-spacing: -0.03em;
+  /* Slightly less negative than at 500: heavier strokes need more room or the
+     counters start to close at this size. */
+  letter-spacing: -0.028em;
   text-wrap: balance;
   /* Set explicitly. `base.css` declares `h1 { color: var(--ink) }`, and an
      element rule beats the colour inherited from `.hero` — so without this the
