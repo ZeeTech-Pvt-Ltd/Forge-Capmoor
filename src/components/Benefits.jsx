@@ -4,113 +4,13 @@ import { IconCheck } from './Icons'
 
 import './Benefits.css'
 
-/**
- * Abstract section art, drawn rather than photographed.
- *
- * Each piece is a different shape so the three rows do not read as one
- * illustration repeated three times: a traced chain, a field of points, and
- * a column chart with a column missing.
- */
-
-function TraceArt() {
-  return (
-    <svg viewBox="0 0 320 220" fill="none" aria-hidden="true" focusable="false">
-      <line
-        x1="40"
-        y1="110"
-        x2="280"
-        y2="110"
-        stroke="rgba(14,14,17,0.16)"
-        strokeWidth="1.5"
-        strokeDasharray="3 7"
-        strokeLinecap="round"
-      />
-      {[40, 100, 220, 280].map((x) => (
-        <circle key={x} cx={x} cy="110" r="8" fill="#fff" stroke="rgba(14,14,17,0.18)" strokeWidth="1.5" />
-      ))}
-      <circle cx="160" cy="110" r="27" stroke="#FF4B2B" strokeOpacity="0.26" strokeWidth="1.5" />
-      <circle cx="160" cy="110" r="16" fill="#FF4B2B" fillOpacity="0.14" stroke="#FF4B2B" strokeWidth="1.5" />
-      <circle cx="160" cy="110" r="5" fill="#FF4B2B" />
-    </svg>
-  )
-}
-
-function FocusArt() {
-  const points = []
-  for (let row = 0; row < 4; row += 1) {
-    for (let col = 0; col < 6; col += 1) {
-      points.push({
-        x: 52 + col * 43,
-        y: 48 + row * 42,
-        accent: (row === 1 && col === 1) || (row === 2 && col === 2) || (row === 3 && col === 3),
-      })
-    }
-  }
-
-  return (
-    <svg viewBox="0 0 320 220" fill="none" aria-hidden="true" focusable="false">
-      {points.map((point) => (
-        <circle
-          key={`${point.x}-${point.y}`}
-          cx={point.x}
-          cy={point.y}
-          r={point.accent ? 11 : 7}
-          fill={point.accent ? '#FF4B2B' : 'rgba(14,14,17,0.12)'}
-          fillOpacity={point.accent ? 0.16 : 1}
-          stroke={point.accent ? '#FF4B2B' : 'none'}
-          strokeWidth={point.accent ? 1.5 : 0}
-        />
-      ))}
-      <circle cx="181" cy="132" r="4.5" fill="#FF4B2B" />
-    </svg>
-  )
-}
-
-function GapArt() {
-  const bars = [
-    { x: 46, h: 62 },
-    { x: 90, h: 96 },
-    { x: 178, h: 78 },
-    { x: 222, h: 118 },
-    { x: 266, h: 70 },
-  ]
-
-  return (
-    <svg viewBox="0 0 320 220" fill="none" aria-hidden="true" focusable="false">
-      <line x1="34" y1="172" x2="292" y2="172" stroke="rgba(14,14,17,0.14)" strokeWidth="1.5" />
-
-      {bars.map((bar) => (
-        <rect
-          key={bar.x}
-          x={bar.x}
-          y={172 - bar.h}
-          width="26"
-          height={bar.h}
-          rx="8"
-          fill="#0E0E11"
-          fillOpacity="0.1"
-        />
-      ))}
-
-      {/* The missing column, drawn as an outline so the gap is the point. */}
-      <rect
-        x="134"
-        y="60"
-        width="26"
-        height="112"
-        rx="8"
-        stroke="#FF4B2B"
-        strokeOpacity="0.55"
-        strokeWidth="1.6"
-        strokeDasharray="5 6"
-      />
-    </svg>
-  )
-}
-
 const BENEFITS = [
   {
-    art: <TraceArt />,
+    image: {
+      src: '/home-1-960.webp',
+      srcSet: '/home-1-640.webp 640w, /home-1-960.webp 960w, /home-1-1200.webp 1200w',
+      alt: 'A person wearing a headset beside panels marked Trade Call, Verified Signals, Risk Analysis and Real-Time Support, with a Bitcoin price chart alongside.',
+    },
     title: 'Defend the call, not just make it',
     text: 'When someone asks why, the answer is already attached to the result: the inputs, the conditions that were met, and the caveats alongside them.',
     points: [
@@ -120,7 +20,11 @@ const BENEFITS = [
     ],
   },
   {
-    art: <FocusArt />,
+    image: {
+      src: '/home-2-960.webp',
+      srcSet: '/home-2-640.webp 640w, /home-2-960.webp 960w, /home-2-1200.webp 1200w',
+      alt: 'A person at a laptop beside panels stepping through Analyze, Evaluate and Decide, with a Bitcoin chart and a circuit-board motif.',
+    },
     title: 'Keep your attention for judgement',
     text: 'Assembly and scanning are routine work. Hand them to the platform and spend the hours you get back on the part that genuinely needs a person.',
     points: [
@@ -130,7 +34,11 @@ const BENEFITS = [
     ],
   },
   {
-    art: <GapArt />,
+    image: {
+      src: '/home-3-960.webp',
+      srcSet: '/home-3-640.webp 640w, /home-3-960.webp 960w, /home-3-1200.webp 1200w',
+      alt: 'A person at a trading desk facing several monitors, with panels marked Live Trading and Market Analysis and a list of market positions.',
+    },
     title: 'See the gaps before they bite',
     text: 'Stale sources and missing data appear as part of the output, rather than surfacing weeks later as an unexplained hole in the numbers.',
     points: [
@@ -165,7 +73,20 @@ export function Benefits() {
               key={benefit.title}
               className={`benefit ${index % 2 === 1 ? 'benefit--flip' : ''}`}
             >
-              <div className="benefit__art">{benefit.art}</div>
+              <div className="benefit__art">
+                {/* Supplied artwork, served as WebP at three widths with the
+                    intrinsic size declared so the column reserves its space. */}
+                <img
+                  src={benefit.image.src}
+                  srcSet={benefit.image.srcSet}
+                  sizes="(max-width: 799px) 320px, 40vw"
+                  width="1254"
+                  height="1254"
+                  loading="lazy"
+                  decoding="async"
+                  alt={benefit.image.alt}
+                />
+              </div>
 
               <div className="benefit__text">
                 <span className="benefit__index" aria-hidden="true">

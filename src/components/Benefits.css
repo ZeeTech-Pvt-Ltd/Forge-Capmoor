@@ -21,19 +21,18 @@
   order: 2;
 }
 
+/* No frame. The artwork is a cut-out with its own torn-paper edge and a
+   transparent background, so a panel behind it would draw a second frame
+   inside the first. */
 .benefit__art {
   display: grid;
   place-items: center;
-  padding: clamp(1.5rem, 3vw, 2.5rem);
-  border-radius: var(--r-xl);
-  background: var(--surface);
-  border: 1px solid var(--border-soft);
-  box-shadow: var(--shadow-xs);
 }
 
-.benefit__art svg {
+.benefit__art img {
+  display: block;
   width: 100%;
-  max-width: 320px;
+  max-width: 30rem;
   height: auto;
 }
 

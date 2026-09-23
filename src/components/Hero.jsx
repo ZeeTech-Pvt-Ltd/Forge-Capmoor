@@ -1,19 +1,28 @@
 import { Link } from '../lib/router'
-import { HeroBackdrop } from './HeroBackdrop'
+import { HeroChartArt } from './TradingArt'
 
 import './Hero.css'
 
 /**
  * Homepage hero.
  *
- * Structure follows the brief's composition: eyebrow, one centred H1, a short
- * supporting paragraph, one primary CTA. The "See how it works" scroll cue that
+ * Structure: one centred H1, a short supporting paragraph, two actions —
+ * primary for the visitor who is ready, secondary for the one who is not.
+ *
+ * There is no eyebrow above the headline. "Explainable automated trading" was
+ * labelling the block for someone who had already read the headline under it,
+ * and on a dark band a grey uppercase pill was the weakest thing in it. The
+ * headline is the first thing now.
+ *
+ * The "See how it works" scroll cue that
  * used to sit under the CTA is gone — it was the last `/#section` anchor left
  * anywhere in the site, so the page now has no in-page anchor links at all.
  *
- * The connected-intelligence network is the section's own background layer
- * (`HeroBackdrop`) rather than a block sitting under the copy, so the drawing
- * wraps around the headline instead of waiting below it.
+ * One backdrop, not three. A market chart sits behind the copy, and that is the
+ * whole of the decoration — an earlier revision stacked a chart, eight
+ * connectors, a hub and four guide rings on top of each other, and the sum
+ * read as noise rather than as a drawing. Each piece was fine alone; together
+ * they said nothing. If something is added here, something else comes out.
  *
  * Headline options considered:
  *   1. "AI market intelligence you can actually interrogate."
@@ -35,15 +44,19 @@ export function Hero() {
   return (
     <section className="hero" aria-labelledby="hero-title">
       <div className="hero__wash" aria-hidden="true" />
-      <HeroBackdrop />
-      {/* Calms the network behind the copy without hiding it at the edges,
-          where the hub and chips are. Sits above the backdrop, below the
-          text — both of which are in HeroBackdrop/Hero.css. */}
+      {/* The trading backdrop, deepest of the three layers. It is the one that
+          says what the product is about before a word is read — the network
+          behind the hub is abstract, and a market chart is not. Faint enough
+          that it reads as a surface rather than as a figure. */}
+      <div className="hero__market" aria-hidden="true">
+        <HeroChartArt />
+      </div>
+      {/* Calms the chart behind the copy so the headline keeps full contrast,
+          and fades out before the edges so the drawing still reads there.
+          Sits above the chart, below the text. */}
       <div className="hero__overlay" aria-hidden="true" />
 
       <div className="container container--wide hero__intro">
-        <p className="hero__eyebrow">Explainable automated trading</p>
-
         <h1 id="hero-title" className="hero__title">
           Automated trading that shows its reasoning, not just its signals.
         </h1>
@@ -53,9 +66,16 @@ export function Hero() {
           made each move. The reasoning is yours to check, question, or switch off.
         </p>
 
+        {/* Two actions, not one. A hero with a single button reads as a
+            landing page that has not decided what to offer next; the second
+            is for the visitor who is not ready to sign up, and it goes
+            somewhere real rather than to another anchor. */}
         <div className="hero__actions">
           <Link to="/signup" className="btn btn--primary btn--lg">
             Create an account
+          </Link>
+          <Link to="/about" className="btn btn--secondary btn--lg">
+            How the platform works
           </Link>
         </div>
       </div>

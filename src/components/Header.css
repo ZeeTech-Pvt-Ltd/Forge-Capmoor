@@ -35,11 +35,12 @@
   pointer-events: auto;
   /* Present at rest, not only once scrolled. An invisible bar left the wordmark
      floating loose over the hero and made the nav read as page content; the
-     pill now sits above it from the first frame and simply firms up on scroll.
-     Both states keep a translucent fill, so the network stays faintly visible
-     through the bar rather than being cut off by an opaque strip. */
-  background: rgba(255, 255, 255, 0.72);
-  box-shadow: 0 2px 10px rgba(23, 20, 18, 0.04);
+     pill sits above it from the first frame and simply firms up on scroll.
+     Opaque enough to stay white over a dark hero — at 0.72 it mixed with the
+     dark band into a grey slab, and the near-black wordmark on it looked
+     faded rather than deliberate. */
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 2px 10px rgba(23, 20, 18, 0.06);
   /* Progressive enhancement: without backdrop-filter the near-opaque white
      above already reads correctly, it is simply less translucent. */
   backdrop-filter: saturate(170%) blur(12px);

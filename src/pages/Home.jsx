@@ -1,4 +1,5 @@
 import { Hero } from '../components/Hero'
+import { Ticker } from '../components/Ticker'
 import { Principles } from '../components/Principles'
 import { Proposition } from '../components/Proposition'
 import { HowItWorks } from '../components/HowItWorks'
@@ -26,6 +27,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <Ticker />
       <Principles />
       <Proposition />
       <HowItWorks />

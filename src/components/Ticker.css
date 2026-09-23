@@ -1,0 +1,115 @@
+/* ==========================================================================
+   Ticker
+   ==========================================================================
+   A dark strip directly under the hero. Dark on purpose: the hero above it is
+   warm and pale, and a terminal-style band is what a market strip looks like
+   everywhere else — putting it in the page's own off-white would make it read
+   as another content section rather than as a data strip.
+   -------------------------------------------------------------------------- */
+
+.ticker {
+  position: relative;
+  background: var(--dark-deep);
+  border-block: 1px solid var(--dark-line);
+  overflow: hidden;
+}
+
+/* The label sits at the left edge, above the row rather than in it, so it
+   cannot scroll away from the values it is qualifying. */
+.ticker__flag {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-inline: clamp(0.9rem, 2vw, 1.5rem);
+  background: var(--dark-deep);
+  border-right: 1px solid var(--dark-line);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--on-dark-3);
+}
+
+.ticker__viewport {
+  overflow: hidden;
+  /* Fades the row out at both ends so it does not appear to be chopped by the
+     viewport edge. */
+  mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+}
+
+.ticker__track {
+  display: flex;
+  width: max-content;
+  animation: ticker-scroll 64s linear infinite;
+}
+
+.ticker__row {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.75rem, 3.5vw, 3rem);
+  margin: 0;
+  padding: 0.85rem clamp(0.875rem, 1.75vw, 1.5rem);
+  list-style: none;
+}
+
+.ticker__item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.ticker__symbol {
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--on-dark);
+}
+
+.ticker__value {
+  font-size: var(--fs-small);
+  color: var(--on-dark-2);
+}
+
+.ticker__change {
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  /* Down by default and up only when marked: the two states are never the same
+     weight, so the pair is distinguishable without relying on hue. */
+  color: #ff9b8a;
+}
+
+.ticker__change[data-up] {
+  color: #7fd4a8;
+}
+
+/* The track is two identical rows, so translating by exactly half its width
+   lands the second copy where the first started. */
+@keyframes ticker-scroll {
+  from {
+    translate: 0 0;
+  }
+  to {
+    translate: -50% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker__track {
+    animation: none;
+  }
+
+  /* Without the animation the row is wider than the viewport and the second
+     copy is dead weight, so it comes out of the layout. */
+  .ticker__row[aria-hidden='true'] {
+    display: none;
+  }
+
+  .ticker__viewport {
+    overflow-x: auto;
+  }
+}

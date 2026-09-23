@@ -72,9 +72,9 @@
   justify-content: center;
 }
 
-.tech__diagram {
+.tech__art {
   width: 100%;
-  max-width: 460px;
+  max-width: 32rem;
   height: auto;
 }
 
@@ -88,7 +88,7 @@
     order: 2;
   }
 
-  .tech__diagram {
-    max-width: 380px;
+  .tech__art {
+    max-width: 26rem;
   }
 }
