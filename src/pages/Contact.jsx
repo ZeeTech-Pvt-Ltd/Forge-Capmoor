@@ -1,5 +1,5 @@
 import { PageHero } from '../components/PageHero'
-import { ChartArt } from '../components/TradingArt'
+import { HeroChartArt } from '../components/TradingArt'
 import { SignUpForm } from '../components/SignUpForm'
 import { IconClock, IconMail, IconPin } from '../components/Icons'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
@@ -45,11 +45,11 @@ export default function Contact() {
   useDocumentMeta('/contact')
 
   return (
-    <article className="section page">
+    <article className="section page page--dark-hero">
       <div className="container">
         <div className="contact__hero">
           <div className="contact__hero-bg" aria-hidden="true">
-            <ChartArt />
+            <HeroChartArt />
           </div>
 
           <div className="contact__hero-text">

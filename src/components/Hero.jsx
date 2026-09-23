@@ -27,18 +27,21 @@ import './Hero.css'
  * Headline options considered:
  *   1. "AI market intelligence you can actually interrogate."
  *   2. "Turn scattered market data into decisions you can explain."
- *   3. "Automated trading that shows its reasoning, not just its signals."
+ *   3. "Automated trading that shows its reasoning."
  *
  * (1) leans on a piece of jargon; (2) is clear but drops the category term a
  * first-time visitor is searching for. (3) leads with the category phrase
  * ("automated trading") and carries the differentiator, that the reasoning is
- * visible, inside the 8–14 word target. It is the one in use below.
+ * visible. It is the one in use below.
  *
- * (3) used to read "AI market intelligence that shows its reasoning". The
- * headline was reframed so the page leads as a trading platform rather than a
- * market-intelligence product — the same shift applied to the homepage's
- * section headings. The category phrase a visitor searches for is "automated
- * trading", not "market intelligence".
+ * It used to run "...shows its reasoning, not just its signals." The trailing
+ * clause was the weaker half: "signals" is what every competitor sells, so
+ * naming it put the competition's word in our headline, and it pushed the line
+ * onto a third row at desktop width. Cut, the headline sets in two.
+ *
+ * The category phrase a visitor searches for is "automated trading", not
+ * "market intelligence" — the headline was reframed on that basis, and the
+ * same shift was applied to the homepage's section headings.
  */
 export function Hero() {
   return (
@@ -58,7 +61,7 @@ export function Hero() {
 
       <div className="container container--wide hero__intro">
         <h1 id="hero-title" className="hero__title">
-          Automated trading that shows its reasoning, not just its signals.
+          Automated trading that shows its reasoning.
         </h1>
 
         <p className="hero__lead">

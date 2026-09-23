@@ -31,9 +31,18 @@
     <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Fonts are self-hosted (no third-party request, no render-blocking
-         Google Fonts stylesheet). Preloading both variable files means the
-         H1 usually paints in Bricolage on first frame rather than swapping,
-         which keeps layout shift from the font swap close to zero. -->
+         Google Fonts stylesheet). Preloading the variable files means the H1
+         usually paints in the right face on first frame rather than swapping,
+         which keeps layout shift from the font swap close to zero. Archivo is
+         preloaded first because it sets the headline, which is the largest
+         thing on the first screen. -->
+    <link
+      rel="preload"
+      href="/fonts/archivo-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <link
       rel="preload"
       href="/fonts/bricolage-grotesque-latin.woff2"

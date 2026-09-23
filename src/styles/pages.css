@@ -108,60 +108,119 @@
    hero: a full-bleed gradient positioned against a column would centre on the
    column instead of the page. */
 
-.about__hero {
+/* --- Dark inner-page hero ------------------------------------------------
+   About and Contact open the same way the homepage does: a full-bleed dark
+   band with the market chart behind the copy. They were light, and an inner
+   page that opens smaller and paler than the section it was reached from reads
+   as a sub-page rather than as a destination.
+
+   `.page--dark-hero` drops the page's own top padding so the band starts at
+   y=0 — otherwise the fixed header would sit over a strip of white above the
+   dark. The hero carries that padding itself. */
+
+.page--dark-hero {
+  padding-top: 0;
+}
+
+.about__hero,
+.contact__hero {
   position: relative;
   isolation: isolate;
-  padding-block: clamp(1rem, 3vw, 2.5rem) clamp(2.5rem, 5vw, 3.5rem);
+  padding-top: calc(var(--header-h) + clamp(2.25rem, 5.5vw, 5rem));
+  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+  /* Full-bleed out of the container, so the band reaches both viewport edges. */
+  background: var(--dark);
+  color: var(--on-dark);
 }
 
-.about__hero::before {
+/* The dark band and the glow are the same layer. The hero sits inside the
+   page's `.container`, so its own background can only ever be as wide as the
+   content column — this pseudo-element is what reaches both viewport edges.
+   Two backgrounds on one element rather than two elements: `::before` and
+   `::after` are both spoken for, and a third layer for a gradient would be
+   one more thing to keep in sync. */
+.about__hero::before,
+.contact__hero::before {
   content: '';
   position: absolute;
-  z-index: -1;
-  top: -28%;
+  z-index: -3;
+  top: 0;
+  bottom: 0;
   left: 50%;
   width: 100vw;
-  height: 165%;
   translate: -50% 0;
   pointer-events: none;
-  background: radial-gradient(
-    54% 60% at 42% 34%,
-    rgba(255, 75, 43, 0.11) 0%,
-    rgba(255, 158, 69, 0.05) 44%,
-    transparent 74%
-  );
+  background:
+    radial-gradient(
+      58% 62% at 50% 42%,
+      rgba(255, 75, 43, 0.22) 0%,
+      rgba(255, 126, 58, 0.1) 44%,
+      transparent 78%
+    ),
+    var(--dark);
 }
 
-/* The chart behind the copy rather than boxed beside it. Held to the right and
-   faded, so it reads as the surface the page opens on instead of a figure the
-   reader has to get past — and so it never sits under the headline, where it
-   would cost contrast. */
-.about__hero-bg {
+/* The chart behind the copy. Same drawing the homepage uses, at a slightly
+   lower weight because these pages carry a longer headline. */
+.about__hero-bg,
+.contact__hero-bg {
   position: absolute;
   z-index: -2;
-  top: 50%;
-  left: 50%;
-  translate: -50% -50%;
-  width: 100%;
-  opacity: 0.42;
+  inset: 0;
+  opacity: 0.7;
   pointer-events: none;
 }
 
-/* Sits between the background chart and the copy, the way the homepage hero
-   washes its own backdrop. Opaque under the text and gone before the edges, so
-   the drawing still reads at the sides while the headline keeps full contrast. */
-.about__hero::after {
+/* Between the chart and the copy: near-solid under the text, gone before the
+   edges. On the light version this was white; on dark it has to be the dark. */
+.about__hero::after,
+.contact__hero::after {
   content: '';
   position: absolute;
   z-index: -1;
   inset: -12% -6%;
   pointer-events: none;
   background: radial-gradient(
-    46% 58% at 32% 46%,
-    rgba(255, 255, 255, 0.94) 0%,
-    rgba(255, 255, 255, 0.72) 52%,
-    rgba(255, 255, 255, 0) 86%
+    52% 62% at 38% 46%,
+    rgba(16, 16, 20, 0.9) 0%,
+    rgba(16, 16, 20, 0.62) 54%,
+    rgba(16, 16, 20, 0) 88%
   );
+}
+
+/* Headline, lead and secondary action have to come off the light defaults for
+   the same reason the homepage's do — an element rule on `h1` in base.css
+   beats anything inherited from the hero. */
+.about__hero .page__title,
+.contact__hero .page__title {
+  color: var(--on-dark);
+}
+
+/* The same correction `.section--dark .eyebrow` makes in base.css. These
+   heroes are dark bands but they are not `.section--dark`, so the eyebrow kept
+   `--accent-ink` — a colour chosen for text on white, which measures 3.7:1 on
+   the dark ground against the 4.5:1 it needs. Plain `--accent` is 5.6:1. */
+.about__hero .eyebrow,
+.contact__hero .eyebrow {
+  color: var(--accent);
+}
+
+.about__hero .page__lead,
+.contact__hero .page__lead {
+  color: var(--on-dark-2);
+}
+
+.about__hero .btn--secondary,
+.contact__hero .btn--secondary {
+  border-color: rgba(255, 255, 255, 0.32);
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--on-dark);
+}
+
+.about__hero .btn--secondary:hover,
+.contact__hero .btn--secondary:hover {
+  border-color: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.13);
 }
 
 .about__hero-bg svg {
@@ -302,69 +361,13 @@
   }
 }
 
-/* --- Contact -------------------------------------------------------------
-   The same split hero as the About page, with the candlestick chart behind the
-   copy. Kept to the lower half here rather than centred: the contact heading is
-   two lines where About's is two wider ones, so a centred drawing sat straight
-   under the lead paragraph. */
-
-.contact__hero {
-  position: relative;
-  isolation: isolate;
-  padding-block: clamp(1rem, 3vw, 2.5rem) clamp(2rem, 4vw, 3rem);
-}
-
-.contact__hero-bg {
-  position: absolute;
-  z-index: -2;
-  right: 0;
-  bottom: 0;
-  width: min(58%, 640px);
-  opacity: 0.34;
-  pointer-events: none;
-}
-
-.contact__hero-bg svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-/* Keeps the headline off the drawing without dimming the drawing at the edges. */
-.contact__hero::after {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  inset: -20% -8% -20% -20%;
-  pointer-events: none;
-  background: radial-gradient(
-    44% 62% at 26% 48%,
-    rgba(255, 255, 255, 0.95) 0%,
-    rgba(255, 255, 255, 0.74) 54%,
-    rgba(255, 255, 255, 0) 88%
-  );
-}
+/* --- Contact ------------------------------------------------------------
+   The hero itself is covered by the shared dark band above. What is left here
+   is the light section below it. */
 
 .contact__hero-text {
   position: relative;
   max-width: min(100%, 44rem);
-}
-
-/* Closes the hero off, matching the About page. On the element that follows
-   rather than on the hero itself: the hero's wash and background chart both
-   bleed past its box, and a border drawn on the hero would sit under them. */
-.contact__hero + .page__body {
-  border-top: 1px solid var(--border-soft);
-}
-
-@media (max-width: 999px) {
-  .contact__hero-bg {
-    display: none;
-  }
-
-  .contact__hero-text {
-    max-width: none;
-  }
 }
 
 /* The form on its own surface. It was sitting directly on the page, which made

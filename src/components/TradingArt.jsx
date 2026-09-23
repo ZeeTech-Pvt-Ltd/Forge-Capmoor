@@ -341,7 +341,7 @@ export function ProvenanceArt({ className = 'tech__art' }) {
  */
 export function HeroChartArt() {
   const candles = []
-  let price = 0.62
+  let price = 0.5
   let seed = 20260923
 
   // A cheap deterministic PRNG — mulberry32. Not for anything that needs
@@ -354,16 +354,34 @@ export function HeroChartArt() {
     return ((t ^ (t >>> 14)) >>> 0) / 4294967296
   }
 
+  // Built in two passes. The first walks a price and records only its shape;
+  // the second maps that shape onto the canvas.
+  //
+  // One pass was wrong. Starting at 0.62 and drifting upward meant the series
+  // never went below about 0.5, so every candle landed in the top half of the
+  // 600-unit canvas — measured at y 85..288 of a 720px hero, the top 40%, with
+  // the middle and the whole lower half bare. Normalising afterwards makes the
+  // drawing use the canvas it is given, whatever shape the walk produces.
+  const walk = []
   for (let i = 0; i < 44; i++) {
-    const open = price
-    // A gentle upward drift with two pullbacks, so the line has shape rather
-    // than reading as noise.
     const drift = i < 14 ? 0.012 : i < 22 ? -0.009 : 0.015
-    const close = Math.max(0.06, Math.min(0.94, open + drift + (rand() - 0.5) * 0.05))
-    const high = Math.max(open, close) + rand() * 0.022
-    const low = Math.min(open, close) - rand() * 0.022
+    price = price + drift + (rand() - 0.5) * 0.05
+    walk.push(price)
+  }
+
+  const min = Math.min(...walk)
+  const max = Math.max(...walk)
+  const span = max - min || 1
+  // 0.06..0.94 leaves a margin top and bottom so the outer wicks do not touch
+  // the canvas edge once the stroke is drawn.
+  const place = (v) => 0.06 + ((v - min) / span) * 0.88
+
+  for (let i = 0; i < 44; i++) {
+    const open = place(walk[i])
+    const close = place(walk[Math.min(i + 1, walk.length - 1)])
+    const high = Math.max(open, close) + rand() * 0.03
+    const low = Math.min(open, close) - rand() * 0.03
     candles.push({ open, close, high, low, up: close >= open })
-    price = close
   }
 
   const X0 = 18

@@ -108,8 +108,13 @@
   --focus-offset: 2px;
 
   /* --- Typography -------------------------------------------------------- */
+  /* The brand face. The wordmark only — see --font-heading for everything set
+     at heading size. */
   --font-display: 'Bricolage Grotesque', 'Segoe UI', system-ui, -apple-system,
-    Roboto, Arial, sans-serif;
+    sans-serif;
+  /* Everything a reader reads as a heading: h1-h4, the FAQ questions, the
+     principle and commitment titles, and the numerals that sit with them. */
+  --font-heading: 'Archivo', 'Segoe UI', system-ui, -apple-system, sans-serif;
   --font-body: 'Plus Jakarta Sans', 'Segoe UI', system-ui, -apple-system,
     Roboto, Arial, sans-serif;
 

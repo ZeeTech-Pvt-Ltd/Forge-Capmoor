@@ -26,29 +26,35 @@
   background: var(--dark);
   color: var(--on-dark);
 
-  /* The chart is anchored to this box, so the box needs a floor. Without one
-     the hero collapses to the height of its text and the drawing is squeezed
-     into a narrow band behind the paragraph. */
-  min-height: max(100svh, 54rem);
+  /* The copy is centred in whatever height the hero ends up with. Without this
+     the extra height all landed below the CTA — on a 390×844 phone the copy
+     ended at 487px and the band ran to 864, so a third of the first screen was
+     empty dark below the buttons. Centring splits that slack above and below
+     instead, which is what a hero is supposed to look like. */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  /* 80svh, not 100. The copy is ~390px tall at every width, so at a full
+     viewport height the hero was carrying 440–690px of slack — more than twice
+     the height of its own content, and it read as a mostly-empty band with a
+     headline floating in it. Four fifths of the fold leaves the ticker showing
+     at the bottom edge, which is the cue that there is more below.
+     36rem is the floor: below that the padded copy (~530px) starts to crowd
+     its own box on the shortest phones. */
+  /* +10px on each floor. */
+  min-height: calc(max(80svh, 36rem) + 10px);
 }
 
-/* A hair of vertical centring once there is room for it, so the extra height
-   the chart needs is shared above and below the copy rather than all of it
-   landing under the CTA. It is also a floor under the drawing itself: the band
-   between the copy and the fold is (hero − copy) / 2, and the copy does not
-   shrink with the window. */
 @media (min-width: 768px) {
   .hero {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: max(100svh, 50rem);
+    min-height: calc(max(80svh, 40rem) + 10px);
   }
 }
 
 @media (min-width: 1120px) {
   .hero {
-    min-height: max(100svh, 52rem);
+    min-height: calc(max(80svh, 42rem) + 10px);
   }
 }
 
@@ -149,13 +155,30 @@
 }
 
 .hero__title {
-  /* ~21ch holds this headline to three lines on desktop, while still
-     scaling down to a comfortable five on a 320px screen. */
-  max-width: 21ch;
-  font-size: var(--fs-display);
-  font-weight: 700;
-  line-height: var(--lh-display);
-  letter-spacing: var(--ls-display);
+  /* ~19ch. Tighter than before: the headline is two words shorter, so a wider
+     measure would have set it on one very long line at desktop. */
+  max-width: 19ch;
+  /* A step up from --fs-display and a little tighter. The whole headline is
+     shorter now, so it can carry more size without running off the measure —
+     and at this weight the display face is what makes the block read as a
+     masthead rather than as a page title. */
+  /* The floor is 2.2rem, not 2.7. At 2.7 the clamp bottomed out on every phone
+     width, which set the headline on four lines at 390px — and four lines put
+     the colour break mid-row, so "That Shows" straddled white and accent. The
+     lower floor lets the vw term do the work down there: three lines, and the
+     accent lands on a line boundary. */
+  font-size: clamp(2.2rem, 1rem + 6vw, 5.9rem);
+  /* 500, the light end of what this headline carries well. Two treatments were
+     tried before it and both were removed: splitting the two halves by colour,
+     then by weight (500 against 800). Each made two focal points where the
+     headline needs one, and at this size the weight split read as an accident
+     rather than as emphasis. Uniform is the stronger choice — the size alone
+     is doing the work.
+     The variable font runs 400–800, so this costs no extra file. */
+  font-weight: 500;
+  line-height: 0.94;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
   /* Set explicitly. `base.css` declares `h1 { color: var(--ink) }`, and an
      element rule beats the colour inherited from `.hero` — so without this the
      headline stayed near-black on a near-black band. */
@@ -172,17 +195,20 @@
 }
 
 /* The secondary action is styled for a light page elsewhere; over the dark band
-   it has to be a hairline and light text rather than a white pill. Scoped to
-   the hero so the same button keeps its light treatment on every other page. */
+   it has to be an outline and light text rather than a white pill. Scoped to
+   the hero so the same button keeps its light treatment on every other page.
+   `--dark-line` alone (10% white) was too faint to read as a button at all —
+   it looked like a label. 32% and a slight fill give it an edge without
+   competing with the primary beside it. */
 .hero .btn--secondary {
-  border-color: var(--dark-line);
-  background: transparent;
+  border-color: rgba(255, 255, 255, 0.32);
+  background: rgba(255, 255, 255, 0.07);
   color: var(--on-dark);
 }
 
 .hero .btn--secondary:hover {
-  border-color: rgba(255, 255, 255, 0.42);
-  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.13);
 }
 
 /* The two actions sit on one line where there is room and stack where there

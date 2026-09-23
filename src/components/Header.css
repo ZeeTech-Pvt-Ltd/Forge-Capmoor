@@ -191,7 +191,7 @@
   display: block;
   padding: 1.05rem 0.25rem;
   border-bottom: 1px solid var(--border-soft);
-  font-family: var(--font-display);
+  font-family: var(--font-heading);
   font-size: 1.42rem;
   font-weight: 600;
   letter-spacing: var(--ls-heading);

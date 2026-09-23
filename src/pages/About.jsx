@@ -2,7 +2,7 @@ import { Link } from '../lib/router'
 import { PageHero } from '../components/PageHero'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { IconArrowRight, IconBolt, IconCheck, IconClose, IconCompass, IconEye, IconLock, IconShield } from '../components/Icons'
-import { ActArt, ChartArt, ContextArt, ReasoningArt } from '../components/TradingArt'
+import { ActArt, ContextArt, HeroChartArt, ReasoningArt } from '../components/TradingArt'
 
 import '../styles/pages.css'
 
@@ -77,7 +77,7 @@ export default function About() {
   useDocumentMeta('/about')
 
   return (
-    <article className="section page">
+    <article className="section page page--dark-hero">
       <div className="container">
         {/* Split hero: the copy on the left, the chart on the right. The chart
             is the page's one large drawing and it belongs beside the headline
@@ -90,7 +90,7 @@ export default function About() {
               headline. aria-hidden because the Capabilities section states the
               same ideas in text. */}
           <div className="about__hero-bg" aria-hidden="true">
-            <ChartArt />
+            <HeroChartArt />
           </div>
 
           <div className="about__hero-text">
