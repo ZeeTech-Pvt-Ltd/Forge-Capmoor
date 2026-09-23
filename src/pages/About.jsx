@@ -1,7 +1,7 @@
 import { Link } from '../lib/router'
 import { PageHero } from '../components/PageHero'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
-import { IconArrowRight, IconBolt, IconCheck, IconCompass, IconEye, IconLock, IconShield } from '../components/Icons'
+import { IconArrowRight, IconBolt, IconCheck, IconClose, IconCompass, IconEye, IconLock, IconShield } from '../components/Icons'
 import { ActArt, ChartArt, ContextArt, ReasoningArt } from '../components/TradingArt'
 
 import '../styles/pages.css'
@@ -74,12 +74,7 @@ const SECURITY = [
 ]
 
 export default function About() {
-  useDocumentMeta({
-    title: 'About us | Forge Capmoor',
-    description:
-      'What Forge Capmoor does, how it behaves, and the commitments behind an AI-assisted trading platform that keeps the reasoning attached to every automated action.',
-    path: '/about',
-  })
+  useDocumentMeta('/about')
 
   return (
     <article className="section page">
@@ -89,7 +84,16 @@ export default function About() {
             rather than under it — on its own it read as a figure the reader
             arrived at before knowing what they were looking at. */}
         <div className="about__hero">
-          <div>
+          {/* Background, not a panel. The chart sits behind the copy at reduced
+              opacity, the way the homepage's network sits behind its hero — the
+              page opens with the drawing rather than arriving at it after the
+              headline. aria-hidden because the Capabilities section states the
+              same ideas in text. */}
+          <div className="about__hero-bg" aria-hidden="true">
+            <ChartArt />
+          </div>
+
+          <div className="about__hero-text">
             <PageHero
               variant="prominent"
               eyebrow="About us"
@@ -107,33 +111,59 @@ export default function About() {
               </Link>
             </p>
           </div>
-
-          <div className="about__hero-art">
-            <ChartArt />
-          </div>
         </div>
 
-        <section className="page__section">
-          <p className="eyebrow">Why we build it this way</p>
-          <h2 className="page__section-title">Most automated trading is opaque by accident</h2>
-          <div className="prose">
-            <p>
-              A position appears, the balance moves, and the reason is somewhere in a log you
-              cannot read. That is not a limitation of automation. It is a choice about how much of
-              it to show you, and most platforms choose to show as little as possible.
-            </p>
-            <p>
-              We built Forge Capmoor the other way round. The record of why an action was taken is
-              part of the product rather than a by-product of it, and it is written for the person
-              whose money is at stake rather than for the engineer who wrote the rule.
-            </p>
-            <p>
-              That has a cost. It means we publish what we can evidence and leave out what we
-              cannot. It is why you will not find user counts, deposit totals, win rates or review
-              scores anywhere on this site, not because the numbers would be unflattering, but
-              because a figure printed for its effect is worth less than nothing to someone
-              deciding whether to fund an account.
-            </p>
+        <section className="page__section about__story">
+          <div className="about__story-art">
+            {/* The one photograph on the site. Served as WebP at three widths
+                with the intrinsic size declared, so the column reserves its
+                space before the file arrives and there is no shift. Lazy: it is
+                below the fold on every viewport.
+
+                The artwork is used as supplied. It carries a feed of three
+                named people — one who "deposited $2,500", one who "made a
+                profit" — and a "Live" badge over a price. Those are claims
+                about customers and about live data that this site does not
+                otherwise make, and they were kept at the owner's instruction
+                rather than by oversight.
+
+                Two passages that would have contradicted it were removed at
+                the same time: the sentence here that said no user counts,
+                deposit totals or win rates appear on this site, and the note
+                in the DataDomains section that said no performance figures
+                appear anywhere on it. If the artwork is ever replaced, both
+                passages are worth restoring. */}
+            <img
+              src="/about-2-960.webp"
+              srcSet="/about-2-640.webp 640w, /about-2-960.webp 960w, /about-2-1200.webp 1200w"
+              sizes="(max-width: 899px) 352px, 39vw"
+              width="1254"
+              height="1254"
+              loading="lazy"
+              decoding="async"
+              alt="A person holding a tablet beside a market chart on a tablet screen."
+            />
+          </div>
+
+          <div>
+            <p className="eyebrow">Why we build it this way</p>
+            <h2 className="page__section-title">Most automated trading is opaque by accident</h2>
+            <div className="prose">
+              <p>
+                A position appears, the balance moves, and the reason is somewhere in a log you
+                cannot read. That is not a limitation of automation. It is a choice about how much
+                of it to show you, and most platforms choose to show as little as possible.
+              </p>
+              <p>
+                We built Forge Capmoor the other way round. The record of why an action was taken
+                is part of the product rather than a by-product of it, and it is written for the
+                person whose money is at stake rather than for the engineer who wrote the rule.
+              </p>
+              <p>
+                That has a cost. It means we publish what we can evidence and leave out what we
+                cannot.
+              </p>
+            </div>
           </div>
         </section>
 
@@ -196,15 +226,64 @@ export default function About() {
             be a claim about who exists rather than about what the product does,
             and this page does not make those. The commitment is what matters,
             and a company can stand behind it without a name attached. */}
-        <div className="about__closing">
+        <section className="page__section about__promise">
+          <p className="eyebrow">Before you open an account</p>
           <h2 className="page__section-title">What we can and cannot promise</h2>
-          <p className="about__closing-lead">
-            We cannot promise returns. Markets do not work that way, and a platform that says
-            otherwise is telling you something about its marketing rather than about its results.
-            What we can promise is narrower and worth more: a written reason behind every automated
-            action, risk disclosure written to be read, and the ability to switch automation off
-            whenever you want.
-          </p>
+
+          <div className="promise__grid">
+            <div className="promise promise--cannot">
+              <h3 className="promise__title">Cannot promise</h3>
+              <ul className="promise__list">
+                <li className="promise__item">
+                  <IconClose size={15} className="promise__icon" />
+                  <span>
+                    A return. Markets do not work that way, and a platform that says otherwise is
+                    telling you about its marketing rather than its results.
+                  </span>
+                </li>
+                <li className="promise__item">
+                  <IconClose size={15} className="promise__icon" />
+                  <span>
+                    That you will not lose. You can lose some or all of the capital you commit.
+                  </span>
+                </li>
+                <li className="promise__item">
+                  <IconClose size={15} className="promise__icon" />
+                  <span>
+                    An outcome. What you get depends on the strategy, the amount you commit and
+                    what the market does.
+                  </span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="promise promise--can">
+              <h3 className="promise__title">Can promise</h3>
+              <ul className="promise__list">
+                <li className="promise__item">
+                  <IconCheck size={15} className="promise__icon" />
+                  <span>
+                    A written reason behind every automated action, stored with the inputs it was
+                    based on.
+                  </span>
+                </li>
+                <li className="promise__item">
+                  <IconCheck size={15} className="promise__icon" />
+                  <span>
+                    Risk disclosure published before you fund an account, and written to be read
+                    rather than skimmed past.
+                  </span>
+                </li>
+                <li className="promise__item">
+                  <IconCheck size={15} className="promise__icon" />
+                  <span>
+                    Automation you can switch off at any time, without losing access to anything
+                    else on the account.
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
 
           <p className="page__actions page__actions--start">
             <Link to="/signup" className="btn btn--primary">
@@ -215,7 +294,7 @@ export default function About() {
               Read the risk disclosure
             </Link>
           </p>
-        </div>
+        </section>
       </div>
     </article>
   )

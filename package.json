@@ -3,10 +3,10 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "Forge Capmoor — AI market intelligence workspace. Marketing site.",
+  "description": "Forge Capmoor — automated trading platform that shows the reasoning behind every action. Marketing site.",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/prerender.mjs",
     "preview": "vite preview --port 4173",
     "images": "node scripts/generate-images.mjs"
   },

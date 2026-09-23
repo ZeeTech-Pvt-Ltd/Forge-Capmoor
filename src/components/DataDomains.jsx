@@ -241,11 +241,10 @@ export function DataDomains() {
         </ul>
 
         <Reveal as="p" className="domains__note">
-          These entries describe the categories of input the platform reads. There are no
-          performance figures anywhere on this site, because a return depends on the strategy
-          you choose, the amount you commit, how long you stay in and what the market did over
-          that period. A single number would tell you nothing about what you would experience,
-          and we would rather publish none than publish one that reads like a promise.
+          These entries describe the categories of input the platform reads. What you get out of
+          it depends on the strategy you choose, the amount you commit, how long you stay in and
+          what the market did over that period, so any single figure would tell you very little
+          about what you would experience.
         </Reveal>
       </div>
     </section>

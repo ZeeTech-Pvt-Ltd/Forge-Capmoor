@@ -21,14 +21,7 @@ const NEXT = [
 ]
 
 export default function ThankYou() {
-  useDocumentMeta({
-    title: 'Thank you | Forge Capmoor',
-    description: 'Your details reached us. Here is what happens next.',
-    path: '/thank-you',
-    // A confirmation page has nothing to offer a search index, and it should
-    // never appear as a result for someone who has not submitted anything.
-    noindex: true,
-  })
+  useDocumentMeta('/thank-you')
 
   return (
     <section className="section page">

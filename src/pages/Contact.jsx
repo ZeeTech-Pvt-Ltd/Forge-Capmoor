@@ -1,57 +1,66 @@
 import { PageHero } from '../components/PageHero'
-import { Placeholder } from '../components/Placeholder'
+import { ChartArt } from '../components/TradingArt'
 import { SignUpForm } from '../components/SignUpForm'
 import { IconClock, IconMail, IconPin } from '../components/Icons'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
-import { LEGAL_PLACEHOLDERS } from '../lib/legal'
 
 import '../styles/pages.css'
 
 /**
  * Contact.
  *
- * The address, email and hours are placeholders. A made-up inbox would bounce
- * and a made-up street address would be worse than useless, so the three cards
- * say plainly what still has to be filled in — see lib/legal.js. The form
- * below them is real and validated.
+ * The three details below were placeholders until the site owner supplied
+ * them. They are values now, not tokens — `Placeholder` is deliberately not
+ * wrapping them, because a marked-up bracket here would say the detail is still
+ * missing when it is not.
+ *
+ * They are still not in lib/legal.js. That file holds the values a regulator
+ * reads, including a *registered office*, which needs a street address rather
+ * than a city: "Melbourne, Victoria, Australia" is where the business is, not
+ * the address on a filing. The legal pages keep their own placeholder until
+ * that address arrives.
  */
 const REACH = [
   {
     Icon: IconMail,
     label: 'Email',
-    value: LEGAL_PLACEHOLDERS.email,
-    note: 'For anything account-related, including a question about a specific trade or withdrawal.',
+    value: 'support@forge-capmoor.net',
+    note: 'Replies within a few hours.',
   },
   {
     Icon: IconClock,
     label: 'Support hours',
-    value: LEGAL_PLACEHOLDERS.hours,
-    note: 'Anything that arrives outside these hours is queued and answered in the order it was received.',
+    value: '24/7, 365 days a year',
+    note: 'Round-the-clock assistance.',
   },
   {
     Icon: IconPin,
-    label: 'Registered office',
-    value: LEGAL_PLACEHOLDERS.office,
-    note: 'A correspondence address only. Our licence and registration details are set out in the terms of use.',
+    label: 'Location',
+    value: 'Melbourne, Victoria, Australia',
+    note: 'Serving traders across Australia.',
   },
 ]
 
 export default function Contact() {
-  useDocumentMeta({
-    title: 'Contact us | Forge Capmoor',
-    description:
-      'Get in touch with Forge Capmoor about an account, a withdrawal, or something the platform did. Send a message or leave your details and we will come back to you.',
-    path: '/contact',
-  })
+  useDocumentMeta('/contact')
 
   return (
     <article className="section page">
       <div className="container">
-        <PageHero
-          eyebrow="Contact"
-          title="Ask us anything, including the awkward questions"
-          lead="Questions about an account, a withdrawal, or an action the system took, send them through and they reach a person who can see the same record you can."
-        />
+        <div className="contact__hero">
+          <div className="contact__hero-bg" aria-hidden="true">
+            <ChartArt />
+          </div>
+
+          <div className="contact__hero-text">
+            <PageHero
+              variant="prominent"
+              eyebrow="Contact"
+              title="Ask us anything, including the awkward questions"
+              lead="Questions about an account, a withdrawal, or an action the system took, send them through and they reach a person who can see the same record you can."
+            />
+          </div>
+        </div>
 
         <div className="page__body">
           <div className="tiles">
@@ -61,9 +70,7 @@ export default function Contact() {
                   <Icon size={22} />
                 </span>
                 <h2 className="tile__label">{label}</h2>
-                <p className="tile__value">
-                  <Placeholder>{value}</Placeholder>
-                </p>
+                <p className="tile__value">{value}</p>
                 <p className="tile__text">{note}</p>
               </div>
             ))}
@@ -72,14 +79,16 @@ export default function Contact() {
 
         <section className="page__section">
           <div className="page__form-head">
-            <h2 className="page__section-title">Or leave your details</h2>
+            <h2 className="page__section-title">Leave your details</h2>
             <p className="page__section-lead">
               Fill this in and we will come back to you to open the account and set your automation
               preferences.
             </p>
           </div>
 
-          <SignUpForm tone="light" submitLabel="Create an account" />
+          <div className="contact__form-card">
+            <SignUpForm tone="light" submitLabel="Create an account" />
+          </div>
         </section>
       </div>
     </article>

@@ -1,13 +1,22 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-AU">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
-    <title>Forge Capmoor | AI Trading Platform That Explains Itself</title>
+    <!--
+      The head below is the homepage's. Every other route gets its own copy of
+      this file with the metadata block swapped — see scripts/prerender.mjs and
+      lib/seo.js, which is the single source both this file and the client-side
+      hook read from.
+
+      Keep the tag shapes here intact: the prerender script matches on them and
+      fails the build rather than silently shipping the homepage's title.
+    -->
+    <title>Automated Trading That Shows Its Reasoning | Forge Capmoor</title>
     <meta
       name="description"
-      content="Forge Capmoor is an AI trading platform that analyses market data, executes the strategy you choose, and shows the reasoning behind every action it takes."
+      content="Forge Capmoor is an automated trading platform. It reads the market, trades the strategy you choose, and records the reasoning behind every move it makes."
     />
     <link rel="canonical" href="https://forge-capmoor.net/" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
@@ -40,30 +49,33 @@
       crossorigin
     />
 
-    <!-- Open Graph -->
+    <!-- Open Graph. og:title, og:description and og:url are rewritten per
+         route at build time; the rest are the same everywhere. -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Forge Capmoor" />
-    <meta property="og:title" content="Forge Capmoor | AI Trading Platform That Explains Itself" />
+    <meta property="og:title" content="Automated Trading That Shows Its Reasoning | Forge Capmoor" />
     <meta
       property="og:description"
-      content="An AI trading platform that analyses market data, executes the strategy you choose, and shows the reasoning behind every action it takes."
+      content="Forge Capmoor is an automated trading platform. It reads the market, trades the strategy you choose, and records the reasoning behind every move it makes."
     />
     <meta property="og:url" content="https://forge-capmoor.net/" />
     <meta property="og:image" content="https://forge-capmoor.net/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="The Forge Capmoor intelligence hub, with connected analysis modules radiating outward." />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:image:alt" content="The Forge Capmoor wordmark on a warm off-white ground, with a copper rule beneath it." />
+    <meta property="og:locale" content="en_AU" />
 
-    <!-- Twitter / X -->
+    <!-- Twitter / X. No twitter:site or twitter:creator: the brand has no X
+         account, and naming a handle that does not exist would attribute the
+         card to a stranger. -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Forge Capmoor | AI Trading Platform That Explains Itself" />
+    <meta name="twitter:title" content="Automated Trading That Shows Its Reasoning | Forge Capmoor" />
     <meta
       name="twitter:description"
-      content="An AI trading platform that analyses market data, executes the strategy you choose, and shows the reasoning behind every action it takes."
+      content="Forge Capmoor is an automated trading platform. It reads the market, trades the strategy you choose, and records the reasoning behind every move it makes."
     />
     <meta name="twitter:image" content="https://forge-capmoor.net/og-image.png" />
-    <meta name="twitter:image:alt" content="The Forge Capmoor intelligence hub, with connected analysis modules radiating outward." />
+    <meta name="twitter:image:alt" content="The Forge Capmoor wordmark on a warm off-white ground, with a copper rule beneath it." />
 
     <!--
       Minimal critical CSS. Establishes the page background and the text
@@ -104,11 +116,18 @@
             "url": "https://forge-capmoor.net/",
             "logo": {
               "@type": "ImageObject",
-              "url": "https://forge-capmoor.net/og-image.png",
-              "width": 1200,
-              "height": 630
+              "url": "https://forge-capmoor.net/apple-touch-icon.png",
+              "width": 180,
+              "height": 180
             },
-            "description": "Forge Capmoor builds an AI trading platform that analyses market data, executes the strategy a client chooses, and shows the reasoning behind every action it takes."
+            "description": "Forge Capmoor builds an automated trading platform that reads market data, trades the strategy a client chooses, and records the reasoning behind every action it takes.",
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "contactType": "customer support",
+              "email": "support@forge-capmoor.net",
+              "areaServed": "AU",
+              "availableLanguage": "en"
+            }
           },
           {
             "@type": "WebSite",

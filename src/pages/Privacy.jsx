@@ -112,12 +112,7 @@ const SECTIONS = [
 ]
 
 export default function Privacy() {
-  useDocumentMeta({
-    title: 'Privacy policy | Forge Capmoor',
-    description:
-      'How Forge Capmoor handles personal information collected through forge-capmoor.net: what the account form collects, how it is used, and what this site does not do.',
-    path: '/privacy',
-  })
+  useDocumentMeta('/privacy')
 
   return (
     <LegalPage

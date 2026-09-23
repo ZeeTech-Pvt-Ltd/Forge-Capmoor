@@ -92,12 +92,7 @@ const SECTIONS = [
 ]
 
 export default function RiskDisclosure() {
-  useDocumentMeta({
-    title: 'Risk disclosure | Forge Capmoor',
-    description:
-      'What can go wrong when you trade: the risk of losing the capital you commit, the limits of automated analysis, and how client money is held.',
-    path: '/risk-disclosure',
-  })
+  useDocumentMeta('/risk-disclosure')
 
   return (
     <LegalPage

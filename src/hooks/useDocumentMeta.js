@@ -1,62 +1,77 @@
 import { useEffect } from 'react'
 
-const SITE_ORIGIN = 'https://forge-capmoor.net'
+import { OG_IMAGE, OG_IMAGE_ALT, ROUTE_META, SITE_NAME, SITE_ORIGIN } from '../lib/seo'
 
 /**
  * Per-route document metadata.
  *
- * The homepage's title, description and canonical are also in index.html so
- * a crawler that never executes the bundle still sees them; this hook exists
- * for the routes that cannot be described in a single static file.
+ * Everything comes from `lib/seo.js`, which `scripts/prerender.mjs` also reads
+ * when it writes the static files. One source, so a title changed here is
+ * changed in the crawlable HTML too — the failure mode of a client-rendered
+ * site is exactly that those two drift and only one of them is ever noticed.
  *
- * The canonical is always rebuilt from SITE_ORIGIN plus the route path.
- * Nothing here ever reads `window.location.origin`, which is what keeps a
- * localhost or preview-deployment URL from being canonicalised.
+ * The Open Graph and Twitter tags are set on every navigation, not just left in
+ * index.html. They used to be static, which meant every shared URL — /about,
+ * /faq, the legal pages — previewed as the homepage with the homepage's title.
+ * Social scrapers do not run JavaScript, so the real fix is the prerendered
+ * HTML; this keeps the client-rendered view consistent with it for anything
+ * that reads the DOM after hydration.
+ *
+ * The canonical is always rebuilt from `SITE_ORIGIN`, never from
+ * `window.location.origin`. That is what keeps a preview deployment or a local
+ * dev server from canonicalising itself.
  */
-export function useDocumentMeta({ title, description, path, noindex = false }) {
+function setMeta(attribute, key, content) {
+  let tag = document.head.querySelector(`meta[${attribute}="${key}"]`)
+  if (!tag) {
+    tag = document.createElement('meta')
+    tag.setAttribute(attribute, key)
+    document.head.appendChild(tag)
+  }
+  tag.setAttribute('content', content)
+}
+
+export function useDocumentMeta(path) {
   useEffect(() => {
-    if (title) document.title = title
+    const meta = ROUTE_META[path] ?? ROUTE_META['/404']
+    const url = `${SITE_ORIGIN}${path === '/' ? '/' : path}`
 
-    if (description) {
-      let tag = document.querySelector('meta[name="description"]')
-      if (!tag) {
-        tag = document.createElement('meta')
-        tag.setAttribute('name', 'description')
-        document.head.appendChild(tag)
+    document.title = meta.title
+
+    setMeta('name', 'description', meta.description)
+    setMeta('name', 'robots', meta.noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1')
+
+    setMeta('property', 'og:type', 'website')
+    setMeta('property', 'og:site_name', SITE_NAME)
+    setMeta('property', 'og:locale', 'en_AU')
+    setMeta('property', 'og:title', meta.title)
+    setMeta('property', 'og:description', meta.description)
+    setMeta('property', 'og:url', url)
+    setMeta('property', 'og:image', OG_IMAGE)
+    setMeta('property', 'og:image:width', '1200')
+    setMeta('property', 'og:image:height', '630')
+    setMeta('property', 'og:image:alt', OG_IMAGE_ALT)
+
+    setMeta('name', 'twitter:card', 'summary_large_image')
+    setMeta('name', 'twitter:title', meta.title)
+    setMeta('name', 'twitter:description', meta.description)
+    setMeta('name', 'twitter:image', OG_IMAGE)
+    setMeta('name', 'twitter:image:alt', OG_IMAGE_ALT)
+
+    // A noindex page has no canonical URL to declare. Leaving index.html's
+    // static canonical in place would claim the 404 *is* the homepage, and
+    // inventing one for the requested path would advertise a URL that does
+    // not exist — so the tag is dropped instead.
+    if (meta.noindex) {
+      document.head.querySelector('link[rel="canonical"]')?.remove()
+    } else {
+      let canonical = document.head.querySelector('link[rel="canonical"]')
+      if (!canonical) {
+        canonical = document.createElement('link')
+        canonical.setAttribute('rel', 'canonical')
+        document.head.appendChild(canonical)
       }
-      tag.setAttribute('content', description)
+      canonical.setAttribute('href', url)
     }
-
-    if (path) {
-      // A noindex page has no canonical URL to declare. Leaving index.html's
-      // static canonical in place would claim the 404 *is* the homepage, and
-      // inventing one for the requested path would advertise a URL that does
-      // not exist — so the tag is dropped instead.
-      if (noindex) {
-        document.querySelector('link[rel="canonical"]')?.remove()
-      } else {
-        const href = `${SITE_ORIGIN}${path === '/' ? '/' : path}`
-        let canonical = document.querySelector('link[rel="canonical"]')
-        if (!canonical) {
-          canonical = document.createElement('link')
-          canonical.setAttribute('rel', 'canonical')
-          document.head.appendChild(canonical)
-        }
-        canonical.setAttribute('href', href)
-      }
-    }
-
-    let robots = document.querySelector('meta[name="robots"]')
-    if (!robots) {
-      robots = document.createElement('meta')
-      robots.setAttribute('name', 'robots')
-      document.head.appendChild(robots)
-    }
-    robots.setAttribute(
-      'content',
-      noindex
-        ? 'noindex, follow'
-        : 'index, follow, max-image-preview:large, max-snippet:-1',
-    )
-  }, [title, description, path, noindex])
+  }, [path])
 }

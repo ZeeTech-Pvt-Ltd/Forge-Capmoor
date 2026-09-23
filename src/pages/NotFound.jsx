@@ -5,13 +5,7 @@ import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import '../styles/pages.css'
 
 export default function NotFound() {
-  useDocumentMeta({
-    title: 'Page not found | Forge Capmoor',
-    description: 'That page does not exist on forge-capmoor.net.',
-    path: '/404',
-    // A 404 has nothing to offer a search index.
-    noindex: true,
-  })
+  useDocumentMeta('/404')
 
   return (
     <section className="section page">

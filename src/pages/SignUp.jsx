@@ -20,12 +20,7 @@ const NEXT = [
 ]
 
 export default function SignUp() {
-  useDocumentMeta({
-    title: 'Create an account | Forge Capmoor',
-    description:
-      'Open a Forge Capmoor account: what we ask for, what happens next, and how much of your trading runs automatically is entirely your decision.',
-    path: '/signup',
-  })
+  useDocumentMeta('/signup')
 
   return (
     <article className="section page">

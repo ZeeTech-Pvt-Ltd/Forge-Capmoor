@@ -4,7 +4,6 @@ import { Proposition } from '../components/Proposition'
 import { HowItWorks } from '../components/HowItWorks'
 import { Capabilities } from '../components/Capabilities'
 import { Technology } from '../components/Technology'
-import { Security } from '../components/Security'
 import { Toolkit } from '../components/Toolkit'
 import { Benefits } from '../components/Benefits'
 import { DataDomains } from '../components/DataDomains'
@@ -22,12 +21,7 @@ import { useDocumentMeta } from '../hooks/useDocumentMeta'
  * closing band. No two adjacent sections share a layout.
  */
 export default function Home() {
-  useDocumentMeta({
-    title: 'Forge Capmoor | AI Trading Platform That Explains Itself',
-    description:
-      'An AI-assisted trading platform that reads live market data, acts when its conditions are met, and explains the reasoning behind every action.',
-    path: '/',
-  })
+  useDocumentMeta('/')
 
   return (
     <>
@@ -37,7 +31,6 @@ export default function Home() {
       <HowItWorks />
       <Capabilities />
       <Technology />
-      <Security />
       <Toolkit />
       <Benefits />
       <DataDomains />

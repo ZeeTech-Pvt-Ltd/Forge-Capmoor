@@ -17,9 +17,9 @@ import './Toolkit.css'
  * platform covers is a fact about the business rather than about the software.
  * It has since been supplied, so the card states it directly.
  *
- * Secure custody deliberately points at the Security section above rather than
- * restating it — two sections making the same claim in different words reads
- * as padding.
+ * The custody card used to point at a Security section that sat above it. That
+ * section has been removed from the homepage, so this card now states the
+ * holding arrangement itself rather than deferring to a heading that is gone.
  */
 const TOOLS = [
   {
@@ -50,17 +50,16 @@ const TOOLS = [
   {
     icon: IconLock,
     title: 'Custody and access',
-    text: 'Client funds held in a segregated account, with two-factor authentication on logins and withdrawals. Set out in full in the Security section above.',
+    text: 'Client funds held in a segregated account, kept separate from the funds Forge Capmoor operates on, with two-factor authentication on logins and withdrawals.',
   },
 ]
 
 /**
  * The toolkit grid.
  *
- * Six equal cards in a three-column grid: the Security row above it is also
- * three across, so this pairs with it rather than competing — and both sit
- * between the dark Technology band and the alternating Benefits rows, which is
- * where the page is between layouts anyway.
+ * Six equal cards in a three-column grid, sitting between the dark Technology
+ * band and the alternating Benefits rows — which is where the page is between
+ * layouts anyway.
  */
 export function Toolkit() {
   return (

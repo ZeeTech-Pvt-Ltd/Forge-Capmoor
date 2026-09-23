@@ -144,12 +144,7 @@ const SECTIONS = [
 ]
 
 export default function Terms() {
-  useDocumentMeta({
-    title: 'Terms of use | Forge Capmoor',
-    description:
-      'The terms that apply to using Forge Capmoor: eligibility, deposits and withdrawals, automated trading and your instructions, fees, and liability.',
-    path: '/terms',
-  })
+  useDocumentMeta('/terms')
 
   return (
     <LegalPage

@@ -16,12 +16,7 @@ import '../styles/pages.css'
  * rather than doubling them.
  */
 export default function Faq() {
-  useDocumentMeta({
-    title: 'Frequently asked questions | Forge Capmoor',
-    description:
-      'Straight answers about Forge Capmoor: how automated trading works, where client money is held, how withdrawals are handled, and what the platform does not do.',
-    path: '/faq',
-  })
+  useDocumentMeta('/faq')
 
   return (
     <article className="section page">
@@ -36,24 +31,30 @@ export default function Faq() {
           <FaqAccordion items={FAQ_ITEMS} flush />
         </div>
 
-        <section className="page__section">
-          <h2 className="page__section-title">Still not answered?</h2>
-          <div className="prose">
-            <p>
-              Ask us directly and a person will come back to you. If your question is about a
-              specific action the system took, mention it, and we can look at the same record you can.
+        {/* The page ends on an answer, not a form field — the accordion above is
+            already the long read, so this is one short block with the two things
+            a person can do next. Given its own card rather than the plain
+            section rhythm, because after twenty-odd collapsed rows the page
+            needs something that reads as an ending. */}
+        <section className="page__section faq__help">
+          <div className="faq__help-card">
+            <p className="eyebrow">Still not answered?</p>
+            <h2 className="faq__help-title">Ask us directly</h2>
+            <p className="faq__help-body">
+              A person will come back to you. If your question is about a specific action the
+              system took, mention it, and we can look at the same record you can.
+            </p>
+
+            <p className="page__actions page__actions--start">
+              <Link to="/contact" className="btn btn--primary">
+                Contact us
+                <IconArrowRight size={18} className="btn__icon" />
+              </Link>
+              <Link to="/risk-disclosure" className="btn btn--secondary">
+                Read the risk disclosure
+              </Link>
             </p>
           </div>
-
-          <p className="page__actions page__actions--start">
-            <Link to="/contact" className="btn btn--primary">
-              Contact us
-              <IconArrowRight size={18} className="btn__icon" />
-            </Link>
-            <Link to="/risk-disclosure" className="btn btn--secondary">
-              Read the risk disclosure
-            </Link>
-          </p>
         </section>
       </div>
 

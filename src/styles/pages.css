@@ -9,6 +9,10 @@
   /* Clears the fixed header on a short page. */
   padding-top: calc(var(--header-h) + clamp(2.5rem, 6vw, 5rem));
   padding-bottom: clamp(4rem, 8vw, 7rem);
+  /* The About hero's background chart is a positioned element that can reach
+     past the content column. Clipping the horizontal axis stops that becoming
+     a horizontal scrollbar, while leaving the full-bleed wash above it intact. */
+  overflow-x: clip;
 }
 
 .page__head {
@@ -95,7 +99,7 @@
 
 .page__head--prominent .page__lead {
   margin-top: 1.4rem;
-  max-width: 46ch;
+  max-width: 62ch;
 }
 
 /* --- Split hero ----------------------------------------------------------
@@ -107,10 +111,6 @@
 .about__hero {
   position: relative;
   isolation: isolate;
-  display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-  gap: clamp(2rem, 5vw, 4.5rem);
-  align-items: center;
   padding-block: clamp(1rem, 3vw, 2.5rem) clamp(2.5rem, 5vw, 3.5rem);
 }
 
@@ -132,48 +132,295 @@
   );
 }
 
-.about__hero-art {
-  border-radius: var(--r-xl);
-  background: var(--surface);
-  border: 1px solid var(--border-soft);
-  box-shadow: var(--shadow-xs);
-  /* Tight to the drawing. The chart carries its own margin in its viewBox, so
-     panel padding on top of that only made the artwork smaller than the space
-     it was sitting in. */
-  padding: clamp(0.75rem, 1.6vw, 1.15rem);
-  overflow: hidden;
+/* The chart behind the copy rather than boxed beside it. Held to the right and
+   faded, so it reads as the surface the page opens on instead of a figure the
+   reader has to get past — and so it never sits under the headline, where it
+   would cost contrast. */
+.about__hero-bg {
+  position: absolute;
+  z-index: -2;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  width: 100%;
+  opacity: 0.42;
+  pointer-events: none;
 }
 
-.about__hero-art svg {
+/* Sits between the background chart and the copy, the way the homepage hero
+   washes its own backdrop. Opaque under the text and gone before the edges, so
+   the drawing still reads at the sides while the headline keeps full contrast. */
+.about__hero::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: -12% -6%;
+  pointer-events: none;
+  background: radial-gradient(
+    46% 58% at 32% 46%,
+    rgba(255, 255, 255, 0.94) 0%,
+    rgba(255, 255, 255, 0.72) 52%,
+    rgba(255, 255, 255, 0) 86%
+  );
+}
+
+.about__hero-bg svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* `ch` here measures the container's own font size, not the headline's — 46ch
+   of 16px body text is ~370px, which is what forced the headline onto three
+   lines. A rem cap sizes the column against the type that actually fills it:
+   44rem holds "Automated trading, with the working shown" on two lines at
+   desktop and one on a wide screen. */
+.about__hero-text {
+  position: relative;
+  max-width: min(100%, 44rem);
+}
+
+/* --- Story row ----------------------------------------------------------- */
+
+.about__story {
+  display: grid;
+  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+
+/* No card around it. The artwork is a cut-out with its own torn-paper edge and
+   a transparent background, so a panel behind it would be a second frame drawn
+   inside the first. */
+.about__story-art {
+  display: grid;
+  place-items: center;
+}
+
+.about__story-art img {
   display: block;
   width: 100%;
   height: auto;
 }
 
 @media (max-width: 899px) {
-  .about__hero {
+  .about__story {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  /* Artwork after the text on narrow screens, so the heading is what a
-     visitor reads first rather than a chart they have no context for. */
-  .about__hero-art {
+  /* Artwork after the text on narrow screens, so the heading is what a visitor
+     reads first rather than a drawing they have no context for. */
+  .about__story-art {
     order: 1;
+    max-width: 22rem;
   }
 }
 
-/* The closing statement that signs the page off. */
-.about__closing {
-  margin-top: clamp(2.5rem, 5vw, 3.5rem);
-  padding-top: clamp(2rem, 4vw, 2.75rem);
+/* Closes the hero off. The wash and the background chart bleed past the hero's
+   own box, so without a line the page reads as one continuous surface and the
+   hero does not announce itself as a block. */
+.about__story {
   border-top: 1px solid var(--border-soft);
 }
 
-.about__closing-lead {
-  font-size: var(--fs-lead);
-  line-height: 1.6;
+/* --- The promise pair ----------------------------------------------------
+   The section heading is a contrast, so the layout is one too: what cannot be
+   promised on the left, muted, and what can on the right, in the accent. Two
+   lists of prose under one heading would have said the same thing with less
+   shape to it. */
+
+.promise__grid {
+  margin-top: clamp(1.75rem, 3.5vw, 2.5rem);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.15rem, 2.2vw, 1.75rem);
+  align-items: start;
+}
+
+.promise {
+  padding: clamp(1.5rem, 2.8vw, 2rem);
+  border-radius: var(--r-xl);
+  border: 1px solid var(--border-soft);
+}
+
+/* Muted, not hidden. This is the list a visitor most needs to read, so it is
+   set in the same size as the other one — it is the surface that recedes. */
+.promise--cannot {
+  background: var(--surface);
+}
+
+.promise--can {
+  background: var(--bg);
+  border-color: rgba(255, 75, 43, 0.3);
+  box-shadow: var(--shadow-sm);
+}
+
+.promise__title {
+  font-size: var(--fs-h4);
+  font-weight: 700;
+}
+
+.promise--cannot .promise__title {
   color: var(--text-2);
-  max-width: 58ch;
+}
+
+.promise__list {
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.promise__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: var(--fs-small);
+  line-height: 1.65;
+  color: var(--text-2);
+}
+
+/* Nudged onto the first line's centre rather than its top. */
+.promise__icon {
+  flex: none;
+  margin-top: 0.16rem;
+}
+
+.promise--cannot .promise__icon {
+  color: var(--text-3);
+}
+
+.promise--can .promise__icon {
+  color: var(--accent-ink);
+}
+
+@media (max-width: 767px) {
+  .promise__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* --- Contact -------------------------------------------------------------
+   The same split hero as the About page, with the candlestick chart behind the
+   copy. Kept to the lower half here rather than centred: the contact heading is
+   two lines where About's is two wider ones, so a centred drawing sat straight
+   under the lead paragraph. */
+
+.contact__hero {
+  position: relative;
+  isolation: isolate;
+  padding-block: clamp(1rem, 3vw, 2.5rem) clamp(2rem, 4vw, 3rem);
+}
+
+.contact__hero-bg {
+  position: absolute;
+  z-index: -2;
+  right: 0;
+  bottom: 0;
+  width: min(58%, 640px);
+  opacity: 0.34;
+  pointer-events: none;
+}
+
+.contact__hero-bg svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Keeps the headline off the drawing without dimming the drawing at the edges. */
+.contact__hero::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: -20% -8% -20% -20%;
+  pointer-events: none;
+  background: radial-gradient(
+    44% 62% at 26% 48%,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.74) 54%,
+    rgba(255, 255, 255, 0) 88%
+  );
+}
+
+.contact__hero-text {
+  position: relative;
+  max-width: min(100%, 44rem);
+}
+
+/* Closes the hero off, matching the About page. On the element that follows
+   rather than on the hero itself: the hero's wash and background chart both
+   bleed past its box, and a border drawn on the hero would sit under them. */
+.contact__hero + .page__body {
+  border-top: 1px solid var(--border-soft);
+}
+
+@media (max-width: 999px) {
+  .contact__hero-bg {
+    display: none;
+  }
+
+  .contact__hero-text {
+    max-width: none;
+  }
+}
+
+/* The form on its own surface. It was sitting directly on the page, which made
+   a validated form read as more body copy. */
+.contact__form-card {
+  max-width: 46rem;
+  margin-inline: auto;
+  padding: clamp(1.5rem, 3.5vw, 2.75rem);
+  border-radius: var(--r-xl);
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-sm);
+}
+
+@media (max-width: 599px) {
+  .contact__form-card {
+    padding-inline: clamp(1rem, 4vw, 1.5rem);
+  }
+}
+
+/* --- FAQ: the ask-us-directly block -------------------------------------- */
+
+.faq__help-card {
+  position: relative;
+  padding: clamp(1.85rem, 4vw, 3rem);
+  border-radius: var(--r-xl);
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  overflow: hidden;
+}
+
+/* An accent rule across the top edge, so the block announces itself as an
+   ending rather than as one more section in the run. */
+.faq__help-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+}
+
+/* Larger than a section title. This is the last thing on the page and the only
+   heading that is an instruction rather than a label. */
+.faq__help-title {
+  margin-top: 0.55rem;
+  font-size: clamp(1.7rem, 1.2rem + 1.9vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.faq__help-body {
+  margin-top: 0.9rem;
+  font-size: var(--fs-lead);
+  line-height: 1.62;
+  color: var(--text-2);
+  max-width: 56ch;
 }
 
 /* The page's opening artwork. A tinted panel rather than a bare drawing, so

@@ -13,7 +13,6 @@ export const SECTION_IDS = {
   howItWorks: 'how-it-works',
   capabilities: 'capabilities',
   technology: 'technology',
-  security: 'security',
   toolkit: 'toolkit',
   domains: 'data-domains',
   faq: 'faq',

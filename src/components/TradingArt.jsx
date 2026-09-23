@@ -158,6 +158,83 @@ export function ChartArt() {
   )
 }
 
+/**
+ * A ledger of trades with one entry opened out.
+ *
+ * Portrait rather than landscape, because it sits in a column beside prose.
+ * The closed rows read as a list; the open one shows what every row carries —
+ * which is the whole argument of the section it sits in. Deliberately not the
+ * same drawing as `ReasoningArt`: that one is a graph of sources fanning out
+ * from a single trade, this one is a stack where one row has been pulled open.
+ */
+export function LedgerArt() {
+  // Closed rows: a direction chip, a price line, a size bar.
+  const closed = [16, 252]
+
+  return (
+    <svg viewBox="0 0 300 336" fill="none" aria-hidden="true" focusable="false">
+      {closed.map((y) => (
+        <g key={y}>
+          <rect
+            x="10"
+            y={y}
+            width="280"
+            height="68"
+            rx="16"
+            fill={INK}
+            fillOpacity="0.03"
+            stroke={INK}
+            strokeOpacity="0.13"
+            strokeWidth="1.3"
+          />
+          <rect x="28" y={y + 22} width="24" height="24" rx="7" fill={INK} fillOpacity="0.1" />
+          <line x1="70" y1={y + 28} x2="150" y2={y + 28} stroke={INK} strokeOpacity="0.28" strokeWidth="4" strokeLinecap="round" />
+          <line x1="70" y1={y + 42} x2="118" y2={y + 42} stroke={INK} strokeOpacity="0.15" strokeWidth="4" strokeLinecap="round" />
+          <line x1="206" y1={y + 34} x2="272" y2={y + 34} stroke={INK} strokeOpacity="0.14" strokeWidth="7" strokeLinecap="round" />
+        </g>
+      ))}
+
+      {/* The opened row. Taller, and lifted out of the stack with an accent
+          edge so it reads as the one the drawing is about. */}
+      <rect
+        x="6"
+        y="104"
+        width="288"
+        height="128"
+        rx="18"
+        fill={ACCENT}
+        fillOpacity="0.05"
+        stroke={ACCENT}
+        strokeOpacity="0.45"
+        strokeWidth="1.5"
+      />
+      <rect x="6" y="104" width="4" height="128" rx="2" fill={ACCENT} />
+
+      <rect x="26" y="124" width="26" height="26" rx="8" fill={ACCENT} fillOpacity="0.16" />
+      <circle cx="39" cy="137" r="4" fill={ACCENT} />
+      <line x1="70" y1="131" x2="164" y2="131" stroke={INK} strokeOpacity="0.35" strokeWidth="4.5" strokeLinecap="round" />
+      <line x1="70" y1="146" x2="122" y2="146" stroke={INK} strokeOpacity="0.16" strokeWidth="4.5" strokeLinecap="round" />
+
+      {/* What the open row carries: three records, stacked. */}
+      {[172, 192, 212].map((y, i) => (
+        <g key={y}>
+          <circle cx="40" cy={y} r="3" fill={ACCENT} fillOpacity="0.75" />
+          <line
+            x1="54"
+            y1={y}
+            x2={i === 1 ? 216 : 258}
+            y2={y}
+            stroke={ACCENT}
+            strokeOpacity={0.42 - i * 0.08}
+            strokeWidth="4"
+            strokeLinecap="round"
+          />
+        </g>
+      ))}
+    </svg>
+  )
+}
+
 /** A setup being acted on: a bar, an arrow, and a filled order behind it. */
 export function ActArt() {
   return (
