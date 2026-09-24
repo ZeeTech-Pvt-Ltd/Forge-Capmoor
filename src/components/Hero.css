@@ -252,6 +252,16 @@
   }
 }
 
+/* 320px only. The clamp bottoms out around 35px there, which wraps the headline
+   to four rows on the narrowest screen worth supporting. Component stylesheets
+   are emitted after base.css, so this cannot live in the shared media query
+   with the other headings — this rule has to win on order. */
+@media (max-width: 320px) {
+  html .hero__title {
+    font-size: 32px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero__title,
   .hero__lead,

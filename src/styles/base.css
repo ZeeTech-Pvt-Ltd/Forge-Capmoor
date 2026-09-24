@@ -448,3 +448,42 @@ p {
     transform: none;
   }
 }
+
+/* ==========================================================================
+   320px — the narrowest viewport worth designing for
+   ==========================================================================
+   The display clamps do not shrink far enough down here. At 320px the section
+   titles landed at 29.6px and the page titles at 33–38px, which is a heading
+   that eats a third of the line and wraps to four rows.
+
+   Two things about how this is written:
+
+   It is targeted by class, not by `h1, h2`. Several h2s are small on purpose —
+   the footer column titles and the contact tile labels are 12.4px, the legal
+   headings 19.2px — and a flat 28px would blow those up rather than settle
+   them down.
+
+   The `html` prefix is load-bearing, not decoration. These selectors have the
+   same specificity as the rules they override, and those rules are spread
+   across base.css, pages.css and FAQ.css — which is emitted last depends on
+   the module graph, so an unprefixed rule won the race in some builds and lost
+   it in others. One extra element in the selector settles it regardless of
+   order. The hero's H1 is the same rule in Hero.css, next to the size it
+   overrides.
+   -------------------------------------------------------------------------- */
+@media (max-width: 320px) {
+  html .page__title,
+  /* About and Contact open on a `prominent` head, and that variant carries its
+     own size at two classes of specificity. One `html` is not enough to reach
+     it — the pair below is, and it has to stay a pair. */
+  html .page__head--prominent .page__title {
+    font-size: 32px;
+  }
+
+  html .section-title,
+  html .page__section-title,
+  html .cta__title,
+  html .faq__help-title {
+    font-size: 28px;
+  }
+}

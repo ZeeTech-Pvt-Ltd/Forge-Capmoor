@@ -129,8 +129,25 @@
   cursor: progress;
 }
 
+/* The live region. It always exists and always reserves a line, so a message
+   arriving does not shove the consent line and everything below it down the
+   page mid-read.
+
+   1lh, not 1.4em. The two look equivalent and are not: 1.4em at the 14px font
+   is 19.6px, while the text it is reserving for has a line box of 23.5px. The
+   reservation was 4px short of the thing it was reserving, so the shift it
+   existed to prevent still happened for every message. `lh` is the line box
+   itself, so it cannot drift from the font-size or line-height above it.
+   The `em` stays first as the fallback for engines without `lh`. */
 .form__status {
   min-height: 1.4em;
+  min-height: 1lh;
+  /* The form's flex gap is 1.1rem, which is right between two fields and wrong
+     around a line of reserved space — it put 56px between the submit button
+     and the consent text. This pulls both neighbours in so the reserved line
+     sits close to the button, and it is scoped here rather than changed on
+     `.form` so the spacing between every other pair is untouched. */
+  margin-block: -0.75rem;
   font-size: var(--fs-small);
   font-weight: 600;
   color: var(--field-status);

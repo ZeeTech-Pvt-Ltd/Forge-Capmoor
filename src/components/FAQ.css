@@ -46,10 +46,15 @@
 
 .faq__question-text {
   font-family: var(--font-heading);
-  font-size: var(--fs-h3);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.3;
+  /* 18px at 500, not --fs-h3 at 700. The question row is a control the reader
+     scans to find the one they want, not a section heading — at the old size
+     and weight every row shouted, and twenty of them in a column was noise.
+     The negative tracking went with the weight: it was there to close up a
+     large bold setting, and at this size it only makes the text tighter than
+     the body copy beside it. */
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.4;
   text-wrap: balance;
 }
 

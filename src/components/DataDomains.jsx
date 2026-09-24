@@ -208,10 +208,13 @@ const DOMAINS = [
 /**
  * The section that would normally be a wall of performance statistics.
  *
- * We do not publish performance figures, and inventing them — as this market
- * routinely does — is not something we are willing to do. So the visual weight
- * that a stats band would carry is given to the taxonomy of inputs the
- * platform actually reads, with an explicit note saying exactly that.
+ * The visual weight a stats band would carry is given to the taxonomy of the
+ * inputs the platform actually reads.
+ *
+ * It used to close with a note saying no performance figures appear anywhere on
+ * this site. That note has been removed: it described a standard the site no
+ * longer holds itself to everywhere, and a sentence stating a policy that is
+ * contradicted a few pages away is worse than no sentence.
  */
 export function DataDomains() {
   return (
@@ -239,13 +242,6 @@ export function DataDomains() {
             </Reveal>
           ))}
         </ul>
-
-        <Reveal as="p" className="domains__note">
-          These entries describe the categories of input the platform reads. What you get out of
-          it depends on the strategy you choose, the amount you commit, how long you stay in and
-          what the market did over that period, so any single figure would tell you very little
-          about what you would experience.
-        </Reveal>
       </div>
     </section>
   )

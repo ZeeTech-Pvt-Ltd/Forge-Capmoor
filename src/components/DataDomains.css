@@ -49,17 +49,6 @@
 
 /* --- Honest footnote ----------------------------------------------------- */
 
-.domains__note {
-  margin-top: clamp(2rem, 3.5vw, 2.75rem);
-  max-width: 68ch;
-  margin-inline: auto;
-  text-align: center;
-  padding-top: clamp(1.5rem, 3vw, 2rem);
-  border-top: 1px solid var(--border-soft);
-  font-size: var(--fs-small);
-  line-height: 1.7;
-  color: var(--text-3);
-}
 
 @media (max-width: 899px) {
   .domains__grid {
