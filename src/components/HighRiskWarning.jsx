@@ -16,23 +16,10 @@ export function HighRiskWarning() {
       </h2>
 
       <p className="risk-band__text">
-        Trading foreign exchange, contracts for difference, cryptocurrencies and other financial
-        instruments is highly speculative and carries a level of risk that will not suit every
-        investor. You may lose some or all of the capital you commit, so you should not trade with
-        money you cannot afford to lose.
-      </p>
-
-      <p className="risk-band__text">
-        Any figures used to illustrate an outcome anywhere on this site are examples only and
-        guarantee nothing. Forge Capmoor provides trading technology and execution services; it
-        does not provide financial, investment or legal advice, and accepts no liability for loss
-        or damage arising from reliance on anything published here.
-      </p>
-
-      <p className="risk-band__text">
-        Laws governing financial activity differ from country to country and change over time. It
-        is your responsibility to satisfy yourself that your use of this site complies with the law
-        where you live.
+        Trading forex, CFDs, crypto and similar instruments is highly speculative, and you may lose
+        all you commit. Figures here are examples only, and nothing on this site is financial,
+        investment or legal advice. Laws differ by country. Complying with the law where you live
+        is your responsibility.
       </p>
     </section>
   )

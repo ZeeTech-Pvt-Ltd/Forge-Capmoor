@@ -9,6 +9,21 @@
 .cta {
   position: relative;
   overflow: clip;
+  /* A warm near-black rather than the flat `--dark` the hero and the
+     Technology band use. Three sections sharing one background made the page
+     read as two dark stripes with no relationship to anything; this one is
+     tinted toward the accent so it sits with the orange in it and reads as the
+     closing band rather than as a third instance of the same thing.
+     Declared here rather than on `.section--dark` because the tint is this
+     section's, not the token's — the hero and Technology are still flat. */
+  /* Set as `background-color` plus `background-image`, not with the `background`
+     shorthand. The shorthand resets background-color to `transparent`, which
+     leaves the element with no colour for anything that reads one — a contrast
+     checker walking up the tree to find what the text actually sits on finds
+     nothing, and so does anything that renders without gradients. The solid
+     sits underneath the gradient as the fallback. */
+  background-color: #150d0b;
+  background-image: linear-gradient(180deg, #1a0f0c 0%, #150d0b 55%, #120c0b 100%);
 }
 
 .cta__glow {

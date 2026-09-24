@@ -30,6 +30,3 @@
   max-width: 96ch;
 }
 
-.risk-band__text + .risk-band__text {
-  margin-top: 0.7rem;
-}
