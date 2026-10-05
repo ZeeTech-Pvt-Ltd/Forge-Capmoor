@@ -80,8 +80,8 @@ const SECTIONS = [
   {
     heading: 'Cookies and tracking',
     paragraphs: [
-      'This site sets no cookies and writes nothing to your browser’s local storage. There is no analytics script, no advertising pixel, no session recorder and no third-party embed on any page.',
-      'This is the kind of statement that quietly stops being true when something is added later, so it is worth being explicit: if any of those were ever added, this section would have to be rewritten and a cookie notice would have to appear before the first one was set.',
+      'We use Google Analytics to understand how visitors use this site. Google Analytics is a service provided by Google that sets cookies in your browser and sends information about your visit, including your IP address, to Google. The data is used only to measure how the site is used, such as which pages are visited and how visitors reach them, and it is not combined with the details you submit through the account form.',
+      'There is no advertising pixel, no session recorder and no social media embed on any page. If you prefer not to be measured by Google Analytics, you can block the cookies through your browser settings, or install Google’s Analytics Opt-out browser add-on.',
     ],
   },
   {

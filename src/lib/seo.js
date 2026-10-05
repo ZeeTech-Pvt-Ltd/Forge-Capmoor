@@ -65,7 +65,7 @@ export const ROUTE_META = {
   '/privacy': {
     title: 'Privacy Policy | Forge Capmoor',
     description:
-      'What Forge Capmoor collects through this site, why, how long it is kept, and the rights you have over it. The site sets no cookies and makes no third-party requests.',
+      'What Forge Capmoor collects through this site, why, how long it is kept, and the rights you have over it. Includes how Google Analytics is used and how to opt out of it.',
   },
   '/terms': {
     title: 'Terms of Use | Forge Capmoor',

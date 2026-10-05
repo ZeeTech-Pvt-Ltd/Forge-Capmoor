@@ -24,14 +24,28 @@
     <meta name="theme-color" content="#FFFFFF" />
     <meta name="color-scheme" content="light" />
 
+    <!-- Google site verification + analytics. Loaded async so it never blocks
+         first paint. -->
+    <meta name="google-site-verification" content="Prs1ha0FTJO_gztMTapv4v1yKL9yY5pc2fhs06oen5s" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YFG3KCWYST"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-YFG3KCWYST');
+    </script>
+
     <!-- Icons. The SVG favicon is the primary; the PNG fallback covers
          browsers and platforms that still will not read an SVG icon. -->
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- Fonts are self-hosted (no third-party request, no render-blocking
-         Google Fonts stylesheet). Preloading the variable files means the H1
+    <!-- Fonts are self-hosted (no third-party font request, no render-blocking
+         Google Fonts stylesheet — the analytics snippet above is the site's one
+         deliberate third-party request, declared in the privacy policy).
+         Preloading the variable files means the H1
          usually paints in the right face on first frame rather than swapping,
          which keeps layout shift from the font swap close to zero. Archivo is
          preloaded first because it sets the headline, which is the largest
