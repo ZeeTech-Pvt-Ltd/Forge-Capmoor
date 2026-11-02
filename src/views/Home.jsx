@@ -11,7 +11,6 @@ import { DataDomains } from '../components/DataDomains'
 import { WhyForge } from '../components/WhyForge'
 import { FaqTeaser } from '../components/FaqTeaser'
 import { FinalCTA } from '../components/FinalCTA'
-import { useDocumentMeta } from '../hooks/useDocumentMeta'
 
 /**
  * Homepage.
@@ -22,8 +21,6 @@ import { useDocumentMeta } from '../hooks/useDocumentMeta'
  * closing band. No two adjacent sections share a layout.
  */
 export default function Home() {
-  useDocumentMeta('/')
-
   return (
     <>
       <Hero />

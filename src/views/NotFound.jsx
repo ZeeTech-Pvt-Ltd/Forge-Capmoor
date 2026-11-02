@@ -1,12 +1,9 @@
 import { Link } from '../lib/router'
 import { PageHero } from '../components/PageHero'
-import { useDocumentMeta } from '../hooks/useDocumentMeta'
 
 import '../styles/pages.css'
 
 export default function NotFound() {
-  useDocumentMeta('/404')
-
   return (
     <section className="section page">
       <div className="container container--narrow page__inner">

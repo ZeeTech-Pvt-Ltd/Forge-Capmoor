@@ -1,6 +1,5 @@
 import { Link } from '../lib/router'
 import { PageHero } from '../components/PageHero'
-import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { IconArrowRight, IconBolt, IconCheck, IconClose, IconCompass, IconEye, IconLock, IconShield } from '../components/Icons'
 import { ActArt, ContextArt, HeroChartArt, ReasoningArt } from '../components/TradingArt'
 
@@ -74,8 +73,6 @@ const SECURITY = [
 ]
 
 export default function About() {
-  useDocumentMeta('/about')
-
   return (
     <article className="section page page--dark-hero">
       <div className="container">

@@ -1,6 +1,5 @@
 import { PageHero } from '../components/PageHero'
 import { SignUpForm } from '../components/SignUpForm'
-import { useDocumentMeta } from '../hooks/useDocumentMeta'
 
 import '../styles/pages.css'
 
@@ -20,8 +19,6 @@ const NEXT = [
 ]
 
 export default function SignUp() {
-  useDocumentMeta('/signup')
-
   return (
     <article className="section page">
       <div className="container">

@@ -1,6 +1,5 @@
 import { LegalPage } from '../components/LegalPage'
 import { Placeholder } from '../components/Placeholder'
-import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { LAWYER_REVIEW_NOTE, LEGAL_PLACEHOLDERS } from '../lib/legal'
 
 const UPDATED = '21 September 2026'
@@ -144,8 +143,6 @@ const SECTIONS = [
 ]
 
 export default function Terms() {
-  useDocumentMeta('/terms')
-
   return (
     <LegalPage
       title="Terms of use"

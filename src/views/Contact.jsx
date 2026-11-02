@@ -2,7 +2,6 @@ import { PageHero } from '../components/PageHero'
 import { HeroChartArt } from '../components/TradingArt'
 import { SignUpForm } from '../components/SignUpForm'
 import { IconClock, IconMail, IconPin } from '../components/Icons'
-import { useDocumentMeta } from '../hooks/useDocumentMeta'
 
 import '../styles/pages.css'
 
@@ -42,8 +41,6 @@ const REACH = [
 ]
 
 export default function Contact() {
-  useDocumentMeta('/contact')
-
   return (
     <article className="section page page--dark-hero">
       <div className="container">

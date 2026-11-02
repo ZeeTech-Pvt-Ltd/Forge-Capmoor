@@ -1,5 +1,4 @@
 import { LegalPage } from '../components/LegalPage'
-import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { LAWYER_REVIEW_NOTE } from '../lib/legal'
 
 const UPDATED = '21 September 2026'
@@ -92,8 +91,6 @@ const SECTIONS = [
 ]
 
 export default function RiskDisclosure() {
-  useDocumentMeta('/risk-disclosure')
-
   return (
     <LegalPage
       eyebrow="Legal"

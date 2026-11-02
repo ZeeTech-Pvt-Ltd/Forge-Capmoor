@@ -2,7 +2,6 @@ import { Link } from '../lib/router'
 import { PageHero } from '../components/PageHero'
 import { FaqAccordion } from '../components/FaqAccordion'
 import { IconArrowRight } from '../components/Icons'
-import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { FAQ_ITEMS, FAQ_SCHEMA } from '../lib/faq'
 
 import '../styles/pages.css'
@@ -16,8 +15,6 @@ import '../styles/pages.css'
  * rather than doubling them.
  */
 export default function Faq() {
-  useDocumentMeta('/faq')
-
   return (
     <article className="section page">
       <div className="container container--narrow">

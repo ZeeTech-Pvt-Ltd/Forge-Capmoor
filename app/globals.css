@@ -1,0 +1,14 @@
+/*
+ * The one stylesheet entry point.
+ *
+ * These three used to be imported by `src/main.jsx` in this order, and the
+ * order is load-bearing: tokens define the custom properties that base.css
+ * reads, and fonts.css must land before anything asks for a face.
+ *
+ * `src/styles/pages.css` is not here. It is imported by the pages that use it,
+ * as it was in the Vite build, so a route that does not need the sub-page
+ * styles does not carry them.
+ */
+@import '../src/styles/tokens.css';
+@import '../src/styles/fonts.css';
+@import '../src/styles/base.css';

@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useId, useRef, useState } from 'react'
 
 import { Link, useRoute } from '../lib/router'
@@ -11,12 +13,12 @@ import './SignUpForm.css'
 /**
  * Delivery endpoint for the account form.
  *
- * Set `VITE_CONTACT_ENDPOINT` in the environment before deploying (see
+ * Set `NEXT_PUBLIC_CONTACT_ENDPOINT` in the environment before deploying (see
  * .env.example). Until it is set, the form validates normally and then tells
  * the visitor plainly that nothing was sent — it never reports a success it
  * did not have, and it never sends anyone to the thank-you page.
  */
-const ENDPOINT = import.meta.env.VITE_CONTACT_ENDPOINT ?? ''
+const ENDPOINT = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT ?? ''
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
 
@@ -202,9 +204,9 @@ export function SignUpForm({ tone = 'light', submitLabel = 'Create an account' }
     }
 
     if (!ENDPOINT) {
-      if (import.meta.env.DEV) {
+      if (process.env.NODE_ENV !== 'production') {
         console.warn(
-          '[Forge Capmoor] VITE_CONTACT_ENDPOINT is not set: the account form cannot deliver. See .env.example.',
+          '[Forge Capmoor] NEXT_PUBLIC_CONTACT_ENDPOINT is not set: the account form cannot deliver. See .env.example.',
         )
       }
       setStatus('unconfigured')

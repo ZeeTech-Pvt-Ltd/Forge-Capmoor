@@ -1,7 +1,6 @@
 import { Link } from '../lib/router'
 import { PageHero } from '../components/PageHero'
 import { IconCheck } from '../components/Icons'
-import { useDocumentMeta } from '../hooks/useDocumentMeta'
 
 import '../styles/pages.css'
 
@@ -21,8 +20,6 @@ const NEXT = [
 ]
 
 export default function ThankYou() {
-  useDocumentMeta('/thank-you')
-
   return (
     <section className="section page">
       <div className="container container--narrow page__inner">

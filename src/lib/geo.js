@@ -8,7 +8,7 @@ import { COUNTRIES } from './countries'
  * this each would ask separately.
  *
  * Every failure path returns null rather than a guess: the endpoint missing
- * (`vite preview`, a non-Vercel host), a network error, a non-JSON body — which
+ * (`next dev`, a non-Vercel host), a network error, a non-JSON body — which
  * is what the SPA fallback rewrite would return if the function were ever
  * shadowed — or a country the selector does not offer. The caller keeps its own
  * default in that case, so there is one place that decides the fallback.
@@ -17,7 +17,7 @@ let pending = null
 
 /**
  * The endpoint is a Vercel function, so there is nothing to ask on a local
- * machine — `vite preview` answers with the SPA fallback, i.e. a 404 or an HTML
+ * machine — `next dev` answers with the SPA fallback, i.e. a 404 or an HTML
  * body, and either way the browser logs a failed request for a feature that was
  * never going to work locally. Skipping the call keeps a developer's console
  * clean, and the result is the same default they would have got anyway.

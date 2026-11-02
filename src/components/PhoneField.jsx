@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useId, useMemo, useRef, useState } from 'react'
 
 import { COUNTRIES, findCountry, nationalDigitRange } from '../lib/countries'
@@ -5,7 +7,7 @@ import { IconChevronDown, IconSearch } from './Icons'
 
 import './PhoneField.css'
 
-const FLAGS = `${import.meta.env.BASE_URL}flags`
+const FLAGS = '/flags'
 
 /**
  * The country's flag, loaded from `public/flags` as its own file.
