@@ -1,6 +1,6 @@
 import { Link } from '../lib/router'
 import { PageHero } from '../components/PageHero'
-import { ReviewsSlider } from '../components/ReviewsSlider'
+import ReviewsSlider from '../components/ReviewsSlider'
 import { IconArrowRight } from '../components/Icons'
 import { HeroChartArt } from '../components/TradingArt'
 

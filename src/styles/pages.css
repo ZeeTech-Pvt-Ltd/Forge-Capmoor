@@ -94,7 +94,10 @@
 }
 
 .page__head--prominent .page__title {
-  font-size: clamp(2.4rem, 1.2rem + 3.6vw, 3.7rem);
+  /* 68px at desktop, per the operator. A clamp rather than a flat size so the
+     headline still steps down on a phone; the 320px rule in base.css takes
+     over at the narrowest width. */
+  font-size: clamp(2.4rem, 1.2rem + 3.6vw, 4.25rem);
 }
 
 .page__head--prominent .page__lead {
