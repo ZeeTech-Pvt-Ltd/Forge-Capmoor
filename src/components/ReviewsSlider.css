@@ -4,7 +4,16 @@
    Native scroll-snap rather than a transform and an index: the position cannot
    desync from what is on screen, and touch, trackpad and keyboard scrolling all
    work before any JavaScript runs.
+
+   Three cards share the track on a wide screen. Each card is sized from the
+   track width minus the two gaps, so the third card ends exactly at the right
+   edge and there is no sliver of a fourth peeking in.
    -------------------------------------------------------------------------- */
+
+/* The heading above the slider needs air between it and the first card. */
+.reviews__slider-wrap {
+  margin-top: clamp(1.75rem, 3vw, 2.5rem);
+}
 
 .reviews__slider {
   display: flex;
@@ -13,14 +22,15 @@
 }
 
 .reviews__track {
+  --reviews-gap: clamp(1rem, 1.7vw, 1.35rem);
+
   margin: 0;
   padding: 0;
   list-style: none;
   display: flex;
+  gap: var(--reviews-gap);
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  /* One card per screen of the track, so the arrow step and the snap point are
-     the same distance. */
   scroll-behavior: smooth;
   scrollbar-width: none;
   border-radius: var(--r-lg);
@@ -31,38 +41,129 @@
 }
 
 .reviews__card {
-  flex: 0 0 100%;
+  /* Three across: the two gaps come out of the track before the third is
+     taken. The breakpoints below redo the sum for two and then one card. */
+  flex: 0 0 calc((100% - 2 * var(--reviews-gap)) / 3);
   scroll-snap-align: start;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: clamp(1.5rem, 3vw, 2.25rem);
-  padding: clamp(1.75rem, 4vw, 3rem);
+  gap: clamp(1.1rem, 2vw, 1.5rem);
+  padding: clamp(1.4rem, 2.4vw, 1.9rem);
   border-radius: var(--r-lg);
   background: var(--surface);
   border: 1px solid var(--border-soft);
 }
 
+/* --- Stars ---------------------------------------------------------------- */
+
+.reviews__rating {
+  --star-size: 17px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.reviews__star {
+  position: relative;
+  display: inline-block;
+  width: var(--star-size);
+  height: var(--star-size);
+  flex: none;
+}
+
+.reviews__star svg {
+  display: block;
+  width: var(--star-size);
+  height: var(--star-size);
+}
+
+.reviews__star-outline path {
+  fill: none;
+  stroke: rgba(14, 14, 17, 0.22);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+}
+
+/* The filled layer is clipped by its own width, so a 4.5 star shows half a
+   filled star without needing a separate half-star glyph or a gradient. */
+.reviews__star-fill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  color: var(--accent);
+}
+
+.reviews__star-fill path {
+  fill: currentColor;
+}
+
+.reviews__rating-value {
+  margin-left: 0.35rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-2);
+}
+
+/* --- Quote ---------------------------------------------------------------- */
+
 .reviews__quote {
   margin: 0;
+  /* Pushes the author row to the bottom, so cards of different quote lengths
+     still line their names up. */
+  flex: 1;
 }
 
 .reviews__quote p {
   font-family: var(--font-heading);
-  font-size: clamp(1.15rem, 0.9rem + 1.1vw, 1.6rem);
+  font-size: clamp(1rem, 0.95rem + 0.35vw, 1.18rem);
   font-weight: 500;
-  line-height: 1.45;
-  letter-spacing: -0.01em;
+  line-height: 1.5;
+  letter-spacing: -0.005em;
   color: var(--ink);
-  /* A quote is easier to read a little narrower than the card. */
-  max-width: 42ch;
 }
+
+/* --- Author --------------------------------------------------------------- */
 
 .reviews__author {
   display: flex;
-  align-items: baseline;
-  gap: 0.6rem;
-  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.reviews__avatar {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--surface-3);
+  color: var(--ink-2);
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* Three tints, cycled by position. Muted enough that the quote stays the
+   loudest thing on the card. */
+.reviews__avatar--1 {
+  background: var(--accent-tint-2);
+  color: var(--accent-ink);
+}
+
+.reviews__avatar--2 {
+  background: var(--surface-2);
+  color: var(--text-2);
+}
+
+.reviews__author-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
 }
 
 .reviews__name {
@@ -74,14 +175,6 @@
 .reviews__city {
   font-size: var(--fs-small);
   color: var(--text-2);
-}
-
-/* A middot between the name and the city, so the pair reads as one line
-   without needing a separator element in the markup. */
-.reviews__city::before {
-  content: '·';
-  margin-right: 0.6rem;
-  color: var(--text-3);
 }
 
 /* --- Controls ------------------------------------------------------------- */
@@ -123,6 +216,22 @@
 
 .reviews__arrow-icon--next {
   rotate: -90deg;
+}
+
+/* --- Breakpoints ---------------------------------------------------------- */
+
+/* Two cards once three would be narrower than a readable quote. */
+@media (max-width: 980px) {
+  .reviews__card {
+    flex-basis: calc((100% - var(--reviews-gap)) / 2);
+  }
+}
+
+/* One card on a phone. */
+@media (max-width: 680px) {
+  .reviews__card {
+    flex-basis: 100%;
+  }
 }
 
 /* Without the snap animation, moving between cards should not animate either. */

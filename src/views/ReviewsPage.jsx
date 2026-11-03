@@ -25,30 +25,35 @@ const REVIEWS = [
       'I had never used anything automated before and I expected to be lost in the settings. Each one explains what it does before you change it, so my first afternoon was far less intimidating than I had braced for.',
     name: 'Priya N.',
     city: 'Melbourne',
+    rating: 5,
   },
   {
     quote:
       'I work office hours, so the thing that sold me was being able to pause it. Knowing I can stop everything in one step is what made me comfortable leaving it running overnight.',
     name: 'Daniel R.',
     city: 'Brisbane',
+    rating: 4.5,
   },
   {
     quote:
       'The part I use most is the record of what it did and what it passed on. I have learned more from reading that than from any explainer video I sat through beforehand.',
     name: 'Megan T.',
     city: 'Perth',
+    rating: 5,
   },
   {
     quote:
       'I asked a fairly basic question through the contact form and got a straight answer back rather than a sales push. That is rarer in this space than it ought to be.',
     name: 'Sam K.',
     city: 'Adelaide',
+    rating: 4,
   },
   {
     quote:
       'What made me take it seriously was being told upfront that I could lose money. Everywhere else I looked was promising me the opposite, which is exactly why I did not trust any of them.',
     name: 'Laura B.',
     city: 'Sydney',
+    rating: 4.5,
   },
 ]
 
