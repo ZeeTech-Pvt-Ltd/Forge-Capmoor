@@ -155,11 +155,71 @@
 }
 
 .form__consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  width: 100%;
+  max-width: 48ch;
   font-size: var(--fs-small);
   line-height: 1.6;
   color: var(--field-note);
+  text-align: left;
+}
+
+.form__consent label {
+  cursor: pointer;
+}
+
+/* Native checkboxes render differently on every surface, so this draws one
+   from the same tokens as the fields. It stays a real checkbox element. */
+.form__consent input[type='checkbox'] {
+  appearance: none;
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  flex: none;
+  margin-top: 0.12rem;
+  border: 1px solid var(--field-line);
+  border-radius: 4px;
+  background: var(--field-bg);
+  cursor: pointer;
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
+}
+
+.form__consent input[type='checkbox']:hover {
+  border-color: var(--field-line-hover);
+}
+
+.form__consent input[type='checkbox']:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.form__consent input[type='checkbox']:checked {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.form__consent input[type='checkbox']:checked::after {
+  content: '';
+  width: 5px;
+  height: 9px;
+  border: solid var(--ink);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) translateY(-1px);
+}
+
+.form__consent-error {
+  align-self: center;
+  width: 100%;
   max-width: 48ch;
-  text-align: center;
+  /* Starts under the label text rather than under the checkbox. */
+  padding-left: calc(18px + 0.65rem);
+  text-align: left;
+  margin-top: -0.6rem;
 }
 
 .form__consent-link {

@@ -1,21 +1,20 @@
 import { LegalPage } from '../components/LegalPage'
 import { LAWYER_REVIEW_NOTE } from '../lib/legal'
 
-const UPDATED = '21 September 2026'
+const UPDATED = '3 November 2026'
 
 /**
  * Privacy policy.
  *
  * Two things in here are load-bearing and must be kept true:
  *
- *   1. The form collects a first name, a last name, an email address and a
- *      phone number. Nothing else. If a field is ever added, section 02 has
- *      to change in the same commit.
- *   2. There is no analytics, no advertising pixel, no embed and no cookie on
- *      this site. Section 09 says so plainly rather than borrowing the usual
- *      "we use cookies and similar technologies" wording, which would be a
- *      false statement here. Adding any of those means rewriting section 09
- *      and adding a cookie notice before the first one is set.
+ *   1. The account form collects a first name, a last name, an email address
+ *      and a phone number. If a field is ever added, section 02 has to change
+ *      in the same commit.
+ *   2. Google Analytics is the only analytics or tracking on this site.
+ *      Sections 02 and 09 describe what it processes. Adding another tracker
+ *      means changing both sections and adding a cookie notice before the
+ *      first cookie is set.
  */
 const SECTIONS = [
   {
@@ -28,8 +27,8 @@ const SECTIONS = [
   {
     heading: 'Information we collect',
     paragraphs: [
-      'Only what you choose to send us. The account form collects four things: the first name you type, the last name you type, the email address you type, and the phone number you type.',
-      'That is the whole list. We do not record your IP address, we do not build a profile of your visit, and we do not track you across other websites.',
+      'The account form collects only what you choose to send us: the first name you type, the last name you type, the email address you type, and the phone number you type.',
+      'This site also uses Google Analytics, which records how pages are used and sends your IP address to Google as described in section 09. The country selector asks our own server for the country your connection appears to come from. Our hosting provider processes your IP address to deliver the site and return that country code; the site itself does not write your IP address into the form or into a profile. We do not track you across other websites.',
     ],
   },
   {
@@ -52,7 +51,7 @@ const SECTIONS = [
     heading: 'Sharing',
     paragraphs: [
       'We do not sell your personal information, and we do not share it for advertising.',
-      'The only sharing this site performs is sending what you submit through the form to the service that delivers it to us. If that service stores data outside Australia, that transfer is part of delivery and is described in section 10.',
+      'The site uses a hosting provider, a form-delivery service and Google Analytics. Google Analytics processes usage data and IP addresses as described in section 09. If any of those providers stores data outside Australia, that transfer is described in section 10.',
     ],
   },
   {
@@ -86,7 +85,7 @@ const SECTIONS = [
   {
     heading: 'International transfers',
     paragraphs: [
-      'This site is operated from Australia. Where a delivery service used by the contact form stores data in another country, your information will be transferred there as part of sending it to us.',
+      'This site is operated from Australia. Our hosting provider, the form-delivery service and Google Analytics may process information in other countries. Where that happens, your information is transferred as part of running the site, delivering an enquiry, or measuring how the site is used.',
       'Where such a transfer happens, we take reasonable steps to ensure the information continues to be handled consistently with this policy.',
     ],
   },

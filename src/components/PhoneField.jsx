@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useId, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
 import { COUNTRIES, findCountry, nationalDigitRange } from '../lib/countries'
 import { IconChevronDown, IconSearch } from './Icons'
@@ -50,11 +50,11 @@ function Flag({ code }) {
  * only combined into an international value on submit. That keeps editing
  * honest: changing the country never rewrites digits the visitor typed.
  */
-export function PhoneField({ uid, value, country, error, onValueChange, onCountryChange, inputRef }) {
-  const id = `${uid}-phone`
-  const errorId = `${id}-error`
-  const listId = `${id}-list`
-  const searchId = `${id}-search`
+export function PhoneField({ value, country, error, onValueChange, onCountryChange, inputRef }) {
+  const id = 'phone'
+  const errorId = 'phone-error'
+  const listId = 'phone-list'
+  const searchId = 'phone-search'
 
   const [open, setOpen] = useState(false)
   const [query, setQuery] = useState('')
