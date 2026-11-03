@@ -230,8 +230,12 @@ p {
   justify-content: center;
 }
 
+/* 38px across the site, per the operator. A fixed size rather than a clamp:
+   every section heading is now the same size at every width, which is what a
+   consistent heading scale looks like. The 320px rule below still wins there,
+   where 38px would not fit. */
 .section-title {
-  font-size: var(--fs-h2);
+  font-size: 38px;
 }
 
 .section-lead {

@@ -21,15 +21,19 @@ export const SECTION_IDS = {
 
 export const NAV_LINKS = [
   { label: 'Home', to: '/' },
+  { label: 'How it works', to: '/how-it-works' },
   { label: 'About us', to: '/about' },
   { label: 'FAQ', to: '/faq' },
+  { label: 'Reviews', to: '/reviews' },
   { label: 'Contact', to: '/contact' },
 ]
 
 export const FOOTER_COMPANY_LINKS = [
   { label: 'Home', to: '/' },
+  { label: 'How it works', to: '/how-it-works' },
   { label: 'About us', to: '/about' },
   { label: 'FAQ', to: '/faq' },
+  { label: 'Reviews', to: '/reviews' },
   { label: 'Contact', to: '/contact' },
 ]
 

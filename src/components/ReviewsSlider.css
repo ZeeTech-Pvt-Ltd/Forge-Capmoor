@@ -1,0 +1,133 @@
+/* ==========================================================================
+   Reviews slider
+   ==========================================================================
+   Native scroll-snap rather than a transform and an index: the position cannot
+   desync from what is on screen, and touch, trackpad and keyboard scrolling all
+   work before any JavaScript runs.
+   -------------------------------------------------------------------------- */
+
+.reviews__slider {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 2.5vw, 1.75rem);
+}
+
+.reviews__track {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  /* One card per screen of the track, so the arrow step and the snap point are
+     the same distance. */
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  border-radius: var(--r-lg);
+}
+
+.reviews__track::-webkit-scrollbar {
+  display: none;
+}
+
+.reviews__card {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: clamp(1.5rem, 3vw, 2.25rem);
+  padding: clamp(1.75rem, 4vw, 3rem);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+}
+
+.reviews__quote {
+  margin: 0;
+}
+
+.reviews__quote p {
+  font-family: var(--font-heading);
+  font-size: clamp(1.15rem, 0.9rem + 1.1vw, 1.6rem);
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  /* A quote is easier to read a little narrower than the card. */
+  max-width: 42ch;
+}
+
+.reviews__author {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.reviews__name {
+  font-size: var(--fs-small);
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.reviews__city {
+  font-size: var(--fs-small);
+  color: var(--text-2);
+}
+
+/* A middot between the name and the city, so the pair reads as one line
+   without needing a separator element in the markup. */
+.reviews__city::before {
+  content: '·';
+  margin-right: 0.6rem;
+  color: var(--text-3);
+}
+
+/* --- Controls ------------------------------------------------------------- */
+
+.reviews__controls {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.reviews__arrow {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--ink);
+  cursor: pointer;
+  transition:
+    border-color var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out);
+}
+
+.reviews__arrow:hover {
+  border-color: rgba(14, 14, 17, 0.24);
+  background: var(--surface-2);
+}
+
+.reviews__arrow:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* The chevron points down; rotating it gives both directions from one glyph. */
+.reviews__arrow-icon--prev {
+  rotate: 90deg;
+}
+
+.reviews__arrow-icon--next {
+  rotate: -90deg;
+}
+
+/* Without the snap animation, moving between cards should not animate either. */
+@media (prefers-reduced-motion: reduce) {
+  .reviews__track {
+    scroll-behavior: auto;
+  }
+}

@@ -13,13 +13,16 @@
   background: var(--surface);
 }
 
+/* 38px like every other section heading. It used to be a small uppercase label
+   at --fs-h4, which was the last heading on the site that did not follow the
+   scale. The uppercase and the wide tracking went with it: both exist to make
+   small text read as a label, and at this size they only shout. */
 .principles__title {
   text-align: center;
-  font-size: var(--fs-h4);
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  color: var(--text-3);
+  font-size: 38px;
+  font-weight: 700;
+  letter-spacing: var(--ls-heading);
+  color: var(--ink);
   margin-bottom: clamp(1.75rem, 3.5vw, 2.75rem);
 }
 

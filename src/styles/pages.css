@@ -123,7 +123,8 @@
 }
 
 .about__hero,
-.contact__hero {
+.contact__hero,
+.band-hero {
   position: relative;
   isolation: isolate;
   padding-top: calc(var(--header-h) + clamp(2.25rem, 5.5vw, 5rem));
@@ -140,7 +141,8 @@
    `::after` are both spoken for, and a third layer for a gradient would be
    one more thing to keep in sync. */
 .about__hero::before,
-.contact__hero::before {
+.contact__hero::before,
+.band-hero::before {
   content: '';
   position: absolute;
   z-index: -3;
@@ -163,7 +165,8 @@
 /* The chart behind the copy. Same drawing the homepage uses, at a slightly
    lower weight because these pages carry a longer headline. */
 .about__hero-bg,
-.contact__hero-bg {
+.contact__hero-bg,
+.band-hero__bg {
   position: absolute;
   z-index: -2;
   inset: 0;
@@ -174,7 +177,8 @@
 /* Between the chart and the copy: near-solid under the text, gone before the
    edges. On the light version this was white; on dark it has to be the dark. */
 .about__hero::after,
-.contact__hero::after {
+.contact__hero::after,
+.band-hero::after {
   content: '';
   position: absolute;
   z-index: -1;
@@ -192,7 +196,8 @@
    the same reason the homepage's do — an element rule on `h1` in base.css
    beats anything inherited from the hero. */
 .about__hero .page__title,
-.contact__hero .page__title {
+.contact__hero .page__title,
+.band-hero .page__title {
   color: var(--on-dark);
 }
 
@@ -201,24 +206,28 @@
    `--accent-ink` — a colour chosen for text on white, which measures 3.7:1 on
    the dark ground against the 4.5:1 it needs. Plain `--accent` is 5.6:1. */
 .about__hero .eyebrow,
-.contact__hero .eyebrow {
+.contact__hero .eyebrow,
+.band-hero .eyebrow {
   color: var(--accent);
 }
 
 .about__hero .page__lead,
-.contact__hero .page__lead {
+.contact__hero .page__lead,
+.band-hero .page__lead {
   color: var(--on-dark-2);
 }
 
 .about__hero .btn--secondary,
-.contact__hero .btn--secondary {
+.contact__hero .btn--secondary,
+.band-hero .btn--secondary {
   border-color: rgba(255, 255, 255, 0.32);
   background: rgba(255, 255, 255, 0.07);
   color: var(--on-dark);
 }
 
 .about__hero .btn--secondary:hover,
-.contact__hero .btn--secondary:hover {
+.contact__hero .btn--secondary:hover,
+.band-hero .btn--secondary:hover {
   border-color: rgba(255, 255, 255, 0.55);
   background: rgba(255, 255, 255, 0.13);
 }
@@ -234,7 +243,8 @@
    lines. A rem cap sizes the column against the type that actually fills it:
    44rem holds "Automated trading, with the working shown" on two lines at
    desktop and one on a wide screen. */
-.about__hero-text {
+.about__hero-text,
+.band-hero__text {
   position: relative;
   max-width: min(100%, 44rem);
 }
@@ -413,7 +423,7 @@
    heading that is an instruction rather than a label. */
 .faq__help-title {
   margin-top: 0.55rem;
-  font-size: clamp(1.7rem, 1.2rem + 1.9vw, 2.5rem);
+  font-size: 38px;
   font-weight: 700;
   line-height: 1.1;
 }
@@ -481,7 +491,7 @@
 /* Sits between --fs-h3 and --fs-h2: a section heading on a sub-page should
    rank below the page title, which --fs-h2 alone did not make obvious. */
 .page__section-title {
-  font-size: clamp(1.45rem, 1.1rem + 1.4vw, 2.05rem);
+  font-size: 38px;
   font-weight: 700;
 }
 
@@ -795,7 +805,7 @@
 }
 
 .split__panel-title {
-  font-size: var(--fs-h3);
+  font-size: 38px;
   font-weight: 700;
   margin-bottom: 1.35rem;
 }
@@ -839,7 +849,7 @@
 }
 
 .legal__heading {
-  font-size: var(--fs-h3);
+  font-size: 38px;
   font-weight: 700;
   margin-bottom: 0.7rem;
 }
@@ -892,4 +902,178 @@
   height: 6px;
   border-radius: 50%;
   background: var(--accent);
+}
+
+
+/* --- Reviews page --------------------------------------------------------
+   An empty state, for now. It is a card rather than a bare paragraph so the
+   page reads as a page with nothing in it yet, not as a page that failed to
+   load. */
+
+.reviews__empty {
+  max-width: 60ch;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+}
+
+.reviews__empty-title {
+  font-size: 38px;
+  font-weight: 700;
+}
+
+.reviews__empty-text {
+  margin-top: 0.8rem;
+  font-size: var(--fs-small);
+  line-height: 1.7;
+  color: var(--text-2);
+}
+
+/* --- How it works page ---------------------------------------------------
+   Three cards on a tinted band, then a dark band, then the closing block.
+   The first version was paragraph after paragraph down one column, which had
+   no shape between the hero and the footer. */
+
+.howto__grid {
+  margin: clamp(2rem, 4vw, 3rem) 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.15rem, 2.2vw, 1.75rem);
+  counter-reset: none;
+}
+
+.howto__card {
+  position: relative;
+  padding: clamp(1.5rem, 2.8vw, 2.15rem);
+  border-radius: var(--r-lg);
+  background: var(--bg);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-xs);
+}
+
+.howto__num {
+  display: block;
+  margin-bottom: 0.9rem;
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 1rem + 1.6vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--accent);
+  opacity: 0.9;
+}
+
+.howto__card-title {
+  font-size: var(--fs-h4);
+  font-weight: 700;
+}
+
+.howto__card-text {
+  margin-top: 0.7rem;
+  font-size: var(--fs-small);
+  line-height: 1.7;
+  color: var(--text-2);
+}
+
+/* --- Records band --------------------------------------------------------- */
+
+.howto__records-list {
+  margin: clamp(2rem, 4vw, 3rem) 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.howto__record-icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r-sm);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--dark-line);
+  color: var(--accent);
+}
+
+.howto__record-title {
+  margin-top: 1rem;
+  font-size: var(--fs-h4);
+  font-weight: 700;
+}
+
+.howto__record-text {
+  margin-top: 0.6rem;
+  font-size: var(--fs-small);
+  line-height: 1.7;
+  color: var(--on-dark-2);
+}
+
+
+@media (max-width: 899px) {
+  .howto__grid,
+  .howto__records-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* --- Closing card --------------------------------------------------------
+   The page runs dark hero, tinted steps, dark records. This is the one warm
+   surface, so the two actions land somewhere that looks like an ending rather
+   than like the last section of a document. Centred, because everything above
+   it is a grid and the change of alignment is what makes it read as a close. */
+
+.howto__close {
+  padding-block: clamp(2.5rem, 5vw, 4rem);
+}
+
+.howto__close-card {
+  max-width: 52rem;
+  margin-inline: auto;
+  padding: clamp(2rem, 5vw, 3.5rem);
+  border-radius: var(--r-xl);
+  text-align: center;
+  border: 1px solid rgba(255, 75, 43, 0.22);
+  /* Warm at the top, fading to the page's own ground, so it reads as lit from
+     above rather than as a flat tinted panel. */
+  background:
+    radial-gradient(120% 140% at 50% 0%, rgba(255, 75, 43, 0.12) 0%, rgba(255, 158, 69, 0.05) 46%, transparent 76%),
+    var(--bg);
+  box-shadow: var(--shadow-sm);
+}
+
+.howto__close-card .eyebrow {
+  margin-bottom: 0.6rem;
+}
+
+.howto__close-title {
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.howto__close-lead {
+  margin: 0.9rem auto 0;
+  max-width: 46ch;
+  font-size: var(--fs-lead);
+  line-height: 1.62;
+  color: var(--text-2);
+}
+
+.howto__close-actions {
+  margin-top: clamp(1.5rem, 3vw, 2rem);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+@media (max-width: 479px) {
+  .howto__close-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }

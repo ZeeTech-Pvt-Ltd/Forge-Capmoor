@@ -45,6 +45,11 @@
   flex-direction: column;
   gap: clamp(1.25rem, 2.6vw, 2rem);
   padding-left: 4px;
+  /* Centred against the text column rather than pinned to its top. The grid
+     sets `align-items: start`, which left the rail 388px tall in a 440px
+     column with all 52px of slack under it — the two halves read as separate
+     blocks instead of one row. */
+  align-self: center;
 }
 
 .proposition__stage {

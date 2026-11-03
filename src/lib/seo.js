@@ -37,6 +37,16 @@ export const ROUTE_META = {
     description:
       'Forge Capmoor is an automated trading platform. It reads the market, trades the strategy you choose, and records the reasoning behind every move it makes.',
   },
+  '/how-it-works': {
+    title: 'How Forge Capmoor Works | Automated Trading',
+    description:
+      'From sign up to your first automated trade: what happens at each step and what the platform records. Open an account and check the reasoning yourself.',
+  },
+  '/reviews': {
+    title: 'Forge Capmoor Reviews | Automated Trading',
+    description:
+      'What people who use Forge Capmoor say about the platform, published with names and dates. Nothing here is written by us. Open an account and judge it yourself.',
+  },
   '/about': {
     title: 'About Forge Capmoor | Automated Trading, Explained',
     description:

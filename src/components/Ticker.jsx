@@ -33,11 +33,17 @@ const INSTRUMENTS = [
 function Row({ hidden }) {
   return (
     <ul className="ticker__row" aria-hidden={hidden || undefined}>
+      {/* The disclosure travels with the prices rather than sitting in a fixed
+          chip at the edge. It recurs every time the row comes round, so it is
+          never more than one screen away from the figures it qualifies. */}
+      <li className="ticker__note">Illustrative</li>
+
       {INSTRUMENTS.map((item) => (
         <li className="ticker__item" key={item.symbol}>
           <span className="ticker__symbol">{item.symbol}</span>
           <span className="ticker__value">{item.value}</span>
           <span className="ticker__change" data-up={item.up || undefined}>
+            <span aria-hidden="true">{item.up ? '▲' : '▼'}</span>
             {item.change}
           </span>
         </li>
@@ -49,7 +55,6 @@ function Row({ hidden }) {
 export function Ticker() {
   return (
     <section className="ticker" aria-label="Markets covered by the platform">
-      <p className="ticker__flag">Illustrative</p>
 
       <div className="ticker__viewport">
         <div className="ticker__track">

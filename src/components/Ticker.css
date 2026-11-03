@@ -14,26 +14,6 @@
   overflow: hidden;
 }
 
-/* The label sits at the left edge, above the row rather than in it, so it
-   cannot scroll away from the values it is qualifying. */
-.ticker__flag {
-  position: absolute;
-  z-index: 2;
-  top: 0;
-  left: 0;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  padding-inline: clamp(0.9rem, 2vw, 1.5rem);
-  background: var(--dark-deep);
-  border-right: 1px solid var(--dark-line);
-  font-size: var(--fs-micro);
-  font-weight: 700;
-  letter-spacing: var(--ls-eyebrow);
-  text-transform: uppercase;
-  color: var(--on-dark-3);
-}
-
 .ticker__viewport {
   overflow: hidden;
   /* Fades the row out at both ends so it does not appear to be chopped by the
@@ -112,4 +92,56 @@
   .ticker__viewport {
     overflow-x: auto;
   }
+}
+
+/* --- Terminal styling ----------------------------------------------------
+   Trading screens are set in a monospaced face with tabular figures, because
+   columns of numbers are read by comparing digits vertically. This follows
+   that: the symbols are uppercased, the figures are monospaced so they hold
+   their column, and the whole strip is a little denser than the page type it
+   sits under. */
+
+.ticker__symbol,
+.ticker__value,
+.ticker__change,
+.ticker__note {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+}
+
+.ticker__symbol {
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.ticker__value {
+  /* Slightly brighter than the symbol so the price leads the cell. */
+  color: var(--on-dark);
+}
+
+.ticker__change {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.28rem;
+}
+
+/* The arrow is the primary signal and the colour is the reinforcement, not the
+   other way round: a reader who cannot separate red from green still gets the
+   direction from the glyph. */
+.ticker__change > span[aria-hidden] {
+  font-size: 0.7em;
+  line-height: 1;
+}
+
+.ticker__note {
+  padding: 0.18rem 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 3px;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--on-dark-2);
+  white-space: nowrap;
 }
