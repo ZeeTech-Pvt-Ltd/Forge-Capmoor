@@ -99,12 +99,24 @@ export default function ReviewsSlider({ reviews }) {
             </blockquote>
 
             <footer className="reviews__author">
-              <span
-                className={`reviews__avatar reviews__avatar--${index % 3}`}
-                aria-hidden="true"
-              >
-                {initials(review.name)}
-              </span>
+              {review.avatar ? (
+                <img
+                  className="reviews__avatar"
+                  src={review.avatar}
+                  alt=""
+                  width={42}
+                  height={42}
+                  loading="lazy"
+                  decoding="async"
+                />
+              ) : (
+                <span
+                  className={`reviews__avatar reviews__avatar--${index % 3}`}
+                  aria-hidden="true"
+                >
+                  {initials(review.name)}
+                </span>
+              )}
 
               <span className="reviews__author-text">
                 <span className="reviews__name">{review.name}</span>

@@ -140,12 +140,18 @@
   height: 42px;
   flex: none;
   border-radius: 50%;
+  border: 1px solid var(--border-soft);
   background: var(--surface-3);
   color: var(--ink-2);
   font-family: var(--font-heading);
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.02em;
+  /* A portrait fills the circle instead of being squeezed into it. The frame
+     sits high because these are head-and-shoulders shots: a centred crop on a
+     taller portrait lands on the chest rather than the face. */
+  object-fit: cover;
+  object-position: 50% 12%;
 }
 
 /* Three tints, cycled by position. Muted enough that the quote stays the

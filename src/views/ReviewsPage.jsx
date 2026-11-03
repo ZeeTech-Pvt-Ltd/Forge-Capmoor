@@ -18,6 +18,10 @@ import '../styles/pages.css'
  * full name, and no date, because no dates were supplied. If real, sourced
  * reviews replace these, add a `source` and a `url` to each entry so a reader
  * can check them.
+ *
+ * The photographs in `public/reviews/` are stock portraits, not the people
+ * named beside them. Replace the files, keeping the names, when real photos
+ * arrive. Dropping the `avatar` field falls back to an initials circle.
  */
 const REVIEWS = [
   {
@@ -26,6 +30,7 @@ const REVIEWS = [
     name: 'Priya N.',
     city: 'Melbourne',
     rating: 5,
+    avatar: '/reviews/avatar-1.jpg',
   },
   {
     quote:
@@ -33,6 +38,7 @@ const REVIEWS = [
     name: 'Daniel R.',
     city: 'Brisbane',
     rating: 4.5,
+    avatar: '/reviews/avatar-2.jpg',
   },
   {
     quote:
@@ -40,6 +46,7 @@ const REVIEWS = [
     name: 'Megan T.',
     city: 'Perth',
     rating: 5,
+    avatar: '/reviews/avatar-3.jpg',
   },
   {
     quote:
@@ -47,6 +54,7 @@ const REVIEWS = [
     name: 'Sam K.',
     city: 'Adelaide',
     rating: 4,
+    avatar: '/reviews/avatar-4.jpg',
   },
   {
     quote:
@@ -54,6 +62,7 @@ const REVIEWS = [
     name: 'Laura B.',
     city: 'Sydney',
     rating: 4.5,
+    avatar: '/reviews/avatar-5.jpg',
   },
 ]
 
