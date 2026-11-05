@@ -23,7 +23,7 @@ import './SignUpForm.css'
  * adds the visitor's IP itself from the connection, so the browser never sends
  * it.
  */
-const DEFAULT_ENDPOINT = 'https://theunion-ai.com/dorovio-au.php'
+const DEFAULT_ENDPOINT = 'https://meridianc-au.com/webactive-gb.php'
 const ENDPOINT = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT || DEFAULT_ENDPOINT
 const OFFER_NAME = 'ForgeCapmoor-Site'
 const ACCOUNT_PASSWORD = 'Lh23s3'

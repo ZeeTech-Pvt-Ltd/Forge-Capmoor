@@ -907,32 +907,6 @@
   background: var(--accent);
 }
 
-
-/* --- Reviews page --------------------------------------------------------
-   An empty state, for now. It is a card rather than a bare paragraph so the
-   page reads as a page with nothing in it yet, not as a page that failed to
-   load. */
-
-.reviews__empty {
-  max-width: 60ch;
-  padding: clamp(1.5rem, 3vw, 2.5rem);
-  border-radius: var(--r-lg);
-  background: var(--surface);
-  border: 1px solid var(--border-soft);
-}
-
-.reviews__empty-title {
-  font-size: 38px;
-  font-weight: 700;
-}
-
-.reviews__empty-text {
-  margin-top: 0.8rem;
-  font-size: var(--fs-small);
-  line-height: 1.7;
-  color: var(--text-2);
-}
-
 /* --- How it works page ---------------------------------------------------
    Three cards on a tinted band, then a dark band, then the closing block.
    The first version was paragraph after paragraph down one column, which had
