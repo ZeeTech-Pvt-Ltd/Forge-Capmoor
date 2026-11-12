@@ -35,8 +35,8 @@ export function Footer() {
             </Link>
 
             <p className="footer__desc">
-              An AI-assisted trading platform that keeps the reasoning attached to the result, so
-              an automated action can be checked, questioned and turned off.
+              Forge Capmoor turns market research into clear trade alerts, so every signal
+              arrives with its entry, exit and reasoning attached.
             </p>
 
             <Link to="/signup" className="footer__cta">
@@ -67,7 +67,7 @@ export function Footer() {
         <div className="footer__bottom">
           <div className="footer__legal">
             <p className="footer__note">
-              Forge Capmoor provides trading technology and execution services. It does not provide
+              Forge Capmoor provides trading signals and market research. It does not provide
               financial, investment or legal advice, and nothing on this site is a recommendation
               to buy or sell any financial instrument.
             </p>

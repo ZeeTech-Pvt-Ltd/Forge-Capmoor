@@ -6,25 +6,29 @@ import './HowItWorks.css'
 
 const STEPS = [
   {
-    title: 'Open an account',
-    text: 'Registration takes a few details and an identity check. What is required is listed before you begin, so nothing arrives as a surprise halfway through.',
+    title: 'Scanning',
+    text: 'We monitor charts, trends and economic events throughout the trading day.',
   },
   {
-    title: 'Fund it',
-    text: 'Deposits are made through the platform. The methods available to you, and the arrangements that apply, are shown before you commit to a transaction, and withdrawals go back the same way they came in.',
+    title: 'Filtering',
+    text: 'Only setups with a clear direction and a defined risk make the cut.',
   },
   {
-    title: 'Turn trading on',
-    text: 'Choose a strategy and the platform places trades on your account in line with it. Every action keeps its reasoning attached, and you can pause automation whenever you want.',
+    title: 'Sending',
+    text: 'The alert lands on your device with every level you need and a quick explanation.',
+  },
+  {
+    title: 'Deciding',
+    text: 'You weigh it up and choose to trade it, modify it or ignore it.',
   },
 ]
 
 /**
- * How the platform works, as a horizontal three-step track.
+ * How the signals work, as a horizontal four-step track.
  *
  * The connector is a dashed rule behind the numbered nodes rather than
- * borders on the cards, so the three steps read as one process instead of
- * three separate boxes.
+ * borders on the cards, so the four steps read as one process instead of
+ * four separate boxes.
  */
 export function HowItWorks() {
   return (
@@ -37,8 +41,7 @@ export function HowItWorks() {
         <SectionHead
           eyebrow="How it works"
           id="how-title"
-          title="Three steps, and the reasoning survives every trade"
-          lead="The order matters. Each stage hands the next everything it recorded, so no trade has to be explained after the fact."
+          title="How Forge Capmoor Signals Work"
         />
 
         <ol className="how__track">

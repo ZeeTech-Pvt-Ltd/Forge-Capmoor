@@ -5,7 +5,7 @@
 .domains__grid {
   margin-top: clamp(2.75rem, 5vw, 4.25rem);
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: clamp(1rem, 1.6vw, 1.5rem);
 }
 

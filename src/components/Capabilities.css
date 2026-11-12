@@ -5,7 +5,7 @@
 .cap__grid {
   margin-top: clamp(2.75rem, 5vw, 4.25rem);
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: clamp(1rem, 1.6vw, 1.5rem);
 }
 
@@ -48,7 +48,12 @@
   width: 100%;
 }
 
-.cap-card--wide {
+/* Five cards balance as two on the first row and three on the second. */
+.cap-card--half {
+  grid-column: span 3;
+}
+
+.cap-card--third {
   grid-column: span 2;
 }
 
@@ -107,11 +112,14 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  /* Two columns, and the eight cards only tile if the wide one gives up its
-     second column: eight singles fill four rows exactly. Leaving it at span 2
-     would push a hole into the bottom of the grid. */
-  .cap-card--wide {
+  .cap-card--half,
+  .cap-card--third {
     grid-column: span 1;
+  }
+
+  /* The fifth card fills the last row rather than leaving a hole. */
+  .cap-card:last-child {
+    grid-column: span 2;
   }
 }
 
@@ -120,7 +128,9 @@
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .cap-card--wide {
+  .cap-card--half,
+  .cap-card--third,
+  .cap-card:last-child {
     grid-column: span 1;
   }
 }

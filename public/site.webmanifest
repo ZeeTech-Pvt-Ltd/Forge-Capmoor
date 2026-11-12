@@ -1,7 +1,7 @@
 {
   "name": "Forge Capmoor",
   "short_name": "Forge Capmoor",
-  "description": "An AI trading platform that analyses market data, executes the strategy you choose, and shows the reasoning behind every action it takes.",
+  "description": "Forge Capmoor turns market research into clear trade alerts with entry, exit and reasoning.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

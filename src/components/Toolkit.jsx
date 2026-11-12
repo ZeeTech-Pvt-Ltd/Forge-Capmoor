@@ -1,66 +1,41 @@
+import { Link } from '../lib/router'
 import { Reveal } from './Reveal'
 import { SectionHead } from './SectionHead'
 import { SECTION_IDS } from '../lib/navigation'
-import { IconEye, IconGauge, IconLayers, IconLock, IconPattern, IconSignal } from './Icons'
+import { IconGauge, IconLock, IconShield, IconSignal } from './Icons'
 
 import './Toolkit.css'
 
 /**
- * What is actually in the product, as six tools.
+ * How to get started, as four cards.
  *
- * Content follows the reference's "Inside the Sovereign Kapitix Toolkit"
- * section, rephrased. Unlike the reference's statistics, almost all of this is
- * a description of a feature rather than a measurement, so it can be stated
- * without a figure behind it.
- *
- * The markets list used to be an unfilled token, because which markets a
- * platform covers is a fact about the business rather than about the software.
- * It has since been supplied, so the card states it directly.
- *
- * The custody card used to point at a Security section that sat above it. That
- * section has been removed from the homepage, so this card now states the
- * holding arrangement itself rather than deferring to a heading that is gone.
+ * The document supplies the four steps and the "Four Steps to Your First
+ * Signal" subheading; this section renders exactly those, with the CTA that
+ * follows them in the document.
  */
-const TOOLS = [
-  {
-    icon: IconGauge,
-    title: 'Charting',
-    text: 'Live price data with drawing tools and an indicator library, so a view can be built and adjusted without leaving the platform.',
-  },
+const STEPS = [
   {
     icon: IconSignal,
-    title: 'Signals as they form',
-    text: 'Entry and exit signals surface as the conditions behind them are met, rather than in a summary after the move has happened.',
+    title: 'Create an account',
+    text: 'Share your name, email and phone number.',
   },
   {
-    icon: IconLayers,
-    title: 'Everything in sync',
-    text: 'Positions, watchlists and settings are held against the account rather than the device, so opening the platform somewhere else picks up where it left off.',
-  },
-  {
-    icon: IconEye,
-    title: 'Portfolio analytics',
-    text: 'Performance, risk and allocation are shown together, so a position is always read against what else is open rather than on its own.',
-  },
-  {
-    icon: IconPattern,
-    title: 'Broad market coverage',
-    text: 'Crypto, equities, forex, commodities and precious metals in one place, rather than spread across a separate app for each.',
+    icon: IconShield,
+    title: 'Complete verification',
+    text: 'Upload your ID to keep your account safe and protected.',
   },
   {
     icon: IconLock,
-    title: 'Custody and access',
-    text: 'Client funds held in a segregated account, kept separate from the funds Forge Capmoor operates on, with two-factor authentication on logins and withdrawals.',
+    title: 'Deposit funds',
+    text: 'Choose the payment method that suits you.',
+  },
+  {
+    icon: IconGauge,
+    title: 'Trade with a plan',
+    text: 'Select your markets, set your risk limits and review your first alert.',
   },
 ]
 
-/**
- * The toolkit grid.
- *
- * Six equal cards in a three-column grid, sitting between the dark Technology
- * band and the alternating Benefits rows — which is where the page is between
- * layouts anyway.
- */
 export function Toolkit() {
   return (
     <section
@@ -70,23 +45,29 @@ export function Toolkit() {
     >
       <div className="container container--wide">
         <SectionHead
-          eyebrow="Inside the platform"
+          eyebrow="Get started"
           id="toolkit-title"
-          title="The tools you trade with"
-          lead="Six parts of the product, and what each one is for."
+          title="How to Get Started"
+          lead="Four Steps to Your First Signal"
         />
 
         <div className="toolkit__grid">
-          {TOOLS.map((tool, index) => (
-            <Reveal key={tool.title} className="toolkit__card" delay={index * 70}>
+          {STEPS.map((step, index) => (
+            <Reveal key={step.title} className="toolkit__card" delay={index * 70}>
               <span className="toolkit__icon" aria-hidden="true">
-                <tool.icon size={22} />
+                <step.icon size={22} />
               </span>
-              <h3 className="toolkit__card-title">{tool.title}</h3>
-              <p className="toolkit__card-text">{tool.text}</p>
+              <h3 className="toolkit__card-title">{step.title}</h3>
+              <p className="toolkit__card-text">{step.text}</p>
             </Reveal>
           ))}
         </div>
+
+        <Reveal className="toolkit__action" delay={220}>
+          <Link to="/signup" className="btn btn--primary">
+            Sign Me Up
+          </Link>
+        </Reveal>
       </div>
     </section>
   )

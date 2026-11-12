@@ -1,3 +1,4 @@
+import { Link } from '../lib/router'
 import { Reveal } from './Reveal'
 import { SectionHead } from './SectionHead'
 
@@ -5,25 +6,29 @@ import './WhyForge.css'
 
 const REASONS = [
   {
-    title: 'The reasoning is the product',
-    text: 'A conclusion you cannot explain does not survive a review. Here the explanation is part of the output, not a paragraph written afterwards to make it sound considered.',
+    title: 'Clarity first',
+    text: 'Short sentences, simple terms and no trader slang.',
   },
   {
-    title: 'Built to be questioned',
-    text: 'Every figure links back to the source that produced it. Disagree with a finding and you can follow it down to the input, then argue with the input instead of with the software.',
+    title: 'Less screen time',
+    text: 'Skip the hours of chart watching while we do the heavy lifting.',
   },
   {
-    title: 'Deliberately unexciting about certainty',
-    text: 'The platform states what the data supports and flags what it does not. Confidence is not decoration, and we do not manufacture it to make a screen feel more decisive.',
+    title: 'Speed that counts',
+    text: 'Alerts go out as soon as a setup is confirmed.',
+  },
+  {
+    title: 'Help when you need it',
+    text: 'Our support team is just a message away on chat or email.',
   },
 ]
 
 /**
- * Why Forge Capmoor.
+ * Why choose us.
  *
  * Two columns with the heading pinned on the left while the reasons scroll
- * past it — a slower, editorial rhythm that gives the page a pause before the
- * FAQ and the closing call to action.
+ * past it - a slower, editorial rhythm that gives the page a pause before the
+ * getting-started steps.
  */
 export function WhyForge() {
   return (
@@ -32,10 +37,9 @@ export function WhyForge() {
         <div className="why__head">
           <SectionHead
             align="start"
-            eyebrow="Why Forge Capmoor"
+            eyebrow="Why choose us"
             id="why-title"
-            title="Why an explained trade beats another signal feed"
-            lead="There is no shortage of places to get a call. The scarce thing is knowing why."
+            title="Why Choose Us"
           />
         </div>
 
@@ -50,6 +54,12 @@ export function WhyForge() {
             </Reveal>
           ))}
         </ol>
+
+        <Reveal className="why__action" delay={200}>
+          <Link to="/signup" className="btn btn--primary">
+            Start With Forge Capmoor
+          </Link>
+        </Reveal>
       </div>
     </section>
   )

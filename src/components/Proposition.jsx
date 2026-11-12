@@ -1,40 +1,39 @@
 import { Reveal } from './Reveal'
 import { SectionHead } from './SectionHead'
-import { IconCheck, IconDoc, IconLayers, IconPattern } from './Icons'
 
 import './Proposition.css'
 
-const POINTS = [
-  'Market and indicator data held in one structured place',
-  'Patterns surfaced with the conditions that triggered them',
-  'Risk context attached to every finding, not bolted on after',
-  'A plain-language rationale beside each result',
-]
-
-const STAGES = [
+/* The images already in /public, used as the visual for the four parts named in
+   the definition. The alt text describes the photograph itself. */
+const GALLERY = [
   {
-    icon: IconLayers,
-    title: 'Assemble',
-    text: 'Market data and derived indicators are gathered and normalised into a single structured store, with each source recorded separately.',
+    src: '/home-1-960.webp',
+    srcSet: '/home-1-640.webp 640w, /home-1-960.webp 960w, /home-1-1200.webp 1200w',
+    alt: 'A person wearing a headset beside panels for trade calls, verified signals, risk analysis and real-time support.',
   },
   {
-    icon: IconPattern,
-    title: 'Detect',
-    text: 'Pattern detection runs across the assembled data. Each match keeps the conditions that defined it rather than discarding them.',
+    src: '/home-2-960.webp',
+    srcSet: '/home-2-640.webp 640w, /home-2-960.webp 960w, /home-2-1200.webp 1200w',
+    alt: 'A person at a laptop beside panels stepping through analyze, evaluate and decide.',
   },
   {
-    icon: IconDoc,
-    title: 'Explain',
-    text: 'Results are published with a written rationale assembled from those recorded conditions, not reconstructed from memory afterwards.',
+    src: '/home-3-960.webp',
+    srcSet: '/home-3-640.webp 640w, /home-3-960.webp 960w, /home-3-1200.webp 1200w',
+    alt: 'A person at a trading desk facing several monitors showing live trading and market analysis.',
+  },
+  {
+    src: '/about-2-960.webp',
+    srcSet: '/about-2-640.webp 640w, /about-2-960.webp 960w, /about-2-1200.webp 1200w',
+    alt: 'A person holding a tablet beside a market chart on the screen.',
   },
 ]
 
 /**
  * Positioning section: what Forge Capmoor actually is.
  *
- * Layout is deliberately asymmetric — text on the left, a vertical three-stage
- * rail on the right — so it does not repeat the centred rhythm used by the
- * principles strip above it and the capabilities grid below.
+ * Layout stays asymmetric - the definition on the left, the four parts of an
+ * alert illustrated on the right - so it does not repeat the centred rhythm
+ * used by the highlights strip below.
  */
 export function Proposition() {
   return (
@@ -45,47 +44,41 @@ export function Proposition() {
             align="start"
             eyebrow="What it is"
             id="proposition-title"
-            title="From market data to a trade you can defend"
-            lead="Most platforms hand you a call and stop there. Forge Capmoor shows the working behind every trade: which inputs it used, which conditions were met, and which were not."
+            title="What Is Forge Capmoor?"
+            lead="Forge Capmoor is a trading signals provider that analyzes the crypto, forex, stock and commodity markets and sends members specific buy or sell recommendations, complete with an entry price, stop-loss, take-profit target and the reasoning behind each trade, so they can make informed decisions on their own terms."
           />
 
-          <Reveal as="ul" className="proposition__points" delay={120}>
-            {POINTS.map((point) => (
-              <li key={point} className="proposition__point">
-                <span className="proposition__tick" aria-hidden="true">
-                  <IconCheck size={14} />
-                </span>
-                {point}
-              </li>
-            ))}
-          </Reveal>
+          <p className="proposition__body">
+            Think of Forge Capmoor as a research desk in your pocket. Professional traders
+            never risk money without careful analysis first. Forge Capmoor brings that same
+            preparation to everyday traders and fits it into one short, easy-to-read alert.
+          </p>
         </div>
 
-        <ol className="proposition__rail">
-          {STAGES.map((stage, index) => {
-            const Icon = stage.icon
-            return (
-              <Reveal
-                as="li"
-                key={stage.title}
-                delay={index * 110}
-                className="proposition__stage"
-              >
-                <span className="proposition__stage-marker" aria-hidden="true">
-                  <Icon size={20} />
-                </span>
-
-                <div className="proposition__stage-body">
-                  <h3 className="proposition__stage-title">
-                    <span className="proposition__stage-index">0{index + 1}</span>
-                    {stage.title}
-                  </h3>
-                  <p className="proposition__stage-text">{stage.text}</p>
-                </div>
-              </Reveal>
-            )
-          })}
-        </ol>
+        <div
+          className="proposition__gallery"
+          role="group"
+          aria-label="Trade research and alerts at Forge Capmoor"
+        >
+          {GALLERY.map((item, index) => (
+            <Reveal
+              key={item.src}
+              delay={index * 90}
+              className="proposition__shot"
+            >
+              <img
+                src={item.src}
+                srcSet={item.srcSet}
+                sizes="(max-width: 899px) 45vw, 22vw"
+                alt={item.alt}
+                width="960"
+                height="960"
+                loading="lazy"
+                decoding="async"
+              />
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   )

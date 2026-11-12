@@ -65,6 +65,24 @@
   max-width: 48ch;
 }
 
+/* The document's risk notice, kept inside the security block rather than
+   buried in the footer. */
+.tech__risk {
+  margin-top: clamp(1.75rem, 3vw, 2.25rem);
+  padding: 1rem 1.2rem;
+  max-width: 52ch;
+  border: 1px solid var(--dark-line);
+  border-radius: var(--r-sm);
+  background: rgba(255, 255, 255, 0.04);
+  font-size: var(--fs-small);
+  line-height: 1.65;
+  color: var(--on-dark-2);
+}
+
+.tech__action {
+  margin-top: 1.5rem;
+}
+
 /* --- Diagram ------------------------------------------------------------- */
 
 .tech__visual {

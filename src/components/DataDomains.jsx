@@ -8,8 +8,8 @@ import './DataDomains.css'
    Decorative charts.
 
    Every one of these is abstract artwork. None of them plots a real series,
-   and none of them is labelled with a figure — they exist to give the six
-   domains a visual language, not to imply a measurement.
+   and none of them is labelled with a figure - they give the four markets a
+   visual language, not a measurement.
    -------------------------------------------------------------------------- */
 
 function PriceChart() {
@@ -120,102 +120,29 @@ function LiquidityChart() {
   )
 }
 
-function CorrelationChart() {
-  const cells = []
-  for (let row = 0; row < 4; row += 1) {
-    for (let col = 0; col < 6; col += 1) {
-      const distance = Math.abs(row - 1.5) + Math.abs(col - 2.5)
-      cells.push({ row, col, opacity: Math.max(0.08, 0.62 - distance * 0.11) })
-    }
-  }
-
-  return (
-    <svg viewBox="0 0 120 56" fill="none" aria-hidden="true" focusable="false">
-      {cells.map((cell) => (
-        <rect
-          key={`${cell.row}-${cell.col}`}
-          x={4 + cell.col * 19}
-          y={4 + cell.row * 12.5}
-          width="15"
-          height="9"
-          rx="2.5"
-          fill="#FF4B2B"
-          fillOpacity={cell.opacity}
-        />
-      ))}
-    </svg>
-  )
-}
-
-function SentimentChart() {
-  const bars = [22, 34, 15, 40, 26, 12, 30]
-  const midline = 28
-
-  return (
-    <svg viewBox="0 0 120 56" fill="none" aria-hidden="true" focusable="false">
-      <line x1="4" y1={midline} x2="116" y2={midline} stroke="rgba(14,14,17,0.16)" strokeWidth="1" />
-      {bars.map((height, index) => {
-        const up = index % 2 === 0
-        return (
-          <rect
-            key={index}
-            x={8 + index * 16}
-            y={up ? midline - height : midline}
-            width="9"
-            height={height}
-            rx="3"
-            fill={index === 3 ? '#FF4B2B' : 'rgba(14,14,17,0.2)'}
-          />
-        )
-      })}
-    </svg>
-  )
-}
-
-const DOMAINS = [
+const MARKETS = [
   {
     chart: <PriceChart />,
-    title: 'Price structure',
-    text: 'Session ranges, established levels and the shape price has carved out over time.',
+    title: 'Crypto',
+    text: 'Trade ideas on top digital assets such as Bitcoin and Ethereum.',
   },
   {
     chart: <MomentumChart />,
-    title: 'Momentum',
-    text: 'The rate and persistence of movement, measured across several lookbacks rather than one.',
+    title: 'Forex',
+    text: 'Signals on heavily traded pairs built around USD, EUR and GBP.',
   },
   {
     chart: <VolatilityChart />,
-    title: 'Volatility',
-    text: 'How much the market is moving, read against its own recent history instead of an absolute threshold.',
+    title: 'Stocks',
+    text: 'Setups on shares of major companies worldwide.',
   },
   {
     chart: <LiquidityChart />,
-    title: 'Liquidity',
-    text: 'Where participation is concentrated, and how readily the market absorbs size.',
-  },
-  {
-    chart: <CorrelationChart />,
-    title: 'Correlation',
-    text: 'Which instruments are moving together, and when those relationships start to break down.',
-  },
-  {
-    chart: <SentimentChart />,
-    title: 'Sentiment',
-    text: 'Positioning and commentary-derived measures, held separately from the price data.',
+    title: 'Commodities',
+    text: 'Alerts on price swings in gold, silver and oil.',
   },
 ]
 
-/**
- * The section that would normally be a wall of performance statistics.
- *
- * The visual weight a stats band would carry is given to the taxonomy of the
- * inputs the platform actually reads.
- *
- * It used to close with a note saying no performance figures appear anywhere on
- * this site. That note has been removed: it described a standard the site no
- * longer holds itself to everywhere, and a sentence stating a policy that is
- * contradicted a few pages away is worse than no sentence.
- */
 export function DataDomains() {
   return (
     <section
@@ -224,21 +151,16 @@ export function DataDomains() {
       aria-labelledby="domains-title"
     >
       <div className="container container--wide">
-        <SectionHead
-          eyebrow="Data domains"
-          id="domains-title"
-          title="Six kinds of market data, cross-referenced"
-          lead="Forge Capmoor works across the categories below, keeping each source’s provenance intact so any finding can be traced back to what produced it."
-        />
+        <SectionHead id="domains-title" title="Markets" />
 
         <ul className="domains__grid">
-          {DOMAINS.map((domain, index) => (
-            <Reveal as="li" key={domain.title} delay={(index % 3) * 80} className="domain">
+          {MARKETS.map((market, index) => (
+            <Reveal as="li" key={market.title} delay={(index % 3) * 80} className="domain">
               <span className="domain__chart" aria-hidden="true">
-                {domain.chart}
+                {market.chart}
               </span>
-              <h3 className="domain__title">{domain.title}</h3>
-              <p className="domain__text">{domain.text}</p>
+              <h3 className="domain__title">{market.title}</h3>
+              <p className="domain__text">{market.text}</p>
             </Reveal>
           ))}
         </ul>

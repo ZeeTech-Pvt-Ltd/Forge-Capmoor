@@ -73,3 +73,9 @@
   width: 100%;
   margin-top: clamp(2rem, 4vw, 3rem);
 }
+
+.cta__micro {
+  margin-top: 1.15rem;
+  font-size: var(--fs-small);
+  color: var(--on-dark-3);
+}

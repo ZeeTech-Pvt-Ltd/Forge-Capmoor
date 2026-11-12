@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Proposition — text beside a vertical three-stage rail
+   Proposition - text beside a grid of alert-part illustrations
    ========================================================================== */
 
 .proposition__inner {
@@ -9,112 +9,38 @@
   align-items: start;
 }
 
-.proposition__points {
-  margin-top: clamp(1.75rem, 3vw, 2.5rem);
-  display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
-}
-
-.proposition__point {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.7rem;
+.proposition__body {
+  margin-top: 1.35rem;
+  max-width: 60ch;
   font-size: var(--fs-body);
-  line-height: 1.55;
-  color: var(--ink-2);
+  line-height: 1.68;
+  color: var(--text-2);
 }
 
-.proposition__tick {
+/* --- Alert-part illustrations -------------------------------------------- */
+
+.proposition__gallery {
   display: grid;
-  place-items: center;
-  flex: none;
-  width: 22px;
-  height: 22px;
-  margin-top: 2px;
-  border-radius: 50%;
-  background: var(--accent-tint);
-  color: var(--accent-ink);
-}
-
-/* --- Stage rail ---------------------------------------------------------- */
-
-.proposition__rail {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: clamp(1.25rem, 2.6vw, 2rem);
-  padding-left: 4px;
-  /* Centred against the text column rather than pinned to its top. The grid
-     sets `align-items: start`, which left the rail 388px tall in a 440px
-     column with all 52px of slack under it — the two halves read as separate
-     blocks instead of one row. */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.75rem, 1.6vw, 1.15rem);
   align-self: center;
+  width: 100%;
 }
 
-.proposition__stage {
-  position: relative;
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: clamp(0.9rem, 2vw, 1.35rem);
-  align-items: start;
-}
-
-/* The connector runs from each marker down to the next one. Drawn on the
-   marker's own column so it never crosses the text. */
-.proposition__stage:not(:last-child)::before {
-  content: '';
-  position: absolute;
-  top: 52px;
-  left: 23px;
-  width: 1px;
-  height: calc(100% - 30px);
-  background: linear-gradient(
-    to bottom,
-    var(--line-strong),
-    rgba(255, 75, 43, 0.06)
-  );
-}
-
-.proposition__stage-marker {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  place-items: center;
-  width: 46px;
-  height: 46px;
-  border-radius: var(--r-sm);
-  background: var(--bg);
-  border: 1px solid var(--border);
-  color: var(--accent-ink);
+.proposition__shot {
+  overflow: hidden;
+  aspect-ratio: 1;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border-soft);
+  background: var(--surface);
   box-shadow: var(--shadow-xs);
 }
 
-.proposition__stage-body {
-  padding-top: 2px;
-}
-
-.proposition__stage-title {
-  display: flex;
-  align-items: baseline;
-  gap: 0.55rem;
-  font-size: var(--fs-h3);
-  font-weight: 700;
-}
-
-.proposition__stage-index {
-  font-family: var(--font-body);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: var(--accent-ink);
-}
-
-.proposition__stage-text {
-  margin-top: 0.5rem;
-  font-size: var(--fs-body);
-  line-height: 1.62;
-  color: var(--text-2);
+.proposition__shot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 @media (max-width: 899px) {
@@ -125,13 +51,7 @@
 }
 
 @media (max-width: 479px) {
-  .proposition__stage:not(:last-child)::before {
-    left: 19px;
-    top: 46px;
-  }
-
-  .proposition__stage-marker {
-    width: 38px;
-    height: 38px;
+  .proposition__gallery {
+    gap: 0.65rem;
   }
 }

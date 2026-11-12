@@ -57,6 +57,12 @@
   max-width: 52ch;
 }
 
+/* Sits under the reasons in the right-hand column. */
+.why__action {
+  grid-column: 2;
+  margin-top: clamp(1.75rem, 3.5vw, 2.5rem);
+}
+
 @media (max-width: 899px) {
   .why__inner {
     grid-template-columns: minmax(0, 1fr);
@@ -67,6 +73,10 @@
      list beneath it, so it reverts to normal flow. */
   .why__head {
     position: static;
+  }
+
+  .why__action {
+    grid-column: 1;
   }
 
   .why__item:first-child {

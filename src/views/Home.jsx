@@ -1,5 +1,4 @@
 import { Hero } from '../components/Hero'
-import { Ticker } from '../components/Ticker'
 import { Principles } from '../components/Principles'
 import { Proposition } from '../components/Proposition'
 import { HowItWorks } from '../components/HowItWorks'
@@ -15,25 +14,26 @@ import { FinalCTA } from '../components/FinalCTA'
 /**
  * Homepage.
  *
- * Section order is arranged so the page alternates rhythm rather than
- * repeating a pattern: centred block, split block, horizontal rail, bento
- * grid, dark band, alternating rows, tile grid, sticky two-column, accordion,
- * closing band. No two adjacent sections share a layout.
+ * The order follows the supplied content document: hero, what it is, how the
+ * signals work, highlights, why choose us, getting started, markets, features,
+ * who it is for, security, FAQs, final CTA.
+ *
+ * The document's testimonial section is deliberately absent. It says to leave
+ * that section hidden until real reviews are collected, so nothing is rendered.
  */
 export default function Home() {
   return (
     <>
       <Hero />
-      <Ticker />
-      <Principles />
       <Proposition />
       <HowItWorks />
-      <Capabilities />
-      <Technology />
-      <Toolkit />
-      <Benefits />
-      <DataDomains />
+      <Principles />
       <WhyForge />
+      <Toolkit />
+      <DataDomains />
+      <Capabilities />
+      <Benefits />
+      <Technology />
       <FaqTeaser />
       <FinalCTA />
     </>

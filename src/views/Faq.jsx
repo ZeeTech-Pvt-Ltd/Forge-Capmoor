@@ -21,7 +21,7 @@ export default function Faq() {
         <PageHero
           eyebrow="Help centre"
           title="Frequently asked questions"
-          lead="Straight answers about how the platform works, what it costs and what happens to your money. Where something is not answered here, it is more likely to be a question we cannot answer yet than one we are avoiding."
+          lead="Straight answers about how Forge Capmoor signals work, what each alert includes, and what happens when you are ready to act. Where something is not answered here, it is more likely to be a question we cannot answer yet than one we are avoiding."
         />
 
         <div className="page__body">
@@ -38,8 +38,8 @@ export default function Faq() {
             <p className="eyebrow">Still not answered?</p>
             <h2 className="faq__help-title">Ask us directly</h2>
             <p className="faq__help-body">
-              A person will come back to you. If your question is about a specific action the
-              system took, mention it, and we can look at the same record you can.
+              A person will come back to you. If your question is about a specific signal,
+              mention it, and we can look at the same record you can.
             </p>
 
             <p className="page__actions page__actions--start">

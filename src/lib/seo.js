@@ -33,9 +33,9 @@ export const OG_IMAGE_ALT =
  */
 export const ROUTE_META = {
   '/': {
-    title: 'Automated Trading That Shows Its Reasoning | Forge Capmoor',
+    title: 'Forge Capmoor | Trade Alerts With Entry, Exit And Reason',
     description:
-      'Forge Capmoor is an automated trading platform. It reads the market, trades the strategy you choose, and records the reasoning behind every move it makes.',
+      'Forge Capmoor turns market research into clear trade alerts with entry, exit and reasoning. Claim your free account and keep every trade decision yours.',
   },
   '/how-it-works': {
     title: 'How Forge Capmoor Works | Automated Trading',
@@ -53,9 +53,9 @@ export const ROUTE_META = {
       'What Forge Capmoor does, how it behaves, and the commitments behind it: a written reason attached to every automated action, and disclosure written to be read.',
   },
   '/faq': {
-    title: 'Automated Trading Questions, Answered | Forge Capmoor',
+    title: 'Forge Capmoor FAQs | Trading Signals And Alerts',
     description:
-      'How automated trading works on Forge Capmoor, where client money is held, how deposits and withdrawals are handled, and what the platform does not do.',
+      'Answers about Forge Capmoor trade alerts: what each signal includes, how to get started, deposits, withdrawals and risk. Read the FAQs.',
   },
   '/contact': {
     title: 'Contact Forge Capmoor | Support and Enquiries',

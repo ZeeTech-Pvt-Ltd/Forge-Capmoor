@@ -8,9 +8,9 @@ import './FinalCTA.css'
 /**
  * Closing call to action.
  *
- * A thin wrapper now: the form itself lives in SignUpForm, so this band, the
+ * A thin wrapper: the form itself lives in SignUpForm, so this band, the
  * /signup page and the /contact page cannot drift apart. All this file owns is
- * the framing — the mark, the headline and the lead.
+ * the framing - the mark, the headline, the lead and the microcopy.
  */
 export function FinalCTA() {
   return (
@@ -27,17 +27,20 @@ export function FinalCTA() {
         </Reveal>
 
         <Reveal as="h2" className="cta__title" id="cta-title" delay={60}>
-          Start trading with the reasoning attached
+          Trade Your Next Move With Purpose
         </Reveal>
 
         <Reveal as="p" className="cta__lead" delay={110}>
-          Open an account and every trade arrives with its working: what was read,
-          which condition was met, and what the risk looked like at the time. You can check any of
-          it, and you can turn automation off whenever you want.
+          Sign up with Forge Capmoor and get research-backed signals that explain
+          themselves, while every trade decision stays yours.
         </Reveal>
 
         <Reveal className="cta__form-wrap" delay={160}>
-          <SignUpForm tone="dark" submitLabel="Create an account" />
+          <SignUpForm tone="dark" submitLabel="Join Free Now" />
+        </Reveal>
+
+        <Reveal as="p" className="cta__micro" delay={200}>
+          Sign up in 2 minutes · Zero joining cost
         </Reveal>
       </div>
     </section>

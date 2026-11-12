@@ -1,35 +1,41 @@
+import { Link } from '../lib/router'
 import { Reveal } from './Reveal'
 import { SectionHead } from './SectionHead'
 import { SECTION_IDS } from '../lib/navigation'
-import { IconClock, IconEye, IconGraph } from './Icons'
+import { IconDoc, IconEye, IconLock, IconShield } from './Icons'
 import { ProvenanceArt } from './TradingArt'
 
 import './Technology.css'
 
 const POINTS = [
   {
-    icon: IconGraph,
-    title: 'Conditions are recorded, not reconstructed',
-    text: 'When a pattern matches, the conditions that defined it are stored alongside it. The sentence you read later is assembled from those records.',
+    icon: IconLock,
+    title: 'Data protection',
+    text: 'Encryption safeguards your personal and payment information.',
   },
   {
-    icon: IconClock,
-    title: 'Sources carry their own provenance',
-    text: 'Every input knows where it came from and when it was last refreshed. A finding that leans on a stale source says so, in the finding.',
+    icon: IconShield,
+    title: 'Secure sign-in',
+    text: 'Two-factor authentication adds an extra lock to your account.',
+  },
+  {
+    icon: IconDoc,
+    title: 'Honest pricing',
+    text: 'All fees are disclosed upfront.',
   },
   {
     icon: IconEye,
-    title: 'Nothing is asserted without a trace',
-    text: 'Output is generated from recorded evidence, so the platform never presents a conclusion it cannot walk you back through.',
+    title: 'Your call, always',
+    text: 'Nothing is traded without your go-ahead.',
   },
 ]
 
 /**
- * Technology section — the one full-bleed dark band on the page.
+ * Security and transparency - the one full-bleed dark band on the page.
  *
- * Going dark here does two things: it breaks the long run of light sections
- * at roughly the two-thirds mark, and it visually separates "what it does"
- * (light, above) from "why it is trustworthy" (dark, here).
+ * The four commitments sit beside the drawing that shows records and the
+ * reasoning spine, then the document's risk notice and its CTA close the
+ * section.
  */
 export function Technology() {
   return (
@@ -42,13 +48,7 @@ export function Technology() {
 
       <div className="container container--wide tech__inner">
         <div className="tech__text">
-          <SectionHead
-            align="start"
-            eyebrow="Technology"
-            id="tech-title"
-            title="Explainability is a by-product of how the trading runs"
-            lead="Most platforms write the explanation afterwards, by summarising what happened. Here the rationale is assembled from records the platform made while it was trading."
-          />
+          <SectionHead align="start" id="tech-title" title="Security & Transparency" />
 
           <ul className="tech__points">
             {POINTS.map((point, index) => {
@@ -66,12 +66,17 @@ export function Technology() {
               )
             })}
           </ul>
+
+          <p className="tech__risk">
+            Trading is risky, and you could lose some or all of your capital. Forge Capmoor
+            signals are for guidance only, and results are never guaranteed.
+          </p>
+
+          <Link to="/signup" className="btn btn--primary tech__action">
+            Create a Protected Account
+          </Link>
         </div>
 
-        {/* Drawn, not photographed. The section's claim is that the rationale
-            is assembled from records made while the platform was trading, so
-            the drawing shows exactly that: an action, the records under it, and
-            the spine that connects them. */ }
         <Reveal className="tech__visual" delay={140}>
           <ProvenanceArt className="tech__art" />
         </Reveal>

@@ -1,23 +1,23 @@
 /* ==========================================================================
-   How it works — horizontal three-step track
+   How it works — horizontal four-step track
    ========================================================================== */
 
 .how__track {
   position: relative;
   margin-top: clamp(2.75rem, 5vw, 4.25rem);
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: clamp(1.25rem, 3vw, 2.5rem);
 }
 
-/* Dashed rule linking the node centres. With three equal columns the first
-   node sits at 16.667% and the last at 83.333%. */
+/* Dashed rule linking the node centres. With four equal columns the first
+   node sits at 12.5% and the last at 87.5%. */
 .how__track::before {
   content: '';
   position: absolute;
   top: 25px;
-  left: 16.667%;
-  right: 16.667%;
+  left: 12.5%;
+  right: 12.5%;
   height: 1px;
   background-image: linear-gradient(90deg, var(--line-strong) 0 6px, transparent 6px 14px);
   background-size: 14px 1px;
@@ -70,9 +70,8 @@
   color: var(--text-2);
 }
 
-/* Three steps do not halve: two columns would strand the third on a row of
-   its own, so the track drops straight to the stacked arrangement below the
-   breakpoint where the row stops working. */
+/* Four steps do not halve cleanly, so the track drops straight to the stacked
+   arrangement below the breakpoint where the row stops working. */
 @media (max-width: 899px) {
   .how__track {
     grid-template-columns: minmax(0, 1fr);
