@@ -3,30 +3,13 @@ import { SectionHead } from './SectionHead'
 
 import './Proposition.css'
 
-/* The images already in /public, used as the visual for the four parts named in
-   the definition. The alt text describes the photograph itself. */
-const GALLERY = [
-  {
-    src: '/home-1-960.webp',
-    srcSet: '/home-1-640.webp 640w, /home-1-960.webp 960w, /home-1-1200.webp 1200w',
-    alt: 'A person wearing a headset beside panels for trade calls, verified signals, risk analysis and real-time support.',
-  },
-  {
-    src: '/home-2-960.webp',
-    srcSet: '/home-2-640.webp 640w, /home-2-960.webp 960w, /home-2-1200.webp 1200w',
-    alt: 'A person at a laptop beside panels stepping through analyze, evaluate and decide.',
-  },
-  {
-    src: '/home-3-960.webp',
-    srcSet: '/home-3-640.webp 640w, /home-3-960.webp 960w, /home-3-1200.webp 1200w',
-    alt: 'A person at a trading desk facing several monitors showing live trading and market analysis.',
-  },
-  {
-    src: '/about-2-960.webp',
-    srcSet: '/about-2-640.webp 640w, /about-2-960.webp 960w, /about-2-1200.webp 1200w',
-    alt: 'A person holding a tablet beside a market chart on the screen.',
-  },
-]
+/* One image, chosen because it shows the signal side of the product: a person
+   with trade-call and verified-signal panels beside a price chart. */
+const VISUAL = {
+  src: '/home-1-960.webp',
+  srcSet: '/home-1-640.webp 640w, /home-1-960.webp 960w, /home-1-1200.webp 1200w',
+  alt: 'A person wearing a headset beside panels for trade calls, verified signals, risk analysis and real-time support.',
+}
 
 /**
  * Positioning section: what Forge Capmoor actually is.
@@ -55,30 +38,18 @@ export function Proposition() {
           </p>
         </div>
 
-        <div
-          className="proposition__gallery"
-          role="group"
-          aria-label="Trade research and alerts at Forge Capmoor"
-        >
-          {GALLERY.map((item, index) => (
-            <Reveal
-              key={item.src}
-              delay={index * 90}
-              className="proposition__shot"
-            >
-              <img
-                src={item.src}
-                srcSet={item.srcSet}
-                sizes="(max-width: 899px) 45vw, 22vw"
-                alt={item.alt}
-                width="960"
-                height="960"
-                loading="lazy"
-                decoding="async"
-              />
-            </Reveal>
-          ))}
-        </div>
+        <Reveal className="proposition__visual" delay={120}>
+          <img
+            src={VISUAL.src}
+            srcSet={VISUAL.srcSet}
+            sizes="(max-width: 899px) 92vw, 44vw"
+            alt={VISUAL.alt}
+            width="960"
+            height="960"
+            loading="lazy"
+            decoding="async"
+          />
+        </Reveal>
       </div>
     </section>
   )
